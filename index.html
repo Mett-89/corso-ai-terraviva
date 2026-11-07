@@ -1,0 +1,2077 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'AI nello studio tecnico — Terraviva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600&family=Fira+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   Corso AI Terraviva — slide HTML
+   Contenuti: slide-scaletta-v02.md · Stile: grafica/prova-stile-slide-v02.html
+   Comandi: ← → (o clic) per scorrere · P finestra relatore · N note sullo schermo · F schermo intero
+   Finestra relatore (07/11/2026): la stessa pagina aperta con ?relatore; legge i punti da <aside class="punti"> e la regia da <aside class="note">
+   Le immagini si caricano da immagini/<id>.png; se mancano resta il segnaposto.
+   ===================================================================== */
+:root{
+  --fondo:#F1F3F6; --trama:#CDD4DF; --blu:#1641A8; --blu2:#0F2E7A;
+  --ciano:#7FD8F0; --ciano2:#2BB3DA; --testo:#2B3240; --tenue:#6B7486; --ambra:#C77800;
+  --bordo:#C9D2DE;
+  --titolo:'Fira Sans Condensed','Bahnschrift SemiBold SemiCondensed','Arial Narrow',sans-serif;
+  --corpo:'Fira Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'Fira Code','Cascadia Mono',Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#cfd5de;color:var(--testo);font-family:var(--corpo)}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden}
+
+.slide{position:absolute;width:1600px;height:900px;background:var(--fondo);padding:70px 110px 80px;
+  display:none;flex-direction:column;overflow:hidden;transform-origin:center center}
+.slide.on{display:flex}
+.slide>*{position:relative;z-index:2}
+.slide>.note,.slide>.punti{display:none}
+
+/* sfondo */
+.binario{position:absolute!important;inset:-10px;z-index:0!important;font-family:var(--mono);font-size:13px;line-height:17px;
+  color:var(--trama);word-break:break-all;user-select:none;
+  mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.3) 45%,#000 100%)}
+.alone{position:absolute!important;z-index:1!important;border-radius:50%;filter:blur(70px);background:var(--ciano);opacity:.45;pointer-events:none}
+.bordi{position:absolute!important;inset:0;z-index:1!important;pointer-events:none}
+[data-fondo="video"] .piccolo{color:#4A5263} /* contrasto >= 4,5:1 sullo sfondo fotografico */
+.sfondo-video{position:absolute!important;inset:0;width:100%;height:100%;object-fit:cover;z-index:0!important;pointer-events:none}
+.seq-video{position:absolute!important;inset:0;width:100%;height:100%;object-fit:cover;z-index:3!important;pointer-events:none;visibility:hidden;background:#f1f3f6}
+.velo{position:absolute!important;inset:0;z-index:1!important;pointer-events:none;
+  background:linear-gradient(90deg,rgba(241,243,246,.7) 0%,rgba(241,243,246,.35) 50%,rgba(241,243,246,0) 66%)}
+.a1{width:420px;height:420px;right:-120px;top:-160px}
+.a2{width:380px;height:380px;left:-140px;bottom:-160px}
+.a3{width:380px;height:380px;right:-140px;bottom:-160px}
+
+/* tipografia */
+h1,h2,h3{font-family:var(--titolo);text-transform:uppercase;font-weight:600;color:var(--blu);line-height:1.04}
+h1{font-size:100px}
+h1 .sec{display:block;font-size:62px;color:var(--testo);font-weight:500;margin-top:10px}
+h2{font-size:54px;text-align:center;margin-bottom:34px}
+h2.sx{text-align:left}
+h3{font-size:28px;margin-bottom:10px}
+p.sotto{font-size:25px;line-height:1.45}
+.piccolo{font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
+.piede{position:absolute!important;bottom:28px;left:110px;right:110px;display:flex;justify-content:space-between;
+  font-size:14px;color:var(--tenue);letter-spacing:.08em;text-transform:uppercase}
+.piede .cod{font-family:var(--mono);color:var(--blu);letter-spacing:0}
+.acc{color:var(--blu)}
+.amb{color:var(--ambra)}
+.centro{justify-content:center}
+ul.lista{list-style:none;font-size:25px;line-height:1.45}
+ul.lista li{padding:10px 0 10px 34px;position:relative;border-bottom:1px solid #DCE2EA}
+ul.lista li::before{content:"";position:absolute;left:4px;top:23px;width:12px;height:12px;border:2px solid var(--ciano2);transform:rotate(45deg)}
+ul.lista.check li::before{transform:none;border-radius:3px;border-color:var(--blu);width:16px;height:16px;top:20px}
+
+/* cornice circolare */
+.tondo{position:absolute!important;width:560px;height:560px}
+.tondo .foto{position:absolute;inset:70px;border-radius:50%;overflow:hidden;
+  background:radial-gradient(circle at 35% 30%,#fff 0%,#E3EEF5 40%,#B9D4E3 100%);
+  box-shadow:0 0 0 10px rgba(255,255,255,.92),0 0 90px 20px rgba(127,216,240,.6);
+  display:flex;align-items:center;justify-content:center}
+.tondo .foto span{font-family:var(--mono);font-size:14px;color:#5E7F96;text-align:center;line-height:1.5;padding:30px}
+.tondo .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tondo svg{position:absolute;inset:0}
+.tondo.m{width:440px;height:440px}
+.tondo.m .foto{inset:55px}
+.vline{position:absolute!important;width:20px}
+
+/* copertina e divisori */
+.cover .testi{max-width:720px}
+.cover p.sotto{margin-top:90px;text-align:right;max-width:600px;font-size:24px}
+.div .n{font-family:var(--titolo);font-size:110px;font-weight:500;color:var(--testo);margin-bottom:14px}
+.div h1{max-width:760px}
+.div p.sotto{margin-top:22px;max-width:640px;color:var(--tenue)}
+.messaggio{padding-left:700px}
+.messaggio h1{font-size:84px}
+.messaggio p.sotto{margin-top:24px;max-width:700px}
+
+/* griglie */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
+.g2w{display:grid;grid-template-columns:1fr 1.45fr;gap:36px;align-items:start}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:50px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:34px 30px}
+.g6{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 40px}
+.voce{text-align:center}
+.num{display:inline-flex;align-items:center;justify-content:center;width:92px;height:80px;border:1.5px solid #AEB8C8;
+  background:rgba(255,255,255,.6);font-family:var(--titolo);font-size:42px;font-weight:500;color:var(--blu2);margin-bottom:16px}
+.voce h3{font-weight:500;font-size:26px;line-height:1.15;margin:0}
+.voce p{font-size:18px;color:var(--tenue);margin-top:6px;line-height:1.4}
+.col h3{font-size:32px}
+.col p{font-size:21px;line-height:1.5}
+
+/* confronto tra modelli */
+.modelli-claude{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:stretch}
+.modello{background:rgba(255,255,255,.84);border:1.5px solid var(--bordo);padding:30px 30px 26px;position:relative;min-height:420px}
+.modello::before{content:"";position:absolute;left:-1.5px;right:-1.5px;top:-1.5px;height:7px;background:var(--ciano2)}
+.modello.sonnet::before{background:var(--blu)}
+.modello.opus::before{background:var(--ambra)}
+.modello .nome{font:600 48px/1 var(--titolo);text-transform:uppercase;color:var(--blu);margin-bottom:8px}
+.modello .ruolo{font:500 18px/1.3 var(--mono);text-transform:uppercase;color:var(--tenue);min-height:48px}
+.modello .uso{font-size:22px;line-height:1.42;margin-top:25px}
+.modello .scelta{position:absolute;left:30px;right:30px;bottom:26px;border-top:1px solid #DCE2EA;padding-top:15px;font:500 17px/1.35 var(--mono);color:var(--blu2)}
+.criteri-modello{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 26px}
+.criterio{background:rgba(255,255,255,.82);border:1.5px solid var(--bordo);padding:20px 24px;min-height:174px;position:relative}
+.criterio .n-criterio{font:500 16px/1 var(--mono);color:var(--ciano2);letter-spacing:.08em;margin-bottom:9px}
+.criterio h3{font-size:28px;margin-bottom:7px}
+.criterio p{font-size:19px;line-height:1.38}
+.prova-reale{margin-top:24px;border-left:7px solid var(--ambra);background:rgba(255,255,255,.72);padding:13px 22px;font-size:21px;line-height:1.4}
+.concetti-claude{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:stretch}
+.concetto-claude{background:rgba(255,255,255,.84);border:1.5px solid var(--bordo);padding:26px 28px;min-height:330px;position:relative}
+.concetto-claude .numero{font:500 16px/1 var(--mono);color:var(--ciano2);letter-spacing:.08em;margin-bottom:12px}
+.concetto-claude h3{font-size:32px;margin-bottom:14px}
+.concetto-claude p{font-size:20px;line-height:1.45}
+.concetto-claude .quando{position:absolute;left:28px;right:28px;bottom:24px;border-top:1px solid #DCE2EA;padding-top:12px;font:500 16px/1.35 var(--mono);color:var(--blu2)}
+.formula-claude{margin-top:25px;background:rgba(255,255,255,.78);border-left:7px solid var(--ciano2);padding:15px 22px;font-size:21px;line-height:1.4}
+.formula-claude.ambra{border-left-color:var(--ambra)}
+.percorso-scelta{display:grid;grid-template-columns:1.25fr 1fr;gap:0;background:rgba(255,255,255,.78);border:1.5px solid var(--bordo)}
+.percorso-scelta>div{padding:13px 22px;border-bottom:1px solid #DCE2EA;font-size:19px;line-height:1.35}
+.percorso-scelta>div:nth-last-child(-n+2){border-bottom:0}
+.percorso-scelta .se{font-weight:500}
+.percorso-scelta .usa{font-family:var(--mono);color:var(--blu2);font-weight:500;border-left:1px solid #DCE2EA}
+.scala-autonomia{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.livello-autonomia{background:rgba(255,255,255,.84);border:1.5px solid var(--bordo);padding:27px 28px;min-height:370px;position:relative}
+.livello-autonomia::before{content:"";position:absolute;left:-1.5px;right:-1.5px;top:-1.5px;height:7px;background:var(--ciano2)}
+.livello-autonomia:nth-child(2)::before{background:var(--blu)}
+.livello-autonomia:nth-child(3)::before{background:var(--ambra)}
+.livello-autonomia .livello{font:500 16px/1 var(--mono);color:var(--tenue);letter-spacing:.08em;margin-bottom:12px}
+.livello-autonomia h3{font-size:34px;margin-bottom:14px}
+.livello-autonomia p{font-size:20px;line-height:1.45}
+.livello-autonomia .regola{position:absolute;left:28px;right:28px;bottom:24px;border-top:1px solid #DCE2EA;padding-top:12px;font:500 16px/1.35 var(--mono);color:var(--blu2)}
+
+/* riquadri e prompt */
+.box{background:rgba(255,255,255,.85);border:1.5px solid var(--bordo);padding:22px 28px;position:relative}
+.box::before{content:"";position:absolute;left:-1.5px;top:-1.5px;width:40px;height:4px;background:var(--ciano2)}
+.box.blu{border-color:var(--blu)}
+.box .et{font-family:var(--titolo);text-transform:uppercase;font-weight:600;font-size:22px;color:var(--tenue);margin-bottom:12px;letter-spacing:.02em}
+.box.blu .et{color:var(--blu)}
+pre{font-family:var(--mono);font-size:18px;line-height:1.55;white-space:pre-wrap;color:var(--testo)}
+pre.s{font-size:15.5px;line-height:1.5}
+pre.xs{font-size:13.5px;line-height:1.45}
+p.xs{font-family:var(--mono);font-size:15px;line-height:1.55;color:var(--testo)}
+p.xs .k{color:var(--blu);font-weight:500} p.xs .seg{color:var(--ambra)}
+pre .k{color:var(--blu);font-weight:500}
+pre .seg{color:var(--ambra)}
+.testo-es{font-size:20px;line-height:1.5;font-style:italic;color:var(--testo)}
+
+/* tabelle */
+table{width:100%;border-collapse:collapse;font-size:23px;background:rgba(255,255,255,.55)}
+th{font-family:var(--titolo);text-transform:uppercase;font-size:24px;font-weight:600;text-align:left;padding:12px 16px;color:var(--blu);border-bottom:2px solid var(--blu)}
+td{padding:13px 16px;border-bottom:1px solid #DCE2EA;vertical-align:top;line-height:1.35}
+td b{color:var(--blu2)}
+
+/* screenshot */
+.io{display:grid;grid-template-columns:1fr 70px 1fr;flex:1;min-height:0}
+.freccia{display:flex;align-items:center;justify-content:center;color:var(--ciano2);font-size:46px}
+.colshot{display:flex;flex-direction:column;min-height:0}
+.shot{background:#fff;border:1.5px solid var(--bordo);box-shadow:0 14px 40px rgba(22,65,168,.12);position:relative;flex:1;min-height:200px}
+.shot .barra-f{height:26px;background:#EEF1F6;border-bottom:1px solid #DDE2EA}
+.shot .vuoto{position:absolute;inset:26px 0 0;display:flex;align-items:center;justify-content:center;color:#93A0B5;font:15px var(--mono);text-align:center;padding:20px}
+.didasc{margin-top:12px;font-family:var(--titolo);text-transform:uppercase;font-size:19px;color:var(--blu)}
+.avviso{margin-top:20px;font-size:20px;display:flex;gap:14px;align-items:center;line-height:1.4}
+.avviso b{font-family:var(--titolo);border:1.5px solid var(--ambra);color:var(--ambra);padding:2px 12px;font-size:17px;letter-spacing:.06em;white-space:nowrap}
+.flex1{flex:1;min-height:0;display:flex;flex-direction:column}
+.passi{display:grid;gap:22px}
+.passo{border-top:2px solid var(--blu);padding-top:14px;font-size:21px;line-height:1.4}
+.passo span{display:block;font-family:var(--mono);color:var(--blu);font-size:15px;margin-bottom:6px}
+.live{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:18px;color:#D7263D;margin-bottom:16px}
+.live i{width:12px;height:12px;border-radius:50%;background:#D7263D;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.grande{font-family:var(--titolo);font-size:130px;font-weight:600;color:var(--blu);text-transform:uppercase;line-height:1}
+
+/* S05 — animazione "prossima parola" (→ avanza un passo, R ricomincia) */
+.frase{font-size:30px;line-height:1.6}
+.frase b{display:inline-block}
+.cursore{display:inline-block;width:3px;height:1.05em;background:var(--blu);vertical-align:-.17em;margin-left:6px;animation:cursore 1.1s steps(1) infinite}
+@keyframes cursore{50%{opacity:0}}
+.frase-nota{font-size:17px;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);margin-top:4px;opacity:0}
+.palco{display:grid;align-items:start}
+.palco>*{grid-area:1/1}
+.pr-testa{display:flex;gap:18px;align-items:baseline;font-family:var(--titolo);text-transform:uppercase;font-weight:600;font-size:24px;color:var(--tenue);margin-bottom:12px}
+.pr-passo{font-family:var(--mono);text-transform:none;font-weight:500;font-size:16px;color:var(--blu);border:1.5px solid var(--blu);padding:1px 10px}
+.pr-passo:empty{display:none}
+.pr-righe{min-height:168px}
+.riga{display:grid;grid-template-columns:230px 1fr 80px;align-items:center;gap:22px;padding:6px 14px;font-size:26px;background:rgba(255,255,255,.8);margin-bottom:4px;
+  transition:background-color .2s cubic-bezier(.2,0,0,1),opacity .2s cubic-bezier(.2,0,0,1)}
+.riga .w{font-weight:600}
+.riga .barra{height:16px;background:#E2E7EF;position:relative;overflow:hidden}
+.riga .barra i{position:absolute;inset:0;background:var(--ciano2);transform-origin:left center}
+.riga .pct{font-family:var(--mono);font-size:20px;color:var(--tenue);text-align:right}
+.riga.scelta{background:var(--blu)}
+.riga.scelta .w,.riga.scelta .pct{color:#fff}
+.riga.scelta .barra{background:rgba(255,255,255,.25)}
+.riga.scelta .barra i{background:var(--ciano)}
+.riga.scartata{opacity:.35}
+.pr-nota{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);margin-top:8px}
+.limiti{opacity:0}
+.volante{position:absolute!important;z-index:5!important;font-size:30px;font-weight:700;line-height:1.6;color:var(--blu);white-space:nowrap;pointer-events:none;transform-origin:left top}
+@media (prefers-reduced-motion:reduce){.cursore{animation:none}.riga{transition:none}}
+
+/* slide interattive (02/11/2026, spunto: libro «Every Joule»): lo stato è nelle classi p1, p2…; .fermo azzera senza transizioni */
+.fermo,.fermo *{transition:none!important}
+.ctrl{cursor:pointer}
+
+/* S08 — alza la linguetta */
+.sentenze{display:grid;gap:18px;align-content:start}
+.sentenza{background:rgba(255,255,255,.88);border:1.5px solid var(--bordo);padding:16px 22px 0;position:relative}
+.sentenza .cit{font:500 20px/1.3 var(--mono);color:var(--blu)}
+.sentenza .princ{font-size:18px;line-height:1.4;font-style:italic;margin:6px 0 12px}
+.verifica{position:relative;height:64px;margin:0 -22px;border-top:1px dashed var(--bordo);display:flex;align-items:center;gap:18px;padding:0 22px;perspective:700px}
+.verifica .esito{font-size:17px;line-height:1.35;flex:1}
+.timbro{font:600 20px/1 var(--titolo);letter-spacing:.06em;text-transform:uppercase;border:3px solid currentColor;padding:6px 12px;color:#D7263D;white-space:nowrap;
+  opacity:0;transform:rotate(-7deg) scale(1.6);transition:transform .3s cubic-bezier(.3,1.6,.5,1) .3s,opacity .15s .3s}
+.timbro.ok{color:#2E8B57}.timbro.altro{color:var(--ambra)}.timbro.nd{color:var(--tenue)}
+.linguetta{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,#F6E3C4 0 12px,#F1D6AA 12px 24px);border-top:1px solid #E2B877;
+  display:flex;align-items:center;justify-content:center;font:600 17px/1 var(--titolo);letter-spacing:.1em;text-transform:uppercase;color:#8A5300;
+  transform-origin:top center;transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s}
+.sentenza.aperta .linguetta{transform:rotateX(85deg);opacity:0}
+.sentenza.aperta .timbro{opacity:1;transform:rotate(-7deg) scale(1)}
+
+/* S14 — la mail che cambia */
+.dom-lista{display:grid;gap:9px}
+.dom{display:grid;grid-template-columns:58px 1fr;gap:2px 16px;align-items:center;padding:8px 14px;border:1.5px solid transparent;opacity:.38;
+  transition:opacity .3s,background-color .3s,border-color .3s}
+.dom .num{width:58px;height:50px;font-size:26px;margin:0;grid-row:span 2}
+.dom h3{font-size:25px;margin:0;font-weight:500}
+.dom p{font-size:17px;color:var(--tenue);line-height:1.3}
+.dom.on{opacity:1;background:rgba(255,255,255,.8);border-color:var(--bordo)}
+.dom.ora{border-color:var(--blu)}
+.mail-testa{display:flex;justify-content:space-between;align-items:baseline}
+.mail-v{font:500 15px/1 var(--mono);color:var(--blu)}
+.mail{font-size:22px;line-height:1.5;white-space:pre-line}
+.mail mark{background:rgba(127,216,240,.5);color:inherit;padding:0 2px}
+.mail .seg{color:var(--ambra)}
+
+/* S17J e S52A — flussi luminosi tra depositi */
+.st1{font:600 21px var(--titolo);fill:var(--blu);text-transform:uppercase}
+.st2{font:400 15px var(--corpo);fill:var(--tenue)}
+.sc{fill:rgba(255,255,255,.9);stroke:var(--bordo);stroke-width:1.5}
+.flusso{opacity:0;transition:opacity .4s}
+.flusso.on{opacity:.4}.flusso.ora{opacity:1}
+.fl-base{fill:none;stroke-opacity:.3;transition:stroke-width .6s cubic-bezier(.2,0,0,1)}
+.fl-luce{fill:none;stroke-linecap:round;stroke-dasharray:.1 18;filter:url(#bagliore);animation:scorre .9s linear infinite;transition:stroke-width .6s cubic-bezier(.2,0,0,1)}
+@keyframes scorre{to{stroke-dashoffset:-18.1}}
+.fonte{opacity:.35;transition:opacity .4s}.fonte.on{opacity:1}
+.vaso{fill:rgba(255,255,255,.55);stroke:var(--blu2);stroke-width:3}
+.limite{stroke:var(--ambra);stroke-width:2;stroke-dasharray:8 6}
+.segm{transition:y .6s cubic-bezier(.2,0,0,1),height .6s cubic-bezier(.2,0,0,1)}
+.trabocco{opacity:0;transition:opacity .4s}.trabocco.on{opacity:1;animation:pulse 1.4s infinite}
+.esce{opacity:.25;transition:opacity .4s}.esce.on{opacity:1}.flusso.esce:not(.on){opacity:0}
+.ctx-dida{text-align:center;font-size:23px;line-height:1.4;min-height:34px}
+.risposte{text-align:center;font:500 36px/1.3 var(--titolo);min-height:96px;margin-top:-14px}
+.risp{opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s cubic-bezier(.2,0,0,1)}
+.p1 .r1,.p2 .r2{opacity:1;transform:none}
+.dep .riemp{transition:width .6s cubic-bezier(.2,0,0,1)}
+.dep{transition:opacity .4s}
+.suggerimento{opacity:0;transition:opacity .4s}.p2 .suggerimento{opacity:1}
+@media (prefers-reduced-motion:reduce){.fl-luce,.trabocco.on{animation:none}}
+
+
+/* S03 — fascia di loghi (SVG da Simple Icons, inline per funzionare senza rete) */
+.loghi{display:flex;justify-content:center;gap:30px;margin-top:58px;flex-wrap:wrap}
+.loghi .logo{display:flex;flex-direction:column;align-items:center;gap:9px;color:#5B6678;width:100px}
+.loghi svg{width:46px;height:46px;fill:currentColor}
+.loghi span{font:500 14px var(--corpo);letter-spacing:.06em;text-transform:uppercase}
+.loghi-tit{text-align:center;margin-top:46px}
+
+/* S04 — miniature al posto dei numeri */
+.mini{position:relative;display:inline-block;width:132px;height:132px;border-radius:50%;margin-bottom:16px;
+  background:radial-gradient(circle at 35% 30%,#fff 0%,#E3EEF5 40%,#B9D4E3 100%);box-shadow:0 0 0 5px rgba(255,255,255,.92),0 0 34px 6px rgba(127,216,240,.45)}
+.mini img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.mini span{position:absolute;right:-6px;bottom:-2px;width:44px;height:44px;border-radius:50%;background:var(--blu2);color:#fff;
+  display:flex;align-items:center;justify-content:center;font:500 20px var(--titolo);box-shadow:0 0 0 3px #fff}
+.mini.b span{background:var(--blu)}
+
+/* S05 — anticipo degli strumenti, compare con i tre limiti */
+.anticipo{grid-column:1/-1;margin-top:-18px;border-left:6px solid var(--ciano2);background:rgba(255,255,255,.72);padding:11px 20px;font-size:21px;line-height:1.4}
+
+/* S06C — il motore e gli attrezzi */
+.attrezzi{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.attrezzi .criterio{min-height:190px}
+.attrezzi h3{font-size:27px}
+
+/* S10 — mappa strumenti × capacità */
+table.mappa{font-size:18px}
+.mappa th{font-size:17px;padding:8px 10px;vertical-align:bottom;line-height:1.15}
+.mappa td{padding:7px 10px;line-height:1.3}
+.mappa td.c,.mappa th.c{text-align:center;width:9%}
+.mappa td.c{font-size:22px;color:var(--blu)}
+.mappa td.c.m{color:var(--ambra)}
+.mappa td.c.n{color:#9AA5B8}
+.mappa td.c.v{font:500 13px var(--mono);color:#9AA5B8}
+.legenda{margin-top:14px;font:500 16px/1.5 var(--corpo);color:var(--tenue);text-align:center}
+
+/* barra e note (fuori dalla slide) */
+.nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);font:13px var(--corpo);color:#55607a;z-index:9;opacity:.7}
+#pannello{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:rgba(15,46,122,.96);color:#fff;
+  font:17px/1.5 var(--corpo);padding:18px 28px;z-index:10;display:none}
+#pannello.on{display:block}
+#pannello b{color:var(--ciano)}
+#pannello .regia{margin-top:10px;opacity:.85;font-size:15px}
+#pannello ul{margin:6px 0 0 20px}
+
+/* finestra relatore (tasto P) */
+#rel{display:none}
+body.relatore{display:block;background:#0E1A33;color:#E8EEF8}
+body.relatore .nav,body.relatore #pannello{display:none!important}
+body.relatore #rel{display:grid;position:fixed;inset:0;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:14px 26px;padding:16px 22px}
+#rel .testa{grid-column:1/3;display:flex;gap:30px;align-items:baseline;font:500 18px var(--corpo);color:#AFC0DA}
+#rel .crono{font:600 46px var(--titolo);color:var(--ciano);min-width:150px}
+#rel .aiuto-rel{margin-left:auto;font-size:14px;color:#7F90AD}
+#rel .sx{display:flex;flex-direction:column;gap:12px;min-height:0}
+#rel-prev{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:8px;flex:none;background:#000}
+#rel-prev .slide{left:0;top:0;transform-origin:0 0}
+#rel .pross{font-size:18px;color:#9FB0CC}
+#rel .tasti{display:flex;gap:10px}
+#rel .tasti button{font:600 18px var(--corpo);padding:10px 22px;border:1px solid #3A4E78;background:#18284A;color:#E8EEF8;border-radius:6px;cursor:pointer}
+#rel .dx{overflow:auto;min-height:0;display:flex;flex-direction:column;gap:16px;padding-right:6px}
+#rel .tit-rel{font:600 30px var(--titolo);text-transform:uppercase;color:#fff}
+#rel .punti-rel ul{list-style:none;font-size:26px;line-height:1.42}
+#rel .punti-rel li{padding:7px 0 7px 28px;position:relative}
+#rel .punti-rel li::before{content:"";position:absolute;left:3px;top:20px;width:10px;height:10px;border:2px solid var(--ciano2);transform:rotate(45deg)}
+#rel .punti-rel b{color:var(--ciano)}
+#rel .regia{background:#18284A;border-left:5px solid var(--ambra);padding:12px 16px;font-size:16px;line-height:1.5;color:#D3DCEB}
+#rel .regia:empty{display:none}
+#rel .regia b{color:#FFD58A}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="anelli">
+      <circle cx="280" cy="280" r="250" fill="none" stroke="#C9D3DF" stroke-width="2"/>
+      <circle cx="280" cy="280" r="232" fill="none" stroke="#7FD8F0" stroke-width="3" stroke-dasharray="300 120 60 980"/>
+      <path d="M95 140 A225 225 0 0 1 200 70" fill="none" stroke="#2BB3DA" stroke-width="2.5"/>
+      <path d="M200 70 l-16 -6 l4 16 z" fill="#2BB3DA"/>
+      <path d="M470 420 A225 225 0 0 1 360 492" fill="none" stroke="#2BB3DA" stroke-width="2.5"/>
+      <path d="M360 492 l16 6 l-4 -16 z" fill="#2BB3DA"/>
+      <circle cx="30" cy="280" r="5" fill="#2BB3DA"/>
+      <circle cx="530" cy="250" r="4" fill="#C9D3DF"/>
+    </g>
+    <g id="circuito" fill="none" stroke="#C3CCD8" stroke-width="1.6">
+      <path d="M0 60 H120 L160 100 H260"/><path d="M0 110 H80 L130 160 V230"/>
+      <path d="M60 0 V40 L100 80"/><circle cx="260" cy="100" r="4"/><circle cx="130" cy="230" r="4"/>
+      <rect x="180" y="150" width="34" height="12" rx="2"/>
+    </g>
+    <g id="frecce" fill="none" stroke="#7E8FAA" stroke-width="1.6">
+      <path d="M10 0 V300"/><path d="M4 250 l6 10 l6 -10 M4 268 l6 10 l6 -10 M4 286 l6 10 l6 -10"/><circle cx="10" cy="0" r="3" fill="#7E8FAA"/>
+    </g>
+    <!-- flussi luminosi di S17J e S52A -->
+    <filter id="bagliore" x="-20%" y="-60%" width="140%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="tratteggio" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="12" height="12" fill="#FBEBD2"/><rect width="5" height="12" fill="#C77800" fill-opacity=".55"/>
+    </pattern>
+  </defs>
+</svg>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 0 — APERTURA                                               -->
+<!-- ================================================================ -->
+
+<section class="slide cover centro" data-cod="S01" data-fondo="video">
+  <!-- sfondo video 60 s in loop: progetto in ../video/sfondo-s01/ (al posto di alone e tondo "copertina") -->
+  <video class="sfondo-video" src="video/sfondo-s01.mp4" muted loop playsinline preload="auto" aria-hidden="true"></video>
+  <div class="velo"></div>
+  <div class="testi">
+    <h1>L'intelligenza artificiale<span class="sec">nello studio tecnico</span></h1>
+    <p class="sotto">Dal prompt alla pratica<br><span class="piccolo">Terraviva · Matteo Oliveri</span></p>
+  </div>
+  <aside class="note">Presentazione personale in 30 secondi: consulente ambientale e agronomico, uso quotidiano dell'AI in VIncA, VIA, relazioni, offerte.</aside>
+  <aside class="punti"><ul><li><b>Chi sono</b> in 30 secondi: consulente ambientale e agronomico, Te.A. Consulting.</li><li>Uso l'AI <b>ogni giorno</b> in VIncA, VIA, relazioni e offerte: vi porto un <b>metodo</b>, non una lista di app.</li><li>Oggi prima la parte con gli esempi, poi un'ora di <b>dimostrazione dal vivo</b>.</li><li>Domande in qualsiasi momento: <b>interrompetemi</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S02">
+  <h2>Cosa porterete a casa</h2>
+  <div class="g3" style="padding:0 30px">
+    <div class="col"><div class="num">01</div><h3>Il prompt</h3><p>Scrivere una richiesta strutturata e migliorarla per iterazioni.</p></div>
+    <div class="col"><div class="num">02</div><h3>Il contesto</h3><p>Costruire il contesto del vostro studio: servizi, tono, modelli, normativa.</p></div>
+    <div class="col"><div class="num">03</div><h3>Le regole</h3><p>Sapere cosa <b>non</b> affidare all'AI e come dichiararne l'uso al cliente.</p></div>
+  </div>
+  <p class="sotto" style="text-align:center;margin-top:60px;color:var(--tenue)">Tre capacità, non una lista di strumenti.</p>
+  <aside class="note">Gli strumenti cambiano ogni tre mesi, il metodo resta.</aside>
+  <aside class="punti"><ul><li>Tre capacità da portare a casa: <b>prompt</b>, <b>contesto</b>, <b>regole</b>.</li><li><b>Prompt</b>: scrivere una richiesta strutturata e migliorarla <b>per iterazioni</b>.</li><li><b>Contesto</b>: dare all'AI il vostro studio, cioè servizi, tono, modelli, normativa.</li><li><b>Regole</b>: cosa <b>non</b> affidare all'AI e come <b>dichiararne l'uso</b> al cliente.</li><li>Gli strumenti cambiano <b>ogni tre mesi</b>, il metodo resta.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S03">
+  <h2>Da dove partiamo</h2>
+  <p class="piccolo" style="text-align:center;margin:-14px 0 34px">Alzata di mano</p>
+  <div class="g3" style="padding:0 30px">
+    <div class="voce"><div class="num">?</div><h3>Chi usa ChatGPT, Claude o Gemini almeno una volta a settimana?</h3></div>
+    <div class="voce"><div class="num">?</div><h3>Chi ha un account a pagamento?</h3></div>
+    <div class="voce"><div class="num">?</div><h3>Chi l'ha usato per un documento consegnato a un cliente?</h3></div>
+  </div>
+  <p class="piccolo loghi-tit">Gli strumenti di cui parleremo</p>
+  <div class="loghi" style="margin-top:22px">
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg><span>Claude</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg><span>ChatGPT</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg><span>Gemini</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.999 3.201C5.372 3.201 0 8.528 0 15.101V20.8h2.212v-.568c0-2.666 2.178-4.827 4.866-4.827 2.688 0 4.866 2.16 4.866 4.827v.568h2.212v-.568c0-3.877-3.17-7.019-7.078-7.019A7.075 7.075 0 0 0 2.992 14.5a7.355 7.355 0 0 1 6.568-4.016c4.057 0 7.347 3.264 7.347 7.287V20.8h2.212V17.77c0-5.235-4.28-9.481-9.56-9.481a9.563 9.563 0 0 0-6.217 2.28A9.795 9.795 0 0 1 12 5.393c5.406 0 9.788 4.346 9.788 9.707V20.8H24V15.1c-.001-6.573-5.373-11.9-12.001-11.9Z"/></svg><span>NotebookLM</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.3977 7.0896h-2.3106V.0676l-7.5094 6.3542V.1577h-1.1554v6.1966L4.4904 0v7.0896H1.6023v10.3976h2.8882V24l6.932-6.3591v6.2005h1.1554v-6.0469l6.9318 6.1807v-6.4879h2.8882V7.0896zm-3.4657-4.531v4.531h-5.355l5.355-4.531zm-13.2862.0676 4.8691 4.4634H5.6458V2.6262zM2.7576 16.332V8.245h7.8476l-6.1149 6.1147v1.9723H2.7576zm2.8882 5.0404v-3.8852h.0001v-2.6488l5.7763-5.7764v7.0111l-5.7764 5.2993zm12.7086.0248-5.7766-5.1509V9.0618l5.7766 5.7766v6.5588zm2.8882-5.0652h-1.733v-1.9723L13.3948 8.245h7.8478v8.087z"/></svg><span>Perplexity</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="12" y="16.2" text-anchor="middle" font-size="10.5" font-weight="600" fill="currentColor" font-family="Fira Sans,sans-serif">Co</text></svg><span>Copilot</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.143 3.429v3.428h-3.429v3.429h-3.428V6.857H6.857V3.43H3.43v13.714H0v3.428h10.286v-3.428H6.857v-3.429h3.429v3.429h3.429v-3.429h3.428v3.429h-3.428v3.428H24v-3.428h-3.43V3.429z"/></svg><span>Le Chat</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.748 4.651c-.254-.124-.364.113-.512.233-.051.04-.094.09-.137.137-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.155-.708-.311-.955-.65-.172-.24-.219-.509-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.094.172.187.129.323-.082.28-.18.553-.266.833-.055.179-.137.218-.328.14a5.5 5.5 0 0 1-1.737-1.179c-.857-.828-1.631-1.743-2.597-2.46a12 12 0 0 0-.689-.47c-.985-.957.13-1.743.387-1.836.27-.098.094-.433-.778-.428-.872.003-1.67.295-2.687.685a3 3 0 0 1-.465.136 9.6 9.6 0 0 0-2.883-.101c-1.885.21-3.39 1.1-4.497 2.622C.082 8.776-.231 10.854.152 13.02c.403 2.284 1.568 4.175 3.36 5.653 1.857 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.132-.284 4.994-1.86.47.234.962.328 1.78.398.629.058 1.235-.031 1.705-.129.735-.155.684-.836.418-.961-2.155-1.004-1.682-.595-2.112-.926 1.095-1.295 2.768-3.598 3.284-6.733.05-.346.115-.834.108-1.114-.004-.171.035-.238.23-.257a4.2 4.2 0 0 0 1.545-.475c1.397-.763 1.96-2.016 2.093-3.517.02-.23-.004-.467-.247-.588M11.58 18.168c-2.088-1.642-3.101-2.183-3.52-2.16-.39.024-.32.472-.234.763.09.288.207.487.371.74.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.168-1.361-.801-2.5-1.86-3.301-3.306-.775-1.393-1.225-2.888-1.299-4.482-.02-.385.094-.522.477-.592a4.7 4.7 0 0 1 1.53-.038c2.131.311 3.946 1.264 5.467 2.774.868.86 1.525 1.887 2.202 2.89.72 1.066 1.494 2.082 2.48 2.915.348.291.626.513.892.677-.802.09-2.14.109-3.055-.615zm1.001-6.44a.306.306 0 0 1 .415-.287.3.3 0 0 1 .113.074.3.3 0 0 1 .086.214c0 .17-.136.307-.308.307a.303.303 0 0 1-.306-.307m3.11 1.596c-.2.081-.4.151-.591.16a1.25 1.25 0 0 1-.798-.254c-.274-.23-.47-.358-.551-.758a1.7 1.7 0 0 1 .015-.588c.07-.327-.007-.537-.238-.727-.188-.156-.426-.199-.689-.199a.6.6 0 0 1-.254-.078.253.253 0 0 1-.114-.358 1 1 0 0 1 .192-.21c.356-.202.767-.136 1.146.016.352.144.618.408 1.001.782.392.451.462.576.685.915.176.264.336.536.446.848.066.194-.02.353-.25.45"/></svg><span>DeepSeek</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.361 10.26a.894.894 0 0 0-.558.47l-.072.148.001.207c0 .193.004.217.059.353.076.193.152.312.291.448.24.238.51.3.872.205a.86.86 0 0 0 .517-.436.752.752 0 0 0 .08-.498c-.064-.453-.33-.782-.724-.897a1.06 1.06 0 0 0-.466 0zm-9.203.005c-.305.096-.533.32-.65.639a1.187 1.187 0 0 0-.06.52c.057.309.31.59.598.667.362.095.632.033.872-.205.14-.136.215-.255.291-.448.055-.136.059-.16.059-.353l.001-.207-.072-.148a.894.894 0 0 0-.565-.472 1.02 1.02 0 0 0-.474.007Zm4.184 2c-.131.071-.223.25-.195.383.031.143.157.288.353.407.105.063.112.072.117.136.004.038-.01.146-.029.243-.02.094-.036.194-.036.222.002.074.07.195.143.253.064.052.076.054.255.059.164.005.198.001.264-.03.169-.082.212-.234.15-.525-.052-.243-.042-.28.087-.355.137-.08.281-.219.324-.314a.365.365 0 0 0-.175-.48.394.394 0 0 0-.181-.033c-.126 0-.207.03-.355.124l-.085.053-.053-.032c-.219-.13-.259-.145-.391-.143a.396.396 0 0 0-.193.032zm.39-2.195c-.373.036-.475.05-.654.086-.291.06-.68.195-.951.328-.94.46-1.589 1.226-1.787 2.114-.04.176-.045.234-.045.53 0 .294.005.357.043.524.264 1.16 1.332 2.017 2.714 2.173.3.033 1.596.033 1.896 0 1.11-.125 2.064-.727 2.493-1.571.114-.226.169-.372.22-.602.039-.167.044-.23.044-.523 0-.297-.005-.355-.045-.531-.288-1.29-1.539-2.304-3.072-2.497a6.873 6.873 0 0 0-.855-.031zm.645.937a3.283 3.283 0 0 1 1.44.514c.223.148.537.458.671.662.166.251.26.508.303.82.02.143.01.251-.043.482-.08.345-.332.705-.672.957a3.115 3.115 0 0 1-.689.348c-.382.122-.632.144-1.525.138-.582-.006-.686-.01-.853-.042-.57-.107-1.022-.334-1.35-.68-.264-.28-.385-.535-.45-.946-.03-.192.025-.509.137-.776.136-.326.488-.73.836-.963.403-.269.934-.46 1.422-.512.187-.02.586-.02.773-.002zm-5.503-11a1.653 1.653 0 0 0-.683.298C5.617.74 5.173 1.666 4.985 2.819c-.07.436-.119 1.04-.119 1.503 0 .544.064 1.24.155 1.721.02.107.031.202.023.208a8.12 8.12 0 0 1-.187.152 5.324 5.324 0 0 0-.949 1.02 5.49 5.49 0 0 0-.94 2.339 6.625 6.625 0 0 0-.023 1.357c.091.78.325 1.438.727 2.04l.13.195-.037.064c-.269.452-.498 1.105-.605 1.732-.084.496-.095.629-.095 1.294 0 .67.009.803.088 1.266.095.555.288 1.143.503 1.534.071.128.243.393.264.407.007.003-.014.067-.046.141a7.405 7.405 0 0 0-.548 1.873c-.062.417-.071.552-.071.991 0 .56.031.832.148 1.279L3.42 24h1.478l-.05-.091c-.297-.552-.325-1.575-.068-2.597.117-.472.25-.819.498-1.296l.148-.29v-.177c0-.165-.003-.184-.057-.293a.915.915 0 0 0-.194-.25 1.74 1.74 0 0 1-.385-.543c-.424-.92-.506-2.286-.208-3.451.124-.486.329-.918.544-1.154a.787.787 0 0 0 .223-.531c0-.195-.07-.355-.224-.522a3.136 3.136 0 0 1-.817-1.729c-.14-.96.114-2.005.69-2.834.563-.814 1.353-1.336 2.237-1.475.199-.033.57-.028.776.01.226.04.367.028.512-.041.179-.085.268-.19.374-.431.093-.215.165-.333.36-.576.234-.29.46-.489.822-.729.413-.27.884-.467 1.352-.561.17-.035.25-.04.569-.04.319 0 .398.005.569.04a4.07 4.07 0 0 1 1.914.997c.117.109.398.457.488.602.034.057.095.177.132.267.105.241.195.346.374.43.14.068.286.082.503.045.343-.058.607-.053.943.016 1.144.23 2.14 1.173 2.581 2.437.385 1.108.276 2.267-.296 3.153-.097.15-.193.27-.333.419-.301.322-.301.722-.001 1.053.493.539.801 1.866.708 3.036-.062.772-.26 1.463-.533 1.854a2.096 2.096 0 0 1-.224.258.916.916 0 0 0-.194.25c-.054.109-.057.128-.057.293v.178l.148.29c.248.476.38.823.498 1.295.253 1.008.231 2.01-.059 2.581a.845.845 0 0 0-.044.098c0 .006.329.009.732.009h.73l.02-.074.036-.134c.019-.076.057-.3.088-.516.029-.217.029-1.016 0-1.258-.11-.875-.295-1.57-.597-2.226-.032-.074-.053-.138-.046-.141.008-.005.057-.074.108-.152.376-.569.607-1.284.724-2.228.031-.26.031-1.378 0-1.628-.083-.645-.182-1.082-.348-1.525a6.083 6.083 0 0 0-.329-.7l-.038-.064.131-.194c.402-.604.636-1.262.727-2.04a6.625 6.625 0 0 0-.024-1.358 5.512 5.512 0 0 0-.939-2.339 5.325 5.325 0 0 0-.95-1.02 8.097 8.097 0 0 1-.186-.152.692.692 0 0 1 .023-.208c.208-1.087.201-2.443-.017-3.503-.19-.924-.535-1.658-.98-2.082-.354-.338-.716-.482-1.15-.455-.996.059-1.8 1.205-2.116 3.01a6.805 6.805 0 0 0-.097.726c0 .036-.007.066-.015.066a.96.96 0 0 1-.149-.078A4.857 4.857 0 0 0 12 3.03c-.832 0-1.687.243-2.456.698a.958.958 0 0 1-.148.078c-.008 0-.015-.03-.015-.066a6.71 6.71 0 0 0-.097-.725C8.997 1.392 8.337.319 7.46.048a2.096 2.096 0 0 0-.585-.041Zm.293 1.402c.248.197.523.759.682 1.388.03.113.06.244.069.292.007.047.026.152.041.233.067.365.098.76.102 1.24l.002.475-.12.175-.118.178h-.278c-.324 0-.646.041-.954.124l-.238.06c-.033.007-.038-.003-.057-.144a8.438 8.438 0 0 1 .016-2.323c.124-.788.413-1.501.696-1.711.067-.05.079-.049.157.013zm9.825-.012c.17.126.358.46.498.888.28.854.36 2.028.212 3.145-.019.14-.024.151-.057.144l-.238-.06a3.693 3.693 0 0 0-.954-.124h-.278l-.119-.178-.119-.175.002-.474c.004-.669.066-1.19.214-1.772.157-.623.434-1.185.68-1.382.078-.062.09-.063.159-.012z"/></svg><span>Ollama</span></div>
+  </div>
+  <aside class="note">Non c'è un questionario preliminare: queste tre domande sono l'unico modo per tarare il livello. Se la maggioranza non usa l'AI, allungare il blocco 1 e accorciare il blocco 7.</aside>
+  <aside class="punti"><ul><li><b>Alzata di mano</b>: mi serve per tarare il livello della giornata.</li><li>Chi usa ChatGPT, Claude o Gemini <b>almeno una volta a settimana</b>?</li><li>Chi ha un <b>account a pagamento</b>? Chi l'ha usato per un documento <b>consegnato a un cliente</b>?</li><li>In basso gli strumenti di cui parleremo: <b>non serve conoscerli tutti</b>, ne useremo pochi.</li><li>Se la maggioranza non usa l'AI: <b>allungo il blocco 1</b>, accorcio il 7.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S04">
+  <h2>Programma</h2>
+  <div class="g4">
+    <div class="voce"><div class="mini"><img src="immagini/prog-01.png" alt="" onerror="this.remove()"><span>01</span></div><h3>Capire lo strumento</h3><p>15'</p></div>
+    <div class="voce"><div class="mini"><img src="immagini/prog-02.png" alt="" onerror="this.remove()"><span>02</span></div><h3>Il contesto</h3><p>40'</p></div>
+    <div class="voce"><div class="mini"><img src="immagini/prog-03.png" alt="" onerror="this.remove()"><span>03</span></div><h3>Il prompt</h3><p>30'</p></div>
+    <div class="voce"><div class="mini"><img src="immagini/prog-04.png" alt="" onerror="this.remove()"><span>04</span></div><h3>Casi d'uso nello studio</h3><p>30'</p></div>
+    <div class="voce"><div class="mini"><img src="immagini/prog-05.png" alt="" onerror="this.remove()"><span>05</span></div><h3>NotebookLM</h3><p>10'</p></div>
+    <div class="voce"><div class="mini"><img src="immagini/prog-06.png" alt="" onerror="this.remove()"><span>06</span></div><h3>Usare l'AI in modo corretto</h3><p>15'</p></div>
+    <div class="voce"><div class="mini"><img src="immagini/prog-07.png" alt="" onerror="this.remove()"><span>07</span></div><h3>Vibe coding</h3><p>10'</p></div>
+    <div class="voce"><div class="mini b"><img src="immagini/prog-b.png" alt="" onerror="this.remove()"><span>B</span></div><h3>Dimostrazione dal vivo</h3><p>60'</p></div>
+  </div>
+  <p class="piccolo" style="text-align:center;margin-top:30px">Pausa di 10' dopo il blocco 3</p>
+  <aside class="punti"><ul><li>Sette blocchi, poi un'ora di <b>dimostrazione dal vivo</b>.</li><li>Il cuore della giornata sono <b>contesto (40')</b> e <b>prompt (30')</b>: lì si decide la qualità.</li><li>Poi <b>casi d'uso</b> reali, <b>NotebookLM</b>, <b>uso corretto</b> e un cenno al <b>vibe coding</b>.</li><li><b>Pausa di 10'</b> dopo il blocco 3.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 1 — CAPIRE LO STRUMENTO                                    -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="B01">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="blocco-01"></div>
+  <div class="n">01</div>
+  <h1>Capire lo strumento</h1>
+  <p class="sotto">Come ragiona un modello linguistico, dove aiuta e dove inciampa.</p>
+  <aside class="punti"><ul><li>Blocco 1: <b>capire lo strumento</b> prima di usarlo.</li><li>Domanda all'aula: secondo voi, <b>come fa</b> a rispondere?</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S05">
+  <h2 class="sx">Una macchina che completa le frasi</h2>
+  <div class="box" style="margin-bottom:34px">
+    <p class="frase">«La siepe campestre è composta da specie arbustive
+      <b class="acc">autoctone</b> <span class="amb">→</span> <b class="acc">disposte</b> <span class="amb">→</span> <b class="acc">su</b> <span class="amb">→</span> <b class="acc">due</b> <span class="amb">→</span> <b class="acc">file</b>…»</p>
+    <p class="frase-nota">Ogni parola è la più probabile dopo tutte quelle che la precedono</p>
+  </div>
+  <div class="palco">
+    <div class="prossima">
+      <div class="pr-testa"><span class="pr-passo"></span>Quale parola viene dopo?</div>
+      <div class="pr-righe"></div>
+      <div class="pr-nota">Probabilità di esempio, a scopo illustrativo</div>
+    </div>
+    <div class="g3 limiti">
+      <div class="col"><h3>Conoscenza ferma a una data</h3><p>Sa moltissimo, ma solo fino al suo addestramento.</p></div>
+      <div class="col"><h3>Non legge la norma vigente</h3><p>Se non gli date il testo o la ricerca web, cita a memoria.</p></div>
+      <div class="col"><h3>Non conosce il vostro studio</h3><p>Clienti, modelli, stile: finché non glieli date, non esistono.</p></div>
+      <p class="anticipo">Molte app aggiungono <b class="acc">strumenti</b>: ricerca web, lettura di file e immagini, calcolo. Li vediamo tra poco.</p>
+    </div>
+  </div>
+  <aside class="note">Animazione a passi: <b>→</b> fa scegliere una parola alla volta (5 passi), al sesto compaiono i tre limiti, poi si passa alla slide successiva; <b>R</b> ricomincia. Prima di ogni passo chiedere all'aula: «quale parola viene dopo?». Le percentuali sono di esempio, non calcolate da un modello reale; in realtà il modello lavora su pezzi di parola (token) e non sceglie sempre la più probabile. Non "cerca" la risposta come Google: la costruisce, parola dopo parola. Per questo scrive bene anche quando sbaglia. Metafora: una biblioteca enorme, aggiornata fino a una certa data, che non contiene il vostro archivio.</aside>
+  <aside class="punti"><ul><li>A ogni passo chiedo all'aula: <b>«quale parola viene dopo?»</b></li><li>Il modello <b>completa le frasi</b>: sceglie una parola alla volta tra le più probabili.</li><li>Non <b>cerca</b> la risposta come Google: la <b>costruisce</b>. Per questo scrive bene <b>anche quando sbaglia</b>.</li><li>Tre limiti: conoscenza <b>ferma a una data</b>, non legge la <b>norma vigente</b>, non conosce <b>il vostro studio</b>.</li><li>Ultima riga: molte app aggiungono <b>strumenti</b> (web, file, immagini). Li vediamo <b>tra poco</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S06" data-fondo="video" data-piede="no" data-titolo="Stessa domanda, 7 modelli (video)">
+  <!-- quattro video in sequenza: progetto in ../video/confronto-modelli/ · dati: ../esempi-output/confronto-modelli-2026-10-20.md -->
+  <video class="seq-video" src="video/s06-confronto-1.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+  <video class="seq-video" src="video/s06-confronto-2.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+  <video class="seq-video" src="video/s06-confronto-3.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+  <video class="seq-video" src="video/s06-confronto-4.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+  <aside class="note">Entrando la slide resta <b>ferma sul primo fotogramma</b> (titolo e domanda): spiegarla con calma. Poi <b>→</b> avvia il video 1; <b>→</b> avvia il video 2, che si ferma da solo sulla domanda appena scritta; <b>→</b> la domanda si spezza in token; <b>→</b> video 3; <b>→</b> video 4. R ricomincia. Contenuto dei video: <b>1</b> dalla slide al titolo «Stessa domanda, 7 modelli» · <b>2</b> la domanda resta leggibile 10 s, poi si spezza in token · <b>3</b> sette modelli al lavoro (cloud 1 milione di token di contesto contro 4.096 sul PC), la gara con i tempi reali accelerati ×3,5 e il verdetto · <b>4</b> le tre lezioni e il ritorno alla slide. Prova reale del 20/10/2026, senza ricerca web: in cloud tutti danno 0,5 m (art. 892 c.c.), ma Haiku cita l'art. 893 e Sonnet sbaglia il limite di altezza; in locale Llama inventa «art. 932, 3 metri» e DeepSeek ridotto capisce «lama in vaso». Dirlo a voce: una domanda, un giorno, non è una classifica. Nella prova sulla robinia (2 m) solo i modelli grandi hanno colto l'eccezione.</aside>
+  <aside class="punti"><ul><li>Slide ferma: <b>leggo la domanda</b>, la distanza minima dal confine per una siepe di <b>ligustro</b>.</li><li>Chiedo all'aula: <b>qual è la risposta giusta?</b> (0,5 m, art. 892 c.c.)</li><li>→ parte la prova: <b>sette modelli</b>, cinque in cloud e due sul nostro PC, <b>senza ricerca web</b>.</li><li>In cloud tutti dicono <b>0,5 m</b>, ma Haiku cita l'<b>art. 893</b> e Sonnet sbaglia il <b>limite di altezza</b>; in locale Llama <b>inventa</b> «art. 932, 3 metri».</li><li><b>Una domanda, un giorno</b>: non è una classifica.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S06A">
+  <h2>Haiku corre, Sonnet bilancia, Opus approfondisce</h2>
+  <div class="modelli-claude">
+    <div class="modello haiku">
+      <div class="nome">Haiku</div>
+      <div class="ruolo">Rapidità e grandi volumi</div>
+      <p class="uso">Estrazioni semplici, classificazioni, riassunti brevi e prime bozze.</p>
+      <div class="scelta">Più rapido e meno costoso<br>Più facile che perda un'eccezione</div>
+    </div>
+    <div class="modello sonnet">
+      <div class="nome">Sonnet</div>
+      <div class="ruolo">Equilibrio per il lavoro quotidiano</div>
+      <p class="uso">Analisi di documenti, scrittura professionale e compiti articolati.</p>
+      <div class="scelta">Buon equilibrio generale<br>Non sempre basta per i casi più sottili</div>
+    </div>
+    <div class="modello opus">
+      <div class="nome">Opus</div>
+      <div class="ruolo">Problemi difficili e più passaggi</div>
+      <p class="uso">Eccezioni, confronti complessi, pianificazione e revisioni critiche.</p>
+      <div class="scelta">Maggiore capacità<br>Di norma più lento e più costoso</div>
+    </div>
+  </div>
+  <p class="piccolo" style="margin-top:26px;text-align:center">Non è una classifica: è una scelta tra qualità, tempo e costo</p>
+  <aside class="note">Usare la famiglia Claude come metafora, senza trasformarla in una graduatoria assoluta. Haiku, Sonnet e Opus rappresentano tre compromessi diversi. Nell'esempio del corso, sul ligustro tutti i Claude arrivano alla distanza principale, ma Haiku sbaglia l'articolo e Sonnet il limite di altezza; sulla robinia solo Opus coglie l'eccezione dei 2 metri. È una prova limitata, non un benchmark. Un modello più capace è utile quando l'errore pesa o il caso è complesso; per estrarre cento righe da documenti uniformi può essere uno spreco.</aside>
+  <aside class="punti"><ul><li>Uso la famiglia Claude come <b>metafora</b>: tre compromessi, non una graduatoria.</li><li><b>Haiku</b>: rapido ed economico, ma più facile che <b>perda un'eccezione</b>.</li><li><b>Sonnet</b>: l'<b>equilibrio</b> per il lavoro quotidiano.</li><li><b>Opus</b>: i casi difficili. Sulla robinia solo lui ha colto l'<b>eccezione dei 2 metri</b>.</li><li>Si sceglie in base a <b>quanto pesa l'errore</b>: per cento righe uniformi Opus è uno spreco.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S06C">
+  <h2>Il motore e gli attrezzi</h2>
+  <p class="sotto" style="text-align:center;margin:-14px 0 32px;color:var(--tenue)">Il modello genera il testo; l'app gli dà gli strumenti per lavorare.</p>
+  <div class="attrezzi">
+    <div class="criterio"><div class="n-criterio">WEB</div><h3>Cerca sul web</h3><p>Trova la norma aggiornata e indica la fonte.</p></div>
+    <div class="criterio"><div class="n-criterio">FILE</div><h3>Legge i file</h3><p>PDF, Word ed Excel; alcune app anche audio e video.</p></div>
+    <div class="criterio"><div class="n-criterio">VISTA</div><h3>Guarda le immagini</h3><p>Foto di campo, planimetrie, schermate.</p></div>
+    <div class="criterio"><div class="n-criterio">CALCOLO</div><h3>Esegue codice</h3><p>Calcoli, tabelle, grafici, file Word ed Excel.</p></div>
+    <div class="criterio"><div class="n-criterio">IMMAGINI</div><h3>Crea immagini</h3><p>Rendering e illustrazioni: non tutte le app.</p></div>
+  </div>
+  <div class="formula-claude ambra" style="margin-top:34px"><b>Gli attrezzi appartengono all'app e al piano, non al modello.</b> Riducono gli errori, non li eliminano.</div>
+  <aside class="note">Slide aggiunta il 07/11/2026. Attacco: «nella prova del video i modelli lavoravano a mani nude, senza ricerca web». Esempio da dire: Opus da solo non cerca sul web, lo fa l'app Claude che usa Opus; lo stesso modello può avere strumenti diversi a seconda del piano. Claude non genera foto né illustrazioni, solo grafici e diagrammi. La ricerca web riduce le invenzioni ma può trovare una fonte sbagliata o superata. La mappa di chi fa cosa è in S10. Fonte: ../2026-11-07-ricerca-capacita-strumenti-ai.md</aside>
+  <aside class="punti"><ul><li>Nella prova i modelli lavoravano <b>a mani nude</b>: niente web, niente file.</li><li>Il modello è il <b>motore</b>; l'app gli dà gli <b>attrezzi</b>: web, file, immagini, calcolo, generazione di immagini.</li><li>Opus da solo <b>non cerca sul web</b>: lo fa l'<b>app Claude</b> che usa Opus.</li><li>Gli attrezzi <b>dipendono dall'app e dal piano</b>: stesso modello, possibilità diverse.</li><li>Riducono gli errori, <b>non li eliminano</b>: anche la ricerca web può trovare la fonte sbagliata.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S06B">
+  <h2>Un modello si sceglie su sei caratteristiche</h2>
+  <div class="criteri-modello">
+    <div class="criterio"><div class="n-criterio">01</div><h3>Dimensione e capacità</h3><p>Comprende sfumature, eccezioni e richieste con più passaggi?</p></div>
+    <div class="criterio"><div class="n-criterio">02</div><h3>Contesto</h3><p>Quanti documenti e istruzioni può considerare nello stesso lavoro?</p></div>
+    <div class="criterio"><div class="n-criterio">03</div><h3>Velocità</h3><p>Quanto impiega a iniziare e completare una risposta?</p></div>
+    <div class="criterio"><div class="n-criterio">04</div><h3>Costo e limiti</h3><p>Quanto costa usarlo e quante richieste permette il piano?</p></div>
+    <div class="criterio"><div class="n-criterio">05</div><h3>Strumenti</h3><p>Quali attrezzi offre l'app: web, file, immagini, codice? (slide precedente)</p></div>
+    <div class="criterio"><div class="n-criterio">06</div><h3>Dove gira</h3><p>Cloud o PC locale: quali prestazioni e quale controllo sui dati?</p></div>
+  </div>
+  <div class="prova-reale"><b>Affidabilità:</b> provarlo su un vostro compito reale e verificare il risultato.</div>
+  <aside class="note"><b>Capacità:</b> parlare di modello piccolo, intermedio o avanzato; il numero di parametri spesso non è pubblico e non permette confronti diretti tra aziende. <b>Contesto:</b> non è la memoria del modello e non è la sua intelligenza; indica quanto materiale può ricevere in una singola lavorazione. Un contesto molto ampio non garantisce che ogni riga venga usata bene. <b>Costo:</b> distinguere abbonamento, limiti del piano e consumo a token nelle API. <b>Strumenti:</b> ricerca web, memoria, progetti e integrazioni appartengono spesso all'applicazione, non al modello. <b>Dove gira:</b> il locale offre più controllo sui dati, ma richiede hardware adeguato. La prova sul proprio lavoro vale più di una classifica generica.</aside>
+  <aside class="punti"><ul><li>Sei domande per <b>scegliere un modello</b>: riassumono <b>motore</b> e <b>attrezzi</b> delle due slide precedenti.</li><li><b>Contesto</b> non è memoria né intelligenza: è <b>quanto materiale</b> riceve in una lavorazione.</li><li><b>Costo</b>: abbonamento, limiti del piano, consumo a token nelle API.</li><li><b>Dove gira</b>: in locale avete più <b>controllo sui dati</b>, ma serve hardware.</li><li>La prova che conta è <b>su un vostro compito reale</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S07">
+  <h2>Dove aiuta, dove inciampa</h2>
+  <table>
+    <tr><th>Bravo a…</th><th style="color:var(--ambra);border-color:var(--ambra)">Debole su…</th></tr>
+    <tr><td>Scrivere, riassumere, riformulare</td><td>Riferimenti normativi precisi</td></tr>
+    <tr><td>Estrarre dati da documenti lunghi</td><td>Numeri e calcoli non verificati</td></tr>
+    <tr><td>Confrontare testi e trovare mancanze</td><td>Informazioni recenti o locali (senza ricerca web)</td></tr>
+    <tr><td>Proporre strutture e alternative</td><td>Sapere quando non sa</td></tr>
+  </table>
+  <aside class="punti"><ul><li>Bravo a <b>scrivere, riassumere, estrarre, confrontare</b>, proporre strutture.</li><li>Debole su <b>riferimenti normativi precisi</b>, <b>numeri non verificati</b>, informazioni <b>recenti o locali</b> senza ricerca web.</li><li>Il punto più pericoloso: <b>non sa quando non sa</b>.</li><li>Lo vediamo subito con una demo.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S08">
+  <h2>Demo · l'allucinazione</h2>
+  <div class="g2" style="grid-template-columns:1fr 1.25fr;flex:1;min-height:0">
+    <div class="flex1">
+      <div class="box"><div class="et">Prompt · Llama 3 (8B) sul nostro PC, senza ricerca web</div>
+<pre>Citami tre sentenze del Consiglio di Stato che
+riguardano la Valutazione di Incidenza per la
+realizzazione di siepi in una ZSC. Per ciascuna
+indica numero, anno e principio affermato.</pre></div>
+      <div class="avviso"><b>PREVEDETE</b> Quali di queste sentenze esistono davvero?</div>
+      <p class="didasc" style="margin-top:34px">Quando non sa, spesso inventa. Con sicurezza.</p>
+      <p class="piccolo" style="margin-top:14px">Prova reale del 07/11/2026 · Ollama, nessuno strumento attivo</p>
+    </div>
+    <!-- schede costruite dallo script (array SENTENZE) -->
+    <div class="sentenze"></div>
+  </div>
+  <aside class="note">Interattiva, «alza la linguetta»: prima far votare per alzata di mano quali sentenze esistono, poi <b>→</b> (o clic su una scheda) alza una linguetta alla volta e mostra l'esito della verifica con il timbro; <b>R</b> richiude tutto. Prova del 07/11/2026 con Llama 3 8B in locale (Ollama), seconda esecuzione: nella prima aveva dato solo data e sezione, senza numero. Le stesse domande a Claude Haiku 4.5 e Haiku 5.5, senza ricerca web, hanno avuto tre rifiuti su tre («non posso indicarti sentenze con sufficiente affidabilità»): oggi i modelli grandi in cloud tendono a non inventare, quelli piccoli sì. Verifica del 07/11/2026 con ricerca web: nessuna traccia delle tre sentenze. Il n. 26215 è fuori scala per il Consiglio di Stato, che numera le decisioni nell'ordine delle migliaia l'anno. Il «caso» descritto (Regione che autorizza un'opera pubblica in ZSC senza VIncA) è identico nelle tre risposte e nessun principio parla di siepi. ZSC è la Zona Speciale di Conservazione, non la «zona di speciale coltivazione». Per sicurezza, controllare i tre estremi anche su giustizia-amministrativa.it prima del corso.</aside>
+  <aside class="punti"><ul><li>Prima del voto: <b>quali di queste sentenze esistono davvero?</b> Alzata di mano.</li><li>Modello: <b>Llama 3, 8 miliardi di parametri</b>, sul nostro PC, <b>senza ricerca web</b>.</li><li>Alzo <b>una linguetta alla volta</b> e mostro l'esito della verifica.</li><li>Inventa <b>numero, data e caso</b>; scrive che ZSC è la «<b>zona di speciale coltivazione</b>».</li><li>Il «caso» è <b>copiato identico</b> nelle tre sentenze e nessuna parla di siepi.</li><li>Quando non sa, spesso <b>inventa con sicurezza</b>. Haiku senza web invece si è <b>rifiutato</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S08A">
+  <h2>Demo · la stessa domanda, con la ricerca web</h2>
+  <div class="g2" style="grid-template-columns:1fr 1.25fr;flex:1;min-height:0">
+    <div class="flex1">
+      <div class="box blu"><div class="et">Claude Sonnet 5.5 · ricerca web attiva</div>
+        <p class="testo-es">«Non ho trovato nessuna sentenza del Consiglio di Stato che riguardi specificamente la realizzazione di siepi in una ZSC. […] Preferisco non attribuire a una sentenza un principio che non ha affermato.»</p>
+        <p style="font-size:19px;line-height:1.45;margin-top:14px">Poi propone tre sentenze sulla VIncA in generale e chiude: <b class="acc">«Prima di citarle, controlla il testo integrale.»</b></p></div>
+      <div class="avviso"><b>PREVEDETE</b> Questa volta esistono?</div>
+      <p class="didasc" style="margin-top:30px">Con gli attrezzi è più prudente. La verifica resta vostra.</p>
+      <p class="piccolo" style="margin-top:14px">Prova reale del 07/11/2026 · claude.ai</p>
+    </div>
+    <!-- schede costruite dallo script (array in linguette('S08A', …)) -->
+    <div class="sentenze"></div>
+  </div>
+  <aside class="note">Interattiva come S08: <b>→</b> (o clic) alza una linguetta alla volta; <b>R</b> richiude. Risposta di Claude Sonnet 5.5 su claude.ai con ricerca web, 07/11/2026 (screenshot di Matteo). Verifica del 07/11/2026 con ricerca web: la Sez. VI n. 388/2025 esiste (20/01/2025; screening e limiti del principio di precauzione, scheda della Regione Veneto), ma la scheda non conferma il caso della stazione radio base. La Sez. IV n. 9440/2023 e la n. 5888/2025 non sono state trovate con la ricerca web: non vuol dire che non esistano, vanno controllate su giustizia-amministrativa.it prima del corso, poi aggiornare il timbro. Altre decisioni citate da Sonnet ma non lette da lui: IV 4327/2017, IV 505/2019, IV 6773/2018, IV 2651/2019, IV 3258/2018, IV 8187/2023, VI 5092/2014. Messaggio: la ricerca web non rende infallibili, ma il modello dichiara cosa ha trovato e cosa no. Collegare a S06C (gli attrezzi) e a S09 (la regola d'oro).</aside>
+  <aside class="punti"><ul><li>Stessa domanda, ma con <b>Claude Sonnet 5.5</b> e la <b>ricerca web attiva</b>.</li><li>Prima frase: «<b>non ho trovato</b> nessuna sentenza sulle siepi». Non inventa.</li><li>Propone tre sentenze sulla VIncA <b>in generale</b> e dice che i principi sono <b>sintesi sue</b>.</li><li>Alzo le linguette: la <b>388/2025 esiste</b>, le altre due sono <b>da verificare</b>.</li><li>Chiude con «<b>controlla il testo integrale</b>»: è la regola d'oro detta dal modello stesso.</li></ul></aside>
+</section>
+
+<section class="slide messaggio centro" data-cod="S09">
+  <div class="alone" style="width:480px;height:480px;left:110px;top:200px"></div>
+  <div class="tondo" style="left:90px;top:170px" data-img="regola-oro" data-rot="180"></div>
+  <svg class="vline" style="left:640px;top:0;height:300px" viewBox="0 0 20 300"><use href="#frecce"/></svg>
+  <h1>L'AI propone,<br>il tecnico verifica e firma.</h1>
+  <p class="sotto">Vale per norme, numeri, specie, superfici.</p>
+  <aside class="note">La regola d'oro: tornerà nel blocco 6.</aside>
+  <aside class="punti"><ul><li>La <b>regola d'oro</b> della giornata: <b>l'AI propone, il tecnico verifica e firma</b>.</li><li>Vale per <b>norme, numeri, specie, superfici</b>.</li><li>Ci torniamo nel <b>blocco 6</b>, quando parliamo di responsabilità.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S10">
+  <h2 style="margin-bottom:20px">Quale strumento per cosa</h2>
+  <table class="mappa">
+    <tr><th style="width:12%">Strumento</th><th>Punto forte per uno studio tecnico</th><th class="c">Crea file</th><th class="c">Cerca sul web</th><th class="c">Legge immagini</th><th class="c">Crea immagini</th><th class="c">Sul PC</th></tr>
+    <tr><td><b>ChatGPT</b></td><td>Uso generale, immagini, agente che lavora sul computer (GPT-6 Astra)</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
+    <tr><td><b>Claude</b></td><td>Documenti lunghi, scrittura curata, file Word, Excel e PDF</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td><td class="c n">–</td></tr>
+    <tr><td><b>Gemini</b></td><td>Google Drive e Gmail, immagini, legge anche video e audio</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
+    <tr><td><b>Copilot</b></td><td>Ricerca web con citazioni, integrato in Windows ed Edge</td><td class="c v">n.v.</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
+    <tr><td><b>Le Chat</b></td><td>Mistral, europeo: ricerca web con fonti, immagini</td><td class="c v">n.v.</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
+    <tr><td><b>Perplexity</b></td><td>Ricerca con le fonti; nel Pro sceglie tra più modelli</td><td class="c m">◐</td><td class="c">●</td><td class="c v">n.v.</td><td class="c m">◐</td><td class="c n">–</td></tr>
+    <tr><td><b>NotebookLM</b></td><td>Risponde <b>solo sulle fonti caricate</b>: normativa, piani</td><td class="c v">n.v.</td><td class="c">●</td><td class="c">●</td><td class="c v">n.v.</td><td class="c n">–</td></tr>
+    <tr><td><b>Ollama</b></td><td>Modelli aperti sul vostro PC: i dati non escono</td><td class="c n">–</td><td class="c v">n.v.</td><td class="c">●</td><td class="c n">–</td><td class="c">●</td></tr>
+    <tr><td><b>DeepL</b></td><td>Traduce documenti mantenendo l'impaginazione</td><td class="c">●</td><td class="c n">–</td><td class="c v">n.v.</td><td class="c n">–</td><td class="c n">–</td></tr>
+    <tr><td><b>noScribe</b></td><td>Trascrive le riunioni e separa le voci, sul PC</td><td class="c">●</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c">●</td></tr>
+  </table>
+  <p class="legenda">● disponibile, anche gratis con limiti · ◐ solo a pagamento · – no · n.v. non verificato<br>Le capacità dipendono dall'app e dal piano, non dal modello · situazione al 07/11/2026</p>
+  <aside class="note">Tabella aggiornata con una ricerca del 07/11/2026 (fonti in ../2026-11-07-ricerca-capacita-strumenti-ai.md). Dati da verificare prima di affermarli: modello Gemini di punta (Gemini 4 non confermato da Google); creazione di file in Copilot, Le Chat e NotebookLM; lettura di immagini in Perplexity e DeepL; ricerca web nell'app Ollama; ChatGPT e PowerPoint (fonti in conflitto); limiti dei piani gratuiti. DeepSeek escluso dalla tabella: nel gennaio 2025 il Garante privacy aveva disposto il blocco dell'app in Italia, stato attuale non verificato. Formati GIS e CAD (shapefile, KML, DXF): nessuna fonte, da provare prima di citarli. Piani e prezzi [DA VERIFICARE alla data del corso].</aside>
+  <aside class="punti"><ul><li>La mappa di <b>chi fa cosa</b> a novembre 2026: sulle righe gli strumenti, sulle colonne le capacità.</li><li><b>Claude</b> scrive documenti ma <b>non genera foto</b>; <b>ChatGPT</b> e <b>Gemini</b> sì.</li><li><b>Gemini</b> legge anche <b>video e audio</b>; <b>NotebookLM</b> risponde <b>solo sulle fonti</b> caricate.</li><li><b>Ollama</b> e <b>noScribe</b> girano <b>sul vostro PC</b>: i dati non escono.</li><li><b>Non serve sceglierne uno per sempre</b>: le capacità cambiano ogni pochi mesi.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 2 — IL CONTESTO                                            -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="B02">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="blocco-02"></div>
+  <div class="n">02</div>
+  <h1>Il contesto</h1>
+  <p class="sotto">La qualità della risposta dipende da quello che gli date.</p>
+  <aside class="punti"><ul><li>Blocco 2: <b>il contesto</b>, il più importante della giornata.</li><li>La qualità della risposta dipende da <b>quello che gli date</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S11">
+  <div class="grande" style="text-align:center">Stessa domanda,<br>due risposte.</div>
+  <p class="sotto" style="text-align:center;margin-top:30px;font-size:30px">Cosa è cambiato? <b class="acc">Solo il contesto.</b></p>
+  <aside class="punti"><ul><li><b>Stessa domanda, due risposte</b>: cosa è cambiato? <b>Solo il contesto</b>.</li><li>Lo vediamo con una mail che tutti scriviamo ogni settimana.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S12">
+  <h2>Demo · la mail «a secco»</h2>
+  <div class="g2">
+    <div class="box"><div class="et">Prompt</div><pre style="font-size:24px">Scrivi una mail a un cliente
+per chiedergli dei documenti.</pre></div>
+    <div class="box"><div class="et">Risposta</div><p class="testo-es">Gentile Cliente, le scrivo per chiederle cortesemente di inviarci i documenti necessari. Resto a disposizione per qualsiasi chiarimento. Cordiali saluti.</p></div>
+  </div>
+  <div class="avviso" style="margin-top:40px;font-size:24px"><b>PROBLEMA</b> Corretta, ma inutile: quali documenti? Per cosa? Entro quando?</div>
+  <aside class="punti"><ul><li>Prompt «a secco»: <b>«scrivi una mail a un cliente per chiedergli dei documenti»</b>.</li><li>La risposta è <b>corretta ma inutile</b>: quali documenti? Per cosa? Entro quando?</li><li>Il modello non può sapere ciò che <b>non gli avete detto</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S13">
+  <h2>Demo · la stessa mail con il contesto</h2>
+  <div class="g2" style="flex:1;min-height:0;align-items:stretch">
+    <div class="box blu"><div class="et">Prompt</div>
+<pre class="s"><span class="k">Sono un agronomo</span> di uno studio tecnico. Sto preparando
+la Valutazione di Incidenza per l'ampliamento di un
+capannone agricolo del cliente <span class="seg">[NOME AZIENDA AGRICOLA]</span>,
+vicino al sito <span class="seg">[SITO NATURA 2000]</span>.
+
+<span class="k">Scrivi una mail al titolare</span>, che non è un tecnico,
+per chiedergli:
+- la planimetria di progetto in formato dwg o pdf;
+- le foto recenti dell'area, soprattutto dei filari
+  lungo il fosso;
+- il calendario previsto dei lavori.
+
+<span class="k">Mi servono entro il</span> <span class="seg">[DATA]</span> perché la Provincia
+ci ha dato 30 giorni per le integrazioni.
+<span class="k">Tono</span> cordiale e diretto, frasi brevi, niente termini
+tecnici non spiegati. Massimo 12 righe.</pre></div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S13 ]</div></div><div class="didasc">Chi scrive · a chi · cosa · perché · entro quando · tono</div></div>
+  </div>
+  <aside class="note">Evidenziare cosa ha aggiunto il contesto: chi scrive, a chi, cosa serve, perché, entro quando, con che tono e lunghezza.</aside>
+  <aside class="punti"><ul><li>Stessa mail, con <b>chi scrive, a chi, cosa, perché, entro quando, tono</b>.</li><li>Ne esce una mail che si può <b>mandare quasi così com'è</b>.</li><li>I <b>segnaposto</b> tra parentesi quadre: i dati del cliente si inseriscono dopo, non si caricano.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S14">
+  <h2 style="margin-bottom:26px">Sei domande a cui il prompt deve rispondere</h2>
+  <div class="g2w" style="grid-template-columns:1fr 1.5fr;flex:1;min-height:0">
+    <div class="dom-lista">
+      <div class="dom"><div class="num">01</div><h3>Chi sei?</h3><p>L'agronomo che segue la VIncA</p></div>
+      <div class="dom"><div class="num">02</div><h3>Per chi è?</h3><p>Il titolare dell'azienda, non un tecnico</p></div>
+      <div class="dom"><div class="num">03</div><h3>Qual è l'obiettivo?</h3><p>Tre documenti entro una data</p></div>
+      <div class="dom"><div class="num">04</div><h3>Con che tono?</h3><p>Cordiale e diretto, frasi brevi</p></div>
+      <div class="dom"><div class="num">05</div><h3>Con quali vincoli?</h3><p>Massimo 12 righe, niente termini non spiegati</p></div>
+      <div class="dom"><div class="num">06</div><h3>Su quali materiali?</h3><p>La lettera della Provincia, allegata</p></div>
+    </div>
+    <div class="box blu" style="align-self:stretch">
+      <div class="mail-testa"><div class="et">La mail che ne esce</div><span class="mail-v"></span></div>
+      <div class="mail"></div>
+    </div>
+  </div>
+  <aside class="note">Interattiva, «prevedi, prova, verifica»: si parte dalla mail «a secco» di S12; a ogni <b>→</b> si accende una delle sei domande e la mail si trasforma (in azzurro le parti nuove); <b>R</b> ricomincia. Prima di ogni → chiedere all'aula: «cosa cambierà?». Le sette versioni sono esempi scritti per la slide; la lettera della Provincia del passo 6 è immaginaria. Il risultato finale coincide con il prompt di S13.</aside>
+  <aside class="punti"><ul><li><b>Sei domande</b> a cui ogni prompt deve rispondere.</li><li>A ogni → si accende una domanda e la mail <b>si trasforma</b>. Prima chiedo: <b>«cosa cambierà?»</b></li><li><b>Chi sei, per chi è, obiettivo, tono, vincoli, materiali</b>.</li><li>L'ultimo passo, i <b>materiali</b>: allegare la lettera della Provincia cambia tutto.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S15">
+  <h2>Dare i file, e perché il Markdown</h2>
+  <div class="g2">
+    <div class="box"><div class="et">Word con formattazione</div>
+      <div style="font-family:Cambria,Georgia,serif;font-size:22px;line-height:1.5">
+        <div style="font-size:34px;color:#1F3864;font-weight:bold">Profilo dello studio</div>
+        <div style="font-size:26px;color:#2E74B5;margin-top:8px">Servizi</div>
+        <div>• Valutazione di Incidenza<br>• Progettazione del verde</div>
+        <div style="font-size:26px;color:#2E74B5;margin-top:8px">Tono</div>
+        <div><i>Professionale, sobrio, senza enfasi.</i></div>
+      </div></div>
+    <div class="box blu"><div class="et">Lo stesso testo in Markdown</div>
+<pre style="font-size:21px"><span class="k"># Profilo dello studio</span>
+<span class="k">## Servizi</span>
+- Valutazione di Incidenza
+- Progettazione del verde
+<span class="k">## Tono</span>
+Professionale, sobrio, senza enfasi.</pre></div>
+  </div>
+  <p class="sotto" style="margin-top:36px">Allegare un documento è meglio che incollare il testo. Il Markdown è testo semplice: <b class="acc">#</b> titoli, <b class="acc">-</b> elenchi.</p>
+  <aside class="note">Leggibile da persone e macchine, apribile con qualsiasi editor. I PDF scansionati sono immagini: l'AI li legge peggio.</aside>
+  <aside class="punti"><ul><li><b>Allegare</b> un documento è meglio che <b>incollare</b> il testo.</li><li>Il <b>Markdown</b> è testo semplice: <b>#</b> per i titoli, <b>-</b> per gli elenchi.</li><li>Si legge <b>da persone e da macchine</b> e si apre con qualsiasi editor.</li><li>Attenzione ai <b>PDF scansionati</b>: sono immagini, l'AI li legge peggio.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S16">
+  <h2>Le istruzioni personalizzate</h2>
+  <p class="sotto" style="text-align:center;margin:-14px 0 26px;color:var(--tenue)">Quello che direste in ogni chat, ditelo una volta sola.</p>
+  <div class="box blu"><div class="et">Da incollare nelle impostazioni</div>
+<pre>Lavoro in uno studio agronomico che si occupa di Valutazione di Incidenza, VIA,
+progettazione del verde e consulenza alle aziende agricole in Lombardia.
+Rispondi sempre in italiano.
+Usa un tono professionale e sobrio, senza enfasi e senza elenchi inutili.
+Quando citi una norma indica sempre la fonte; se non sei sicuro scrivi <span class="seg">[DA VERIFICARE]</span>.
+Non inventare dati, superfici, specie o riferimenti normativi.
+Se mancano informazioni necessarie, fammi una domanda prima di rispondere.</pre></div>
+  <aside class="note">In ChatGPT e Claude si trovano nelle impostazioni (nome del menu [DA VERIFICARE]).</aside>
+  <aside class="punti"><ul><li>Le <b>istruzioni personalizzate</b>: quello che direste in ogni chat, ditelo <b>una volta sola</b>.</li><li>Dentro: <b>chi siete</b>, lingua, <b>tono</b>, come citare le norme.</li><li>Le due frasi chiave: <b>non inventare</b> e <b>[DA VERIFICARE]</b> quando non è sicuro.</li><li>Si trovano nelle <b>impostazioni</b> di ChatGPT e Claude.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17">
+  <h2>I progetti</h2>
+  <p class="sotto" style="text-align:center;margin:-14px 0 30px;color:var(--tenue)">Una «cartella» per ogni cliente o tipo di lavoro, con file e istruzioni sempre presenti.</p>
+  <div class="g3">
+    <div class="box"><div class="et">Istruzioni</div><p style="font-size:20px;line-height:1.5">«Stai lavorando alla VIncA per… Usa la struttura delle linee guida…»</p></div>
+    <div class="box"><div class="et">File</div><ul class="lista" style="font-size:20px"><li>Relazione vigente</li><li>Richiesta di integrazioni</li><li>Planimetria</li><li>Formulario del sito</li></ul></div>
+    <div class="box"><div class="et">Chat</div><ul class="lista" style="font-size:20px"><li>Risposta punto 1</li><li>Risposta punto 2</li><li>Lettera di accompagnamento</li></ul></div>
+  </div>
+  <p class="piccolo" style="text-align:center;margin-top:30px">Esempio: progetto «VIncA — [nome cliente]»</p>
+  <aside class="note">Ogni chat del progetto parte già con il contesto dedicato. Nella versione aggiornata di Claude, un progetto può avere istruzioni, file, attività programmate e memoria propria. Per uno studio tecnico: un progetto per pratica o cliente, senza mescolare documenti di clienti diversi. Fonte verificata il 20/10/2026: https://support.claude.com/en/articles/14116274-organize-your-tasks-with-projects-in-claude-cowork</aside>
+  <aside class="punti"><ul><li>Un <b>progetto</b> è una cartella per <b>cliente o pratica</b>, con istruzioni e file sempre presenti.</li><li>Ogni chat del progetto <b>parte già con il contesto</b>.</li><li>Esempio: <b>«VIncA, cliente»</b> con relazione, richiesta di integrazioni, planimetria, formulario.</li><li>Regola: <b>non mescolare</b> documenti di clienti diversi.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17A">
+  <h2>Nella nuova esperienza, Chat e Cowork sono un unico Claude</h2>
+  <p class="piccolo" style="text-align:center;margin:-15px 0 28px">Rilascio graduale da settembre 2026</p>
+  <div class="g2" style="align-items:stretch">
+    <div class="box" style="min-height:390px;padding:34px 38px">
+      <div class="et">Domanda rapida</div>
+      <h3 style="font-size:38px;margin:12px 0 20px">Restate nella conversazione</h3>
+      <ul class="lista" style="font-size:22px"><li>Spiegare un concetto</li><li>Riformulare una mail</li><li>Confrontare due testi</li><li>Preparare una prima bozza</li></ul>
+    </div>
+    <div class="box blu" style="min-height:390px;padding:34px 38px">
+      <div class="et">Compito delegato</div>
+      <h3 style="font-size:38px;margin:12px 0 20px">Descrivete il risultato</h3>
+      <ul class="lista" style="font-size:22px"><li>Più passaggi e più file</li><li>Ricerca e uso di applicazioni</li><li>Produzione di documenti finiti</li><li>Lavoro lungo o programmato</li></ul>
+    </div>
+  </div>
+  <div class="formula-claude"><b>La stessa casella di testo:</b> Claude decide se basta rispondere o se deve organizzare ed eseguire un lavoro.</div>
+  <aside class="note">Dal 16/09/2026 Anthropic sta unificando Chat e Cowork: nella nuova esperienza non si sceglie più la modalità prima di iniziare. Il criterio didattico resta utile: conversazione per una risposta o una bozza; delega agentica per un risultato che richiede più passaggi, file, app o tempo. Alcuni account possono ancora mostrare le due voci durante il rilascio graduale: verificare l'interfaccia il giorno del corso. Fonte: https://claude.com/resources/articles/cowork-is-now-claude</aside>
+  <aside class="punti"><ul><li>Da settembre 2026 <b>Chat e Cowork</b> sono un unico Claude.</li><li><b>Domanda rapida</b>: restate nella conversazione.</li><li><b>Compito delegato</b>: descrivete il <b>risultato</b> e Claude organizza i passaggi.</li><li>La casella di testo è <b>la stessa</b>. Il rilascio è graduale: <b>l'interfaccia può variare</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17B">
+  <h2>Progetto, conversazione e Artifact hanno ruoli diversi</h2>
+  <div class="concetti-claude">
+    <div class="concetto-claude">
+      <div class="numero">01 · CONTENITORE</div><h3>Progetto</h3>
+      <p>Raccoglie istruzioni, file, memoria e attività riferiti alla stessa pratica.</p>
+      <div class="quando">USARLO · lavoro che continua nel tempo</div>
+    </div>
+    <div class="concetto-claude">
+      <div class="numero">02 · LAVORO</div><h3>Conversazione</h3>
+      <p>È il singolo incarico: una verifica, una lettera, un confronto o una ricerca.</p>
+      <div class="quando">USARLA · un obiettivo preciso</div>
+    </div>
+    <div class="concetto-claude">
+      <div class="numero">03 · RISULTATO</div><h3>Artifact</h3>
+      <p>È un prodotto autonomo, modificabile e condivisibile: documento, slide, dashboard o piccolo strumento.</p>
+      <div class="quando">USARLO · qualcosa da riaprire o consegnare</div>
+    </div>
+  </div>
+  <div class="formula-claude ambra"><b>Claude Design</b> è il laboratorio visivo degli Artifacts: mockup, prototipi, one-pager e pagine web, modificabili direttamente sulla tela e coerenti con il design system.</div>
+  <aside class="note">Un Project non è un output: è l'ambiente stabile della pratica. Un Artifact è ciò che Claude produce e che può vivere fuori dalla chat. Gli Artifacts comprendono Docs, Slides, Design e, secondo piano e disponibilità, dashboard e animazioni. Usare Design quando il risultato è visivo e deve essere rifinito sulla tela; usare Docs per un testo lungo e Slides per una presentazione. Fonti verificate il 20/10/2026: https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them e https://claude.com/resources/articles/claude-design-stays-on-brand-for-daily-work</aside>
+  <aside class="punti"><ul><li>Tre ruoli: <b>progetto</b> = contenitore, <b>conversazione</b> = singolo incarico, <b>Artifact</b> = risultato.</li><li>Il progetto serve per un lavoro che <b>continua nel tempo</b>.</li><li>Un Artifact si <b>riapre e si condivide</b>: documento, slide, dashboard.</li><li><b>Claude Design</b> quando il risultato è <b>visivo</b> e va rifinito sulla tela.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17C">
+  <h2>Un Project separa la pratica, ma non sempre tutta la memoria</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box" style="min-height:390px;padding:34px 38px">
+      <div class="et">Separazione operativa</div>
+      <h3 style="font-size:38px;margin:12px 0 20px">Un cliente, un Project</h3>
+      <ul class="lista" style="font-size:22px"><li>File della sola pratica</li><li>Istruzioni dedicate</li><li>Conversazioni collegate</li><li>Memoria appresa nel Project</li></ul>
+    </div>
+    <div class="box blu" style="min-height:390px;padding:34px 38px">
+      <div class="et">Separazione completa</div>
+      <h3 style="font-size:38px;margin:12px 0 20px">Controllate la memoria dell'account</h3>
+      <p style="font-size:23px;line-height:1.5">Se la pratica deve restare isolata anche dalle chat esterne ai Project, disattivate <b class="acc">Use account memory</b> nelle impostazioni del progetto.</p>
+      <p class="piccolo" style="margin-top:30px">Verificare l'opzione nel menu Memory</p>
+    </div>
+  </div>
+  <div class="formula-claude ambra"><b>Regola dello studio:</b> il confine organizzativo va configurato; il nome del Project, da solo, non è una garanzia di riservatezza.</div>
+  <aside class="note">Le informazioni apprese in un Project non vengono trasferite agli altri Project. La guida precisa però che il Project può condividere la memoria generale dell'account con le conversazioni esterne ai Project: per una separazione completa occorre disattivare «Use account memory» nel menu Memory del progetto. Mostrare l'impostazione solo se presente nell'account usato durante il corso, perché interfaccia e disponibilità possono cambiare. Fonte verificata il 20/10/2026: https://support.claude.com/en/articles/14116274-organize-your-tasks-with-projects-in-claude-cowork</aside>
+  <aside class="punti"><ul><li><b>Un cliente, un progetto</b>: file, istruzioni e memoria della sola pratica.</li><li>Ma il progetto può usare la <b>memoria generale</b> dell'account.</li><li>Per isolarlo davvero: disattivare <b>Use account memory</b> nel menu Memory.</li><li>Il nome del progetto <b>non garantisce</b> la riservatezza.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17D">
+  <h2>Un connettore è un MCP già pronto da usare</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box" style="min-height:390px;padding:34px 38px">
+      <div class="et">MCP · lo standard</div>
+      <h3 style="font-size:38px;margin:12px 0 20px">La lingua comune</h3>
+      <p style="font-size:23px;line-height:1.5">Definisce come Claude può trovare dati e usare strumenti esterni. È come lo standard di una presa.</p>
+      <p class="piccolo" style="margin-top:30px">Serve conoscerlo solo per collegamenti personalizzati</p>
+    </div>
+    <div class="box blu" style="min-height:390px;padding:34px 38px">
+      <div class="et">Connettore · il prodotto pronto</div>
+      <h3 style="font-size:38px;margin:12px 0 20px">L'adattatore installato</h3>
+      <p style="font-size:23px;line-height:1.5">Collega Drive, Gmail, Slack, Microsoft 365 o altri servizi: Claude può cercare dati e, se autorizzato, compiere azioni.</p>
+      <p class="piccolo" style="margin-top:30px">Customize → Connectors · nessun terminale</p>
+    </div>
+  </div>
+  <div class="formula-claude ambra"><b>Regola pratica:</b> se il servizio è nella directory, installate il connettore; create un MCP solo per uno strumento interno o non disponibile.</div>
+  <aside class="note">MCP significa Model Context Protocol. Nell'app l'utente normalmente vede e installa un connettore già pronto. I connettori ereditano i permessi dell'account collegato e possono avere capacità di lettura e scrittura: verificare sempre cosa si autorizza. I connettori web sono disponibili direttamente in Claude; le estensioni desktop coprono anche servizi locali. Fonte: https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities</aside>
+  <aside class="punti"><ul><li><b>MCP</b> è lo standard, come la <b>presa</b>; il <b>connettore</b> è l'adattatore già pronto.</li><li>I connettori collegano <b>Drive, Gmail, Microsoft 365</b>: Claude cerca dati e, se autorizzato, <b>agisce</b>.</li><li>Ereditano i <b>permessi dell'account</b>: controllate cosa autorizzate.</li><li>Un MCP si crea solo per uno <b>strumento interno</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17E">
+  <h2>Prima scegliete l'accesso; poi decidete quanta autonomia concedere</h2>
+  <div class="scala-autonomia">
+    <div class="livello-autonomia">
+      <div class="livello">01 · STRUTTURATO</div><h3>Connettore</h3>
+      <p>Claude usa funzioni definite dal servizio: cercare, leggere e, se autorizzato, aggiornare dati.</p>
+      <div class="regola">PRIMA SCELTA · più affidabile e controllabile</div>
+    </div>
+    <div class="livello-autonomia">
+      <div class="livello">02 · INTERFACCIA WEB</div><h3>Browser</h3>
+      <p>Claude opera su un sito già autenticato quando non esiste un connettore adatto.</p>
+      <div class="regola">SECONDA SCELTA · controllare ogni passaggio</div>
+    </div>
+    <div class="livello-autonomia">
+      <div class="livello">03 · SCHERMO</div><h3>Computer use</h3>
+      <p>Claude vede schermate e controlla applicazioni desktop. È il livello più ampio e più delicato.</p>
+      <div class="regola">ULTIMA SCELTA · cartella e app dedicate</div>
+    </div>
+  </div>
+  <div class="formula-claude ambra"><b>Inviare, cancellare, condividere o pubblicare:</b> mantenete una conferma manuale prima dell'azione.</div>
+  <aside class="note">Ordine consigliato dalla guida: connettore, poi browser, infine controllo dello schermo. I connettori sono normalmente più veloci e affidabili perché usano azioni strutturate; browser e computer use dipendono dall'interfaccia e possono sbagliare bersaglio. Nel computer use non c'è una sandbox tra Claude e ciò che appare nelle applicazioni autorizzate; vengono inoltre acquisite schermate. Evitare questa modalità per documenti legali, contratti o informazioni personali sensibili. Fonti: https://support.claude.com/en/articles/14128542-let-claude-use-your-computer-in-cowork e https://support.claude.com/en/articles/13364135-use-claude-cowork-safely</aside>
+  <aside class="punti"><ul><li>Tre livelli di accesso: <b>connettore</b>, <b>browser</b>, <b>computer use</b>.</li><li>Il connettore è la <b>prima scelta</b>: più veloce e affidabile.</li><li>Il <b>computer use</b> vede lo schermo: è il più ampio e delicato, mai su documenti <b>legali o sensibili</b>.</li><li>Per <b>inviare, cancellare, pubblicare</b>: sempre una <b>conferma manuale</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17F">
+  <h2>La skill insegna il metodo; il plugin prepara il kit</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box" style="min-height:400px;padding:34px 38px">
+      <div class="et">Skill · una procedura</div>
+      <h3 style="font-size:38px;margin:12px 0 18px">«Fallo sempre così»</h3>
+      <p style="font-size:22px;line-height:1.5">Istruzioni, modelli e risorse per eseguire in modo coerente un compito ripetibile.</p>
+      <div class="avviso" style="margin-top:30px"><b>SEGNALE</b> State incollando per la terza volta lo stesso procedimento.</div>
+      <p class="piccolo" style="margin-top:25px">Esempio: /prepara-risposta-integrazioni</p>
+    </div>
+    <div class="box blu" style="min-height:400px;padding:34px 38px">
+      <div class="et">Plugin · un kit installabile</div>
+      <h3 style="font-size:38px;margin:12px 0 18px">Metodo + strumenti</h3>
+      <p style="font-size:22px;line-height:1.5">Riunisce skill, connettori e assistenti specializzati per un ruolo o un flusso di lavoro.</p>
+      <div class="avviso" style="margin-top:30px"><b>SEGNALE</b> Il metodo va condiviso con tutto lo studio.</div>
+      <p class="piccolo" style="margin-top:25px">Esempio: plugin «Studio agronomico»</p>
+    </div>
+  </div>
+  <div class="formula-claude"><b>Direttamente nell'app:</b> Customize → Skills, Plugins e Connectors.</div>
+  <aside class="note">Le skill possono essere richiamate con /nome oppure caricate automaticamente quando il compito corrisponde. Per crearne una semplice basta descrivere il procedimento in Markdown o chiedere a Claude: «Trasforma quello che abbiamo appena fatto in una skill». Un plugin è il livello di confezionamento e distribuzione: utile quando più persone devono avere lo stesso metodo e gli stessi collegamenti. Il corso si limita alle funzioni utilizzabili direttamente nell'app web o desktop. Disponibilità e piani da verificare prima del corso. Fonti: https://support.claude.com/en/articles/12512176-what-are-skills e https://support.claude.com/en/articles/13837440-use-plugins-in-claude</aside>
+  <aside class="punti"><ul><li>La <b>skill</b> insegna un <b>metodo</b>: «fallo sempre così».</li><li>Il segnale: state incollando <b>per la terza volta</b> lo stesso procedimento.</li><li>Il <b>plugin</b> è il <b>kit</b> (skill + connettori) da distribuire a <b>tutto lo studio</b>.</li><li>Per crearne una: «<b>trasforma quello che abbiamo appena fatto in una skill</b>».</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17G">
+  <h2>Una skill o un plugin va valutato come un programma</h2>
+  <div class="g4" style="align-items:stretch">
+    <div class="box"><div class="et">01 · Provenienza</div><h3>Fonte affidabile</h3><p style="font-size:20px;line-height:1.45">Autore noto, documentazione leggibile e aggiornamenti tracciabili.</p></div>
+    <div class="box"><div class="et">02 · Permessi</div><h3>Accesso minimo</h3><p style="font-size:20px;line-height:1.45">Solo cartelle, servizi e azioni necessari al compito.</p></div>
+    <div class="box"><div class="et">03 · Prova</div><h3>Ambiente separato</h3><p style="font-size:20px;line-height:1.45">Prima esecuzione su copie e dati non sensibili.</p></div>
+    <div class="box blu"><div class="et">04 · Uscita</div><h3>Azione reversibile</h3><p style="font-size:20px;line-height:1.45">Backup e conferma prima di invii, cancellazioni o modifiche esterne.</p></div>
+  </div>
+  <div class="avviso" style="margin-top:36px;font-size:23px"><b>SEGNALI D'ALLARME</b> Richiede credenziali, accesso molto ampio o componenti che non sapete spiegare.</div>
+  <aside class="note">Le skill possono contenere istruzioni, file e codice eseguibile. Plugin e server MCP possono aggiungere strumenti con accesso a dati o risorse locali. Installare solo componenti provenienti da fonti affidabili, leggerne i contenuti e controllare dipendenze e permessi. Per la prima prova usare una cartella dedicata con copie dei file. I server MCP locali possono operare con i permessi del programma che li avvia. Fonti: https://support.claude.com/en/articles/12512180-use-skills-in-claude e https://support.claude.com/en/articles/13364135-use-claude-cowork-safely</aside>
+  <aside class="punti"><ul><li>Una skill o un plugin si valuta <b>come un programma</b>: può contenere <b>codice</b>.</li><li>Quattro controlli: <b>provenienza</b>, <b>permessi minimi</b>, <b>prova su copie</b>, <b>azioni reversibili</b>.</li><li>Allarme se chiede <b>credenziali</b> o accessi molto ampi.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17H">
+  <h2>Un'attività programmata è una delega che continua senza di voi</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box" style="min-height:390px;padding:32px 36px">
+      <div class="et">Buoni candidati</div>
+      <ul class="lista" style="font-size:22px"><li>Riepilogo settimanale delle scadenze</li><li>Monitoraggio periodico di fonti ufficiali</li><li>Stato delle pratiche da dati già strutturati</li><li>Organizzazione di file in una cartella dedicata</li></ul>
+    </div>
+    <div class="box blu" style="min-height:390px;padding:32px 36px">
+      <div class="et">Condizioni di sicurezza</div>
+      <ul class="lista check" style="font-size:22px"><li>Obiettivo e fonti ben delimitati</li><li>Output sempre riesaminabile</li><li>Nessun invio esterno automatico</li><li>Controllo delle prime esecuzioni</li></ul>
+    </div>
+  </div>
+  <div class="formula-claude"><b>Automatizzate la preparazione, non la decisione:</b> Claude può predisporre il rapporto; il tecnico lo valida e decide cosa fare.</div>
+  <aside class="note">Le attività programmate possono usare connettori, skill e plugin. Alcune vengono eseguite da remoto anche con il computer spento; quelle che richiedono file o applicazioni locali dipendono invece dall'ambiente locale. Iniziare con compiti a basso rischio e risultati facilmente verificabili. Evitare invii, cancellazioni, comunicazioni ufficiali e decisioni tecniche senza revisione umana. Fonte verificata il 20/10/2026: https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork</aside>
+  <aside class="punti"><ul><li>L'<b>attività programmata</b> è una delega che continua <b>senza di voi</b>.</li><li>Buoni candidati: <b>scadenze settimanali</b>, monitoraggio di <b>fonti ufficiali</b>, stato delle pratiche.</li><li>Mai <b>invii automatici</b> all'esterno; controllate le <b>prime esecuzioni</b>.</li><li><b>Automatizzate la preparazione, non la decisione.</b></li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S17I">
+  <h2>Partite dal bisogno, non dal nome della funzione</h2>
+  <div class="percorso-scelta">
+    <div class="se">Una domanda, una spiegazione o una prima bozza</div><div class="usa">Conversazione</div>
+    <div class="se">La stessa pratica continua in più giornate</div><div class="usa">Progetto</div>
+    <div class="se">Serve un risultato autonomo da modificare o condividere</div><div class="usa">Artifact · Design se è visivo</div>
+    <div class="se">Claude deve leggere o aggiornare un servizio esterno</div><div class="usa">Connettore · MCP se personalizzato</div>
+    <div class="se">Ripetete sempre la stessa procedura</div><div class="usa">Skill</div>
+    <div class="se">Procedura e strumenti vanno distribuiti al gruppo</div><div class="usa">Plugin</div>
+  </div>
+  <div class="formula-claude ambra"><b>Compito complesso?</b> Scrivete comunque l'obiettivo nella conversazione: nella nuova esperienza Claude organizza il lavoro necessario.</div>
+  <aside class="note">Dal talk «Ma non dovevamo lavorare meno?»: invece di risolvere solo il caso di oggi, ricavarne un metodo per i successivi; la seconda VIncA dello stesso tipo parte dalla procedura, non da zero. Usare questa slide come riepilogo e far proporre un esempio ai partecipanti. Sequenza suggerita per Terraviva: iniziare con un Project per una pratica, collegare solo le fonti necessarie, svolgere due o tre volte il flusso, quindi trasformarlo in una Skill. Creare un Plugin soltanto quando il metodo è abbastanza stabile da essere condiviso. Le funzioni cambiano rapidamente: controllare menu, piani e disponibilità il giorno prima del corso.</aside>
+  <aside class="punti"><ul><li>Riepilogo: partite <b>dal bisogno</b>, non dal nome della funzione.</li><li>Domanda → <b>conversazione</b>; pratica lunga → <b>progetto</b>; procedura ripetuta → <b>skill</b>.</li><li>Sequenza consigliata: un <b>progetto</b>, due o tre volte lo stesso flusso, poi una <b>skill</b>.</li><li>Chiedo all'aula <b>un esempio</b> dal loro lavoro.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S17J">
+  <h2 style="margin-bottom:10px">Cosa legge il modello quando gli scrivete</h2>
+  <!-- disegno costruito dallo script -->
+  <svg class="ctx" viewBox="0 -50 1380 590" style="width:100%;flex:1;min-height:0"></svg>
+  <p class="ctx-dida"></p>
+  <aside class="note">Interattiva, flussi tra depositi: a ogni <b>→</b> una fonte versa nella finestra di contesto (9 passi); <b>R</b> ricomincia. Passi: istruzioni personalizzate · progetto · memoria · connettori e ricerca · conversazione · prompt · risposta · chat lunghissima (la finestra si riempie) · nuova conversazione (la chat riparte da zero, il resto rimane). Messaggi: la risposta nasce da tutto ciò che è nella finestra, non solo dal prompt; per una pratica lunga conviene mettere il materiale stabile nel progetto e aprire chat nuove per ogni compito. Le altezze sono illustrative, non misure in token. Il comportamento della memoria e dei file di progetto molto grandi dipende dall'app e dal piano: verificare il giorno del corso.</aside>
+  <aside class="punti"><ul><li><b>Cosa legge il modello</b> quando gli scrivete: non solo il prompt.</li><li>A ogni → una fonte entra nella <b>finestra di contesto</b>: istruzioni, progetto, memoria, connettori, chat.</li><li>Una chat <b>lunghissima riempie</b> la finestra e il modello perde dei pezzi.</li><li>Per una pratica lunga: materiale stabile <b>nel progetto</b>, <b>chat nuova</b> per ogni compito.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S18">
+  <h2>La memoria</h2>
+  <div class="grande" style="text-align:center;font-size:96px">Comoda,<br>ma va controllata.</div>
+  <p class="sotto" style="text-align:center;margin-top:34px">Ricorda informazioni tra una chat e l'altra: <b class="acc">una volta al mese</b> controllatela e cancellate ciò che è sbagliato o superato.</p>
+  <aside class="punti"><ul><li>La <b>memoria</b> ricorda informazioni tra una chat e l'altra: è <b>comoda</b>.</li><li>Ma può ricordare cose <b>sbagliate o superate</b>.</li><li><b>Una volta al mese</b> controllatela e cancellate quello che non va.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S19">
+  <div class="alone" style="width:400px;height:400px;right:150px;top:240px"></div>
+  <div class="tondo m" style="right:110px;top:220px" data-img="profilo-studio"></div>
+  <h2 class="sx">Il profilo dello studio</h2>
+  <div style="max-width:820px">
+    <div class="box blu"><div class="et">profilo-studio.md</div>
+<pre><span class="k"># Profilo dello studio</span> <span class="seg">[NOME]</span>
+<span class="k">## Chi siamo</span>
+<span class="k">## Servizi e ambiti</span>
+<span class="k">## Territorio di lavoro e normativa di riferimento</span>
+<span class="k">## Clienti tipo</span>
+<span class="k">## Tono di voce</span> (frasi che usiamo / che non usiamo)
+<span class="k">## Modelli di documento</span> (relazione, offerta, mail)
+<span class="k">## Regole</span> (cosa non fare mai)</pre></div>
+    <p class="sotto" style="margin-top:24px">Il vero punto di partenza. Si allega a ogni progetto.</p>
+  </div>
+  <aside class="note">È la prima cosa da fare lunedì mattina.</aside>
+  <aside class="punti"><ul><li>Il <b>profilo dello studio</b> è il vero punto di partenza.</li><li>Un file <b>Markdown</b>: chi siete, servizi, territorio e normativa, clienti tipo, <b>tono</b>, modelli, <b>regole</b>.</li><li>Si allega a <b>ogni progetto</b>.</li><li>È la prima cosa da fare <b>lunedì mattina</b>.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 3 — IL PROMPT                                              -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="B03">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="blocco-03"></div>
+  <div class="n">03</div>
+  <h1>Il prompt</h1>
+  <p class="sotto">Come chiedere, cosa dare, come correggere.</p>
+  <aside class="punti"><ul><li>Blocco 3: <b>il prompt</b>.</li><li>Come <b>chiedere</b>, cosa <b>dare</b>, come <b>correggere</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S20">
+  <h2>Prompt povero e prompt strutturato</h2>
+  <div class="g2w">
+    <div class="box"><div class="et">Prompt povero</div>
+<pre>Scrivimi un paragrafo sulla
+siepe di mitigazione.</pre></div>
+    <div class="box blu"><div class="et">Prompt strutturato</div>
+<pre class="s"><span class="k">Agisci come</span> un agronomo che scrive la relazione tecnica
+di un progetto del verde.
+
+<span class="k">Compito:</span> scrivi il paragrafo "Descrizione dell'intervento
+di mitigazione" per una siepe campestre lungo il confine
+nord di un nuovo magazzino agricolo.
+
+<span class="k">Dati:</span>
+- lunghezza 180 m, doppio filare sfalsato, sesto 1 m
+  sulla fila, 1,5 m tra le file;
+- specie: <span class="seg">[ELENCO SPECIE ARBUSTIVE E ARBOREE]</span>;
+- obiettivo: schermatura visiva e continuità ecologica
+  con il fosso esistente.
+
+<span class="k">Formato:</span> un unico paragrafo di 150-200 parole,
+linguaggio tecnico ma leggibile.
+Non aggiungere specie o dati che non ti ho dato.</pre></div>
+  </div>
+  <aside class="note">Mostrare poi i due output affiancati (screenshot S20).</aside>
+  <aside class="punti"><ul><li>Prompt povero: <b>una riga</b>, risultato generico.</li><li>Prompt strutturato: <b>ruolo, compito, dati, formato, vincoli</b>.</li><li>La frase finale conta: <b>«non aggiungere specie o dati che non ti ho dato»</b>.</li><li>Mostro i <b>due risultati affiancati</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S21">
+  <h2>Lo schema TCCRI</h2>
+  <div class="g2w" style="grid-template-columns:1fr 1.15fr">
+    <table style="font-size:20px">
+      <tr><th>Lettera</th><th>Significa</th><th>Nel prompt di S20</th></tr>
+      <tr><td><b>T</b></td><td>Task (compito)</td><td>«scrivi il paragrafo…»</td></tr>
+      <tr><td><b>C</b></td><td>Persona / ruolo</td><td>«agisci come un agronomo…»</td></tr>
+      <tr><td><b>C</b></td><td>Contesto</td><td>dati della siepe, obiettivo</td></tr>
+      <tr><td><b>R</b></td><td>Riferimenti</td><td>un paragrafo già scritto</td></tr>
+      <tr><td><b>I</b></td><td>Iterazione</td><td>correggere dopo il primo risultato</td></tr>
+    </table>
+    <div style="display:grid;gap:22px">
+      <div class="box blu"><div class="et">R · Un esempio vale più di dieci aggettivi</div>
+<pre class="s">Scrivi con lo stesso stile di questo paragrafo,
+tratto da una nostra relazione:
+"""
+<span class="seg">[PARAGRAFO REALE DI UNA RELAZIONE DELLO STUDIO]</span>
+"""</pre></div>
+      <div class="box blu"><div class="et">A cosa serve, e cosa non deve essere</div>
+<pre class="s">Il paragrafo deve permettere al tecnico della
+Provincia di capire in 30 secondi cosa si pianta,
+dove e perché.
+Non deve sembrare un testo promozionale e non deve
+contenere frasi generiche sulla biodiversità.</pre></div>
+    </div>
+  </div>
+  <aside class="note">Far apparire le due aggiunte una alla volta, collegandole alla lettera R e allo scopo del testo. Fonti: video "Il 99% delle persone NON sa scrivere Prompt" (corso Google) e "Dammi 25 Minuti… con Claude".</aside>
+  <aside class="punti"><ul><li>Lo schema <b>TCCRI</b>: compito, ruolo, contesto, riferimenti, iterazione.</li><li><b>R</b>: un esempio vale più di dieci aggettivi. Incollate un <b>paragrafo vero</b> dello studio.</li><li>Dite <b>a cosa serve</b> il testo e <b>cosa non deve essere</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S24">
+  <h2>I vincoli di sicurezza</h2>
+  <p class="sotto" style="text-align:center;margin:-14px 0 30px;color:var(--tenue)">Tre frasi da mettere quasi sempre.</p>
+  <div class="box blu" style="max-width:1100px;margin:0 auto;width:100%">
+<pre style="font-size:28px;line-height:1.8">Non inventare dati, norme o specie che non ti ho fornito.
+Se un'informazione manca, scrivi <span class="seg">[DA COMPLETARE]</span>.
+Se non sei sicuro di un riferimento, scrivi <span class="seg">[DA VERIFICARE]</span>.</pre></div>
+  <aside class="punti"><ul><li>Tre frasi da mettere <b>quasi sempre</b>.</li><li><b>Non inventare</b> dati, norme o specie.</li><li><b>[DA COMPLETARE]</b> per ciò che manca, <b>[DA VERIFICARE]</b> per ciò che è incerto.</li><li>Così gli errori diventano <b>visibili</b> invece che nascosti.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S25">
+  <h2>«Fammi delle domande»</h2>
+  <div class="g2" style="flex:1;min-height:0;align-items:stretch">
+    <div class="flex1">
+      <div class="box blu"><div class="et">Prompt</div>
+<pre>Devo preparare la relazione agronomica per
+un permesso di costruire in zona agricola.
+<span class="k">Non iniziare ancora a scrivere.</span>
+Prima fammi tutte le domande che ti servono
+per fare un buon lavoro, una alla volta,
+e aspetta la mia risposta.</pre></div>
+      <p class="sotto" style="margin-top:24px">Il modo più semplice per ottenere un prompt completo è farselo chiedere.</p>
+    </div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S25:<br>le prime 3 domande del modello ]</div></div></div>
+  </div>
+  <aside class="note">In alternativa: "Prima di scrivere, elencami le informazioni che ti mancano".</aside>
+  <aside class="punti"><ul><li>Il modo più semplice per avere un prompt completo: <b>farselo chiedere</b>.</li><li>«<b>Non iniziare ancora a scrivere.</b> Fammi le domande, <b>una alla volta</b>.»</li><li>Mostro le <b>prime tre domande</b> del modello.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S26">
+  <h2>Il primo risultato è una bozza</h2>
+  <div class="g3" style="gap:30px">
+    <div class="box"><div class="et">Accorciare</div><pre>Più breve: massimo
+100 parole.</pre></div>
+    <div class="box"><div class="et">Asciugare</div><pre>Togli gli aggettivi e le
+frasi generiche, lascia
+solo le informazioni
+tecniche.</pre></div>
+    <div class="box blu"><div class="et">Correggere un punto</div><pre>Il punto 3 non è
+corretto: la siepe è a
+doppio filare, non a
+filare singolo. Correggi
+solo quel punto.</pre></div>
+  </div>
+  <p class="sotto" style="text-align:center;margin-top:40px">Si corregge <b class="acc">nella stessa chat</b>, non si ricomincia da zero.</p>
+  <aside class="punti"><ul><li>Il primo risultato è <b>una bozza</b>.</li><li>Si corregge <b>nella stessa chat</b>: accorciare, asciugare, <b>correggere un punto</b>.</li><li>«Correggi <b>solo quel punto</b>» evita che riscriva tutto.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S27">
+  <h2>Far ragionare prima di rispondere</h2>
+  <div class="box blu"><div class="et">Prompt · confronto tra alternative</div>
+<pre>Devo scegliere tre specie arbustive per una siepe su terreno argilloso, con ristagno
+invernale, in pianura in Lombardia.
+<span class="k">Prima</span> proponi sei candidate, <span class="k">poi</span> per ciascuna indica pro e contro rispetto
+a queste condizioni, <span class="k">poi</span> scegli le tre migliori spiegando il motivo.
+Usa solo specie autoctone della Lombardia e segnala <span class="seg">[DA VERIFICARE]</span> se non sei
+sicuro dell'autoctonia.</pre></div>
+  <div class="avviso" style="margin-top:34px;font-size:23px"><b>VERIFICA</b> L'autoctonia si controlla sulle liste regionali, non sulla parola del modello.</div>
+  <aside class="note">È la tecnica del "confronto tra alternative" (Tree of Thought).</aside>
+  <aside class="punti"><ul><li><b>Far ragionare prima di rispondere</b>: proporre, valutare, scegliere.</li><li>Esempio: <b>sei specie candidate</b>, pro e contro, poi le <b>tre migliori</b>.</li><li>L'<b>autoctonia</b> si controlla sulle <b>liste regionali</b>, non sulla parola del modello.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S28">
+  <h2>Farsi scrivere il prompt dall'AI</h2>
+  <div class="g2" style="flex:1;min-height:0;align-items:stretch">
+    <div class="box blu"><div class="et">Prompt</div>
+<pre>Sei un esperto di prompt. Migliora questo
+prompt perché produca un risultato preciso
+e utilizzabile in una relazione tecnica.
+Aggiungi ruolo, contesto, formato e vincoli,
+poi spiegami in 3 righe cosa hai cambiato.
+
+Prompt da migliorare:
+<span class="seg">"Fammi una tabella delle prescrizioni
+dell'autorizzazione"</span></pre></div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S28 ]</div></div></div>
+  </div>
+  <aside class="note">Si può creare un progetto "Migliora prompt" con dentro una guida di prompt engineering.</aside>
+  <aside class="punti"><ul><li>Farsi <b>scrivere il prompt dall'AI</b>: «migliora questo prompt».</li><li>Chiedete anche di <b>spiegare cosa ha cambiato</b>: così imparate.</li><li>Idea: un progetto <b>«Migliora prompt»</b> con dentro una guida.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S29">
+  <div class="alone a1"></div>
+  <h2>La scheda del buon prompt</h2>
+  <div class="g2" style="gap:60px">
+    <ul class="lista check">
+      <li>Chi sono · per chi · cosa voglio · a cosa serve</li>
+      <li>Dati e file</li>
+      <li>Formato e lunghezza</li>
+    </ul>
+    <ul class="lista check">
+      <li>Cosa non deve fare</li>
+      <li>«Se manca qualcosa, chiedimelo»</li>
+    </ul>
+  </div>
+  <p class="piccolo" style="text-align:center;margin-top:50px">Da tenere accanto al monitor · è anche nella dispensa</p>
+  <aside class="punti"><ul><li>La <b>scheda del buon prompt</b>: chi sono, per chi, cosa voglio, a cosa serve.</li><li><b>Dati e file</b>, <b>formato e lunghezza</b>, <b>cosa non deve fare</b>.</li><li>E sempre: <b>«se manca qualcosa, chiedimelo»</b>.</li><li>È nella <b>dispensa</b>, da tenere accanto al monitor.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="PAUSA">
+  <div class="alone" style="width:600px;height:600px;left:500px;top:150px"></div>
+  <div class="grande" style="text-align:center">Pausa</div>
+  <p class="sotto" style="text-align:center;margin-top:20px;font-size:34px">10 minuti</p>
+  <aside class="punti"><ul><li><b>10 minuti</b> di pausa.</li><li>Al rientro: <b>casi d'uso</b> reali dello studio.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 4 — CASI D'USO                                             -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="B04">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="blocco-04"></div>
+  <div class="n">04</div>
+  <h1>Casi d'uso nello studio</h1>
+  <p class="sotto">Input e output reali. Tutti i prompt sono nella dispensa.</p>
+  <aside class="punti"><ul><li>Blocco 4: <b>casi d'uso nello studio</b>.</li><li>Input e output <b>reali</b>; tutti i prompt sono <b>nella dispensa</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S30">
+  <h2>Quattro aree di lavoro</h2>
+  <div class="g4">
+    <div class="voce"><div class="num">T</div><h3>Pratiche</h3><p>Completezza, prescrizioni, integrazioni</p></div>
+    <div class="voce"><div class="num">T</div><h3>Agronomia e verde</h3><p>Specie, siepi, rendering</p></div>
+    <div class="voce"><div class="num">T</div><h3>Campo</h3><p>Sopralluoghi, verbali</p></div>
+    <div class="voce"><div class="num">G</div><h3>Gestione dello studio</h3><p>Riunioni, bandi, offerte</p></div>
+  </div>
+  <aside class="punti"><ul><li>Quattro aree: <b>pratiche</b>, <b>agronomia e verde</b>, <b>campo</b>, <b>gestione dello studio</b>.</li><li>Per ogni caso: <b>prompt</b>, <b>risultato</b> e cosa <b>verificare</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S31">
+  <h2>T2 · La relazione è completa?</h2>
+  <div class="io">
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Prompt · con i due file allegati</div>
+<pre class="s">Ti allego due documenti:
+1) la nostra relazione di Valutazione di Incidenza;
+2) l'elenco dei contenuti richiesti dalle linee guida.
+
+Confronta i due documenti e prepara una tabella:
+contenuto richiesto | presente sì/no/in parte |
+dove si trova (capitolo e pagina) | cosa manca.
+Non giudicare la qualità tecnica, verifica solo
+la presenza dei contenuti.
+Se un contenuto è trattato solo in parte, spiega
+in una riga cosa manca.</pre></div><div class="didasc">Input · relazione VIncA + Allegato F lombardo</div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S31:<br>tabella con 3-4 righe «in parte» ]</div></div><div class="didasc">Output · richiesto / presente / mancante</div></div>
+  </div>
+  <div class="avviso"><b>VERIFICA</b> Le linee guida in ingresso devono essere quelle giuste: l'AI confronta, non sceglie la norma.</div>
+  <aside class="punti"><ul><li><b>La relazione è completa?</b> Confronto tra la relazione VIncA e i <b>contenuti richiesti</b> dalle linee guida.</li><li>Esce una tabella <b>presente / in parte / mancante</b>, con capitolo e pagina.</li><li>«<b>Non giudicare la qualità</b>, verifica solo la presenza.»</li><li>Le linee guida giuste le scegliete <b>voi</b>: l'AI confronta, <b>non sceglie la norma</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S32">
+  <h2>T3 · La tabella di ottemperanza</h2>
+  <div class="io">
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Prompt · atto anonimizzato in PDF</div>
+<pre class="s">Dal documento allegato estrai tutte le prescrizioni.
+Prepara una tabella con: n. | testo della
+prescrizione (sintetico) | articolo o paragrafo
+dell'atto | scadenza o frequenza | chi deve farlo |
+documento da produrre.
+Riporta le scadenze esattamente come sono scritte
+nell'atto.
+<span class="k">Alla fine indica quante prescrizioni hai trovato</span>,
+così posso controllare di non averne perse.</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S32 ]</div></div></div>
+  </div>
+  <div class="avviso"><b>VERIFICA</b> Il conteggio finale serve al tecnico per confrontare con l'atto.</div>
+  <aside class="punti"><ul><li><b>Tabella di ottemperanza</b>: tutte le prescrizioni di un atto, con scadenze e responsabili.</li><li>Le scadenze vanno riportate <b>esattamente come scritte</b> nell'atto.</li><li>Il trucco: <b>«alla fine indica quante prescrizioni hai trovato»</b>, per un controllo veloce.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S33">
+  <h2>T7 · Quante piante per la siepe?</h2>
+  <div class="g2" style="flex:1;min-height:0;align-items:stretch">
+    <div class="box blu"><div class="et">Prompt</div>
+<pre class="s">Siepe a doppio filare sfalsato, lunghezza 180 m,
+sesto 1 m sulla fila.
+Composizione in percentuale:
+- <span class="seg">[SPECIE A]</span> 30%
+- <span class="seg">[SPECIE B]</span> 25%
+- <span class="seg">[SPECIE C]</span> 25%
+- <span class="seg">[SPECIE D]</span> 20%
+Calcola il numero di piante per specie, arrotondando
+all'unità, e verifica che il totale torni.
+Presenta il risultato in una tabella che posso
+copiare in Excel. <span class="k">Mostra il calcolo.</span></pre></div>
+    <div class="flex1" style="justify-content:center">
+      <p class="sotto" style="font-size:30px;line-height:1.35"><b class="acc">E se lo stesso calcolo lo volessi come strumento da riusare?</b></p>
+      <div class="box" style="margin-top:26px"><div class="et">Demo · calcolatore-siepe.html</div>
+        <p style="font-size:20px;line-height:1.5">Stesso calcolo, totale che torna sempre, tabella da copiare in Excel. Nato da tre righe di richiesta in italiano.</p>
+        <p style="margin-top:14px"><a href="demo/calcolatore-siepe.html" target="_blank" style="color:var(--blu);font-family:var(--mono);font-size:17px">apri la demo →</a></p></div>
+      <p class="piccolo" style="margin-top:22px">Ci torniamo nel blocco 7</p>
+    </div>
+  </div>
+  <aside class="note">Chiedere di mostrare il calcolo permette di verificarlo. Demo verificata il 29/09/2026: 180 m, 2 file, sesto 1 m → 360 piante. Prompt con cui è nata: "Crea una pagina web che calcoli il numero di piante di una siepe: inserisco lunghezza, numero di file, sesto sulla fila e percentuali delle specie, e mi restituisce la tabella delle piante per specie."</aside>
+  <aside class="punti"><ul><li><b>Quante piante per la siepe?</b> 180 m, doppio filare, sesto 1 m: <b>360 piante</b>.</li><li>«<b>Mostra il calcolo</b>»: così si verifica.</li><li>Se il calcolo serve spesso, meglio un <b>piccolo strumento</b> da riusare: apro la <b>demo</b>.</li><li>Ci torniamo nel <b>blocco 7</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S34">
+  <h2>T11 · Dal sopralluogo al verbale</h2>
+  <div class="io">
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Prompt · trascrizione di una nota vocale</div>
+<pre class="s">Questa è la trascrizione di una nota vocale che ho
+registrato durante un sopralluogo.
+Trasformala in un verbale con queste sezioni:
+data e luogo | presenti | stato dei luoghi | rilievi |
+criticità | azioni da fare (chi, entro quando).
+Non aggiungere informazioni che non sono nella
+trascrizione.
+Segna <span class="seg">[DA VERIFICARE]</span> le parole trascritte male
+o i nomi di specie dubbi.
+"""
+<span class="seg">[TRASCRIZIONE]</span>
+"""</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S34 ]</div></div></div>
+  </div>
+  <div class="avviso"><b>VERIFICA</b> Nomi e misure.</div>
+  <aside class="punti"><ul><li><b>Dal sopralluogo al verbale</b>: una <b>nota vocale</b> registrata in campo.</li><li>Il prompt dà le <b>sezioni</b> del verbale: presenti, stato dei luoghi, rilievi, criticità, azioni.</li><li><b>[DA VERIFICARE]</b> per le parole trascritte male e i <b>nomi di specie</b> dubbi.</li><li>Si verificano sempre <b>nomi e misure</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S34A">
+  <h2>G2 · Prima del verbale: registrare e trascrivere</h2>
+  <div class="g3" style="gap:30px">
+    <div class="passo"><span>01 · REGISTRO</span>Cellulare al centro del tavolo, dopo aver avvisato i presenti.</div>
+    <div class="passo"><span>02 · TRASCRIVO E SEPARO LE VOCI</span>Il programma scrive «Speaker 1», «Speaker 2»…</div>
+    <div class="passo"><span>03 · DO IL TESTO A CLAUDE</span>Verbale, decisioni, attività: è la slide successiva.</div>
+  </div>
+  <div class="g2" style="margin-top:30px;grid-template-columns:1.2fr 1fr;align-items:stretch">
+    <table style="font-size:19px">
+      <tr><th>Strumento</th><th>Costo</th><th>Dove lavora</th></tr>
+      <tr><td><b>Word · Trascrivi</b></td><td>incluso in Microsoft 365, 300 min al mese</td><td>cloud Microsoft</td></tr>
+      <tr><td><b>noScribe</b></td><td>gratuito, open source</td><td>sul PC</td></tr>
+      <tr><td><b>aTrain</b></td><td>gratuito, dal Microsoft Store</td><td>sul PC</td></tr>
+      <tr><td><b>Registratore Samsung</b></td><td>incluso nel telefono</td><td>sul telefono</td></tr>
+    </table>
+    <div class="box blu"><div class="et">Prompt · i nomi li date voi</div><pre class="s">Nella trascrizione allegata Speaker 1 è
+<span class="seg">[NOME, consulente]</span> e Speaker 2 è
+<span class="seg">[NOME, tecnico comunale]</span>.
+Sostituisci le etichette con i nomi.
+Se un intervento non è attribuibile con
+sicurezza, segnalo <span class="seg">[DA VERIFICARE]</span>.</pre></div>
+  </div>
+  <div class="avviso"><b>RISERVATEZZA</b> Riunioni con i clienti: programmi sul PC o account aziendale, mai servizi cloud gratuiti.</div>
+  <aside class="note">Slide aggiunta il 07/11/2026 (fonti in ../2026-11-07-ricerca-capacita-strumenti-ai.md). Word «Trascrivi»: file .mp3, .m4a, .wav, .mp4, 300 minuti al mese di file caricati, etichette Speaker rinominabili; Microsoft la indica per Word su Windows con account aziendali: [DA VERIFICARE] con i piani Personal/Family. noScribe (Whisper + pyannote): scaricarlo solo da noscribe.de o github.com/kaixxx/noScribe, il dominio noscribe.ai non è dell'autore; a volte conta più voci di quelle reali; lento sui PC senza scheda grafica [DA VERIFICARE con una prova]. aTrain (Università di Graz): stessa tecnologia. Registratore Samsung: separa le voci ma con errori; italiano non confermato. Pixel separa le voci solo in inglese USA; iPhone trascrive ma non separa le voci. Whisper da solo non separa le voci. Otter gratuito: 300 min al mese ma solo 3 file importati in tutto, cloud USA: sconsigliato. Registrare: avvisare sempre i presenti.</aside>
+  <aside class="punti"><ul><li>E una <b>riunione intera</b>? Tre passaggi: <b>registro</b>, <b>trascrivo e separo le voci</b>, <b>do il testo a Claude</b>.</li><li>Il <b>cellulare</b> basta; prima <b>avvisate i presenti</b>.</li><li>Con <b>Microsoft 365</b>: Word → <b>Trascrivi</b>, 300 minuti al mese, separa gli interlocutori.</li><li>Gratis e <b>sul PC</b>: <b>noScribe</b> o <b>aTrain</b>, l'audio non lascia il computer.</li><li>I programmi scrivono «<b>Speaker 1, 2</b>»: i nomi li date voi nel prompt.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S35">
+  <h2>G2 · Il verbale di riunione</h2>
+  <div class="io">
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ trascrizione grezza della riunione<br>del 27/09/2026 in cui è nato questo corso ]</div></div>
+      <div class="box" style="margin-top:16px"><pre class="s">Dalla trascrizione allegata prepara un verbale con:
+argomenti, decisioni prese, attività con responsabile
+e scadenza, questioni aperte.
+<span class="k">Distingui ciò che è stato deciso da ciò che è stato
+solo proposto.</span></pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S35: verbale ordinato ]</div></div></div>
+  </div>
+  <aside class="note">Esempio "meta": mostrare la trascrizione grezza (confusa, frasi spezzate) e il risultato ordinato. Buon momento per sorridere.</aside>
+  <aside class="punti"><ul><li>Dalla trascrizione al <b>verbale</b>: argomenti, <b>decisioni</b>, attività con <b>responsabile e scadenza</b>, questioni aperte.</li><li>La frase chiave: <b>distingui ciò che è stato deciso da ciò che è stato solo proposto</b>.</li><li>Esempio «meta»: la <b>riunione in cui è nato questo corso</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S36">
+  <h2>G4 · La scheda del bando</h2>
+  <div class="io">
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Prompt · bando regionale in PDF</div>
+<pre class="s">Leggi il bando allegato e prepara una scheda di
+una pagina con:
+- chi può partecipare;
+- cosa finanzia e cosa è escluso;
+- contributo (percentuale, massimali);
+- scadenze, con data e ora esatte;
+- documenti da presentare (checklist);
+- punti di attenzione.
+<span class="k">Per ogni informazione indica l'articolo del bando.</span>
+Poi scrivi una mail breve ai nostri clienti aziende
+agricole per segnalare il bando.</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S36 ]</div></div></div>
+  </div>
+  <div class="avviso"><b>VERIFICA</b> Scadenze e requisiti, sempre sul testo del bando.</div>
+  <aside class="punti"><ul><li><b>La scheda del bando</b>: chi partecipa, cosa finanzia, contributo, <b>scadenze</b>, documenti.</li><li>«<b>Per ogni informazione indica l'articolo</b>»: così si controlla.</li><li>In più una <b>mail ai clienti</b> per segnalare il bando.</li><li>Scadenze e requisiti si verificano <b>sempre sul testo del bando</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S37">
+  <h2>R2 · Il rendering: l'impianto nel tempo</h2>
+  <div class="g4" style="grid-template-columns:repeat(4,1fr);gap:20px;flex:1;min-height:0">
+    <div class="colshot"><div class="shot"><div class="vuoto">[ foto stato di fatto ]</div></div><div class="didasc">Oggi</div></div>
+    <div class="colshot"><div class="shot"><div class="vuoto">[ immagine 1 ]</div></div><div class="didasc">Impianto</div></div>
+    <div class="colshot"><div class="shot"><div class="vuoto">[ immagine 2 ]</div></div><div class="didasc">5 anni</div></div>
+    <div class="colshot"><div class="shot"><div class="vuoto">[ immagine 3 ]</div></div><div class="didasc">15 anni</div></div>
+  </div>
+  <div class="avviso"><b>DICHIARARE</b> Immagine generata con AI — resa indicativa, non fotoinserimento tecnico.</div>
+  <aside class="note">Strumento: ChatGPT o Gemini (dopo la prova). Prompt: "Questa è la foto di un'area agricola dove verrà piantata una siepe campestre lungo il fosso sul lato destro dell'immagine. Genera tre versioni della stessa foto, stessa inquadratura e stessa luce: 1) subito dopo l'impianto: piantine alte 60-80 cm con shelter e pacciamatura; 2) dopo 5 anni: siepe arbustiva continua alta circa 2-3 m; 3) dopo 15 anni: siepe matura con alcuni alberi alti 8-10 m. Non modificare il resto dell'immagine. Stile fotografico realistico." Togliere i dati EXIF e GPS dalla foto prima del caricamento.</aside>
+  <aside class="punti"><ul><li><b>Rendering</b>: la stessa foto all'<b>impianto</b>, a <b>5 anni</b> e a <b>15 anni</b>.</li><li>Strumento: ChatGPT o Gemini, perché <b>Claude non genera immagini</b>.</li><li>Va <b>dichiarato</b>: immagine generata con AI, <b>resa indicativa</b>, non fotoinserimento tecnico.</li><li>Prima di caricare la foto togliete i dati <b>EXIF e GPS</b>.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 5 — NOTEBOOKLM                                             -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="B05">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="blocco-05"></div>
+  <div class="n">05</div>
+  <h1>NotebookLM</h1>
+  <p class="sotto">Un assistente che legge solo i vostri documenti, e cita il punto da cui prende l'informazione.</p>
+  <aside class="punti"><ul><li>Blocco 5: <b>NotebookLM</b>.</li><li>Un assistente che legge <b>solo i vostri documenti</b> e <b>cita</b> il punto da cui prende l'informazione.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S39">
+  <h2>T4 · Cosa dice il piano per la mia area?</h2>
+  <p class="piccolo" style="text-align:center;margin:-16px 0 22px">Fonti → notebook → domande con citazione · sintesi · slide · audio · mappe mentali · quiz</p>
+  <div class="g2" style="flex:1;min-height:0;align-items:stretch">
+    <div class="flex1">
+      <div class="box blu"><div class="et">Prompt · in NotebookLM</div>
+<pre class="s">Il progetto prevede l'ampliamento di un capannone
+agricolo e la realizzazione di una siepe a circa 300 m
+dal confine del sito, in un'area agricola.
+Quali misure di conservazione, divieti o obblighi dei
+documenti caricati sono pertinenti per questo
+intervento? Per ciascuno indica documento e articolo.
+<span class="k">Se un aspetto non è trattato nei documenti,
+dillo esplicitamente.</span></pre></div>
+      <p style="font-size:18px;color:var(--tenue);margin-top:16px;line-height:1.5">Fonti caricate: piano di gestione del <span class="amb">[SITO NATURA 2000]</span>, misure di conservazione, formulario standard.</p>
+    </div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S39:<br>risposta con citazioni cliccabili ]</div></div></div>
+  </div>
+  <aside class="note">È lo strumento giusto per normativa e piani: riduce le invenzioni e permette di controllare subito la fonte. Cliccare dal vivo una citazione. Idea d'uso: un notebook con tutta la normativa VIncA regionale per chi entra nuovo nello studio.</aside>
+  <aside class="punti"><ul><li>Carico <b>piano di gestione, misure di conservazione e formulario</b> del sito.</li><li>Domanda: quali <b>divieti e obblighi</b> valgono per il mio intervento? Con <b>documento e articolo</b>.</li><li>«<b>Se un aspetto non è trattato, dillo</b>»: evita le invenzioni.</li><li>Clicco dal vivo una <b>citazione</b>: si apre il punto esatto della fonte.</li><li>Idea: un notebook con la <b>normativa VIncA regionale</b> per chi entra nello studio.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 6 — USO CORRETTO                                           -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="B06">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="blocco-06"></div>
+  <div class="n">06</div>
+  <h1>Usare l'AI in modo corretto</h1>
+  <p class="sotto">Dati, verifica, legge, contratto.</p>
+  <aside class="punti"><ul><li>Blocco 6: <b>usare l'AI in modo corretto</b>.</li><li><b>Dati, verifica, legge, contratto.</b></li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S41">
+  <div class="alone a1"></div>
+  <h2>Cosa non caricare</h2>
+  <ul class="lista" style="max-width:1100px;margin:0 auto;width:100%">
+    <li>Dati personali non necessari: cedolini, documenti d'identità, dati sanitari</li>
+    <li>Documenti riservati dei clienti su account personali o gratuiti</li>
+    <li>Credenziali e password</li>
+    <li>In caso di dubbio: <b class="acc">anonimizzare</b> (nomi, particelle, ragioni sociali)</li>
+  </ul>
+  <aside class="note">Account professionali e impostazioni sull'uso dei dati per l'addestramento [DA VERIFICARE per ciascuno strumento].</aside>
+  <aside class="punti"><ul><li><b>Cosa non caricare</b>: dati personali non necessari, <b>documenti riservati</b> su account gratuiti, <b>credenziali</b>.</li><li>Nel dubbio si <b>anonimizza</b>: nomi, particelle, ragioni sociali.</li><li>Controllate le impostazioni sull'<b>uso dei dati per l'addestramento</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S42">
+  <h2>Prima di consegnare un testo prodotto con l'AI</h2>
+  <ul class="lista check" style="max-width:1100px;margin:0 auto;width:100%">
+    <li>Le norme citate esistono e sono vigenti?</li>
+    <li>I numeri tornano con i dati di partenza?</li>
+    <li>Le specie sono corrette per il territorio (liste regionali)?</li>
+    <li>Ci sono informazioni aggiunte che non avevo fornito?</li>
+    <li><b class="acc">Il testo lo firmerei così com'è?</b></li>
+  </ul>
+  <aside class="punti"><ul><li><b>Checklist</b> prima di consegnare: norme <b>esistenti e vigenti</b>, <b>numeri</b> che tornano, <b>specie</b> corrette per il territorio.</li><li>Ci sono <b>informazioni aggiunte</b> che non avevo fornito?</li><li>La domanda finale: <b>lo firmerei così com'è?</b></li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S43">
+  <h2>Il quadro normativo</h2>
+  <div class="g2">
+    <div class="box blu"><div class="et">L. 23 settembre 2025, n. 132 — art. 13</div>
+      <p style="font-size:16px;color:var(--tenue);margin-bottom:12px">In vigore dal 10/10/2025</p>
+      <p style="font-size:19px;line-height:1.5"><b>c. 1</b> — l'AI è ammessa <i>«al solo esercizio delle attività strumentali e di supporto all'attività professionale e con prevalenza del lavoro intellettuale»</i></p>
+      <p style="font-size:19px;line-height:1.5;margin-top:12px"><b>c. 2</b> — <i>«le informazioni relative ai sistemi di intelligenza artificiale utilizzati dal professionista sono comunicate al soggetto destinatario della prestazione intellettuale con linguaggio chiaro, semplice ed esaustivo»</i></p></div>
+    <div class="box"><div class="et">Reg. (UE) 2024/1689 (AI Act) — art. 4</div>
+      <p style="font-size:16px;color:var(--tenue);margin-bottom:12px">Alfabetizzazione in materia di IA · applicabile dal 02/02/2025</p>
+      <p style="font-size:19px;line-height:1.5">Riscritto dal <b>Reg. (UE) 2026/1744</b> (Omnibus digitale, in vigore dal 27/07/2026): chi usa l'AI adotta misure <i>volte a sostenere lo sviluppo</i> delle competenze, senza obbligo di garantire un livello specifico.</p></div>
+  </div>
+  <div class="g3" style="margin-top:30px;gap:30px">
+    <div class="passo"><span>01</span>La responsabilità resta del professionista</div>
+    <div class="passo"><span>02</span>Il cliente va informato prima, e su quali sistemi</div>
+    <div class="passo"><span>03</span>Formarsi e documentarlo: questo corso ne fa parte</div>
+  </div>
+  <aside class="note">Fonti verificate il 29/09/2026 su fonti secondarie concordi; ricontrollare su GU e EUR-Lex prima della versione finale (entro 09/10).</aside>
+  <aside class="punti"><ul><li><b>L. 132/2025, art. 13</b>: AI solo per attività <b>strumentali e di supporto</b>, con <b>prevalenza del lavoro intellettuale</b>.</li><li>Il cliente va <b>informato</b> sui sistemi usati, con linguaggio <b>chiaro</b>.</li><li><b>AI Act, art. 4</b>: alfabetizzazione, oggi riscritto dall'<b>Omnibus digitale</b>.</li><li>Tre conseguenze: la <b>responsabilità</b> è vostra, <b>informare prima</b>, <b>formarsi</b> (questo corso ne fa parte).</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S44">
+  <h2>La clausola nel contratto</h2>
+  <div class="box blu"><div class="et">Uso di strumenti di intelligenza artificiale (art. 13, L. 132/2025)</div>
+<pre class="s" style="font-family:var(--corpo);font-size:19px;line-height:1.55">Nello svolgimento dell'incarico il Professionista può avvalersi dei seguenti sistemi di intelligenza
+artificiale: <span class="seg">[ELENCO STRUMENTI]</span>, esclusivamente con funzione di supporto all'attività professionale,
+per attività quali: redazione di bozze, sintesi e confronto di documenti, controlli di completezza,
+elaborazione di immagini illustrative.
+Le valutazioni tecniche, le scelte progettuali e il contenuto degli elaborati restano di esclusiva
+competenza e responsabilità del Professionista, che ne verifica ogni parte.
+I dati del Committente sono trattati nel rispetto della normativa sulla protezione dei dati personali.
+Il Committente può chiedere che determinate attività o documenti siano esclusi dall'uso di tali strumenti.</pre></div>
+  <div class="avviso"><b>DOVE</b> Nell'offerta o nel disciplinare d'incarico, cioè prima dell'inizio della prestazione. Da far valutare a un legale.</div>
+  <aside class="note">Testo completo nella dispensa, § 8.3.</aside>
+  <aside class="punti"><ul><li>La <b>clausola</b> da mettere nell'offerta o nel disciplinare d'incarico.</li><li>Dentro: elenco degli <b>strumenti</b>, funzione <b>solo di supporto</b>, responsabilità del <b>professionista</b>.</li><li>Il committente può chiedere di <b>escludere</b> alcune attività.</li><li>Va inserita <b>prima</b> della prestazione e <b>fatta valutare a un legale</b>.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- BLOCCO 7 — VIBE CODING                                            -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="B07">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="blocco-07"></div>
+  <div class="n">07</div>
+  <h1>Tre cenni sul futuro: vibe coding</h1>
+  <p class="sotto">Oggi un tecnico può costruirsi un piccolo programma descrivendolo in italiano.</p>
+  <aside class="punti"><ul><li>Blocco 7: tre cenni sul futuro, il <b>vibe coding</b>.</li><li>Un tecnico può costruirsi un <b>piccolo programma</b> descrivendolo <b>in italiano</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S45">
+  <h2>Cos'è il vibe coding</h2>
+  <div class="g4" style="gap:24px">
+    <div class="passo"><span>01</span>Descrivo cosa mi serve</div>
+    <div class="passo"><span>02</span>L'AI scrive il codice</div>
+    <div class="passo"><span>03</span>Provo</div>
+    <div class="passo"><span>04</span>Correggo a parole</div>
+  </div>
+  <p class="sotto" style="text-align:center;margin-top:60px;color:var(--tenue)">Non si diventa programmatori: si ottengono strumenti su misura per problemi precisi.</p>
+  <aside class="punti"><ul><li>Quattro passi: <b>descrivo</b>, l'AI <b>scrive il codice</b>, <b>provo</b>, <b>correggo a parole</b>.</li><li>Non si diventa programmatori: si ottengono <b>strumenti su misura</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S46">
+  <div class="alone a1"></div>
+  <div class="live"><i></i>DAL VIVO</div>
+  <h2 class="sx">La dashboard delle piante: cosa fa</h2>
+  <p class="sotto" style="max-width:1250px">Otto fonti di specie in un'unica tabella: abaco <i>Alberi per la città</i> (Emilia-Romagna), ERSAF, Parco delle Groane, Parco del Ticino, guida INFC, <i>Atlante della flora del Parco Agricolo Sud Milano</i>, PlantEX. Si apre con un doppio clic e funziona senza connessione.</p>
+  <div class="g3" style="margin-top:44px;gap:30px">
+    <div class="passo"><span>01</span>Filtri combinati: fonte, tipo, acqua, luce, lista nera lombarda</div>
+    <div class="passo"><span>02</span>La scheda di una specie con i dati di tutte le fonti</div>
+    <div class="passo"><span>03</span>Un'incongruenza tra fonti</div>
+  </div>
+  
+  <aside class="note">Far vedere un'incongruenza tra fonti per ricordare che l'autoctonia dipende dalla regione: la lista vale per il suo territorio. Riserva: 3 screenshot dei passaggi. Prima del corso rigenerare dati.js.</aside>
+  <aside class="punti"><ul><li><b>Dal vivo</b>: la dashboard delle piante, <b>otto fonti</b> in un'unica tabella.</li><li>Filtri combinati: fonte, tipo, acqua, luce, <b>lista nera lombarda</b>.</li><li>Mostro un'<b>incongruenza tra fonti</b>: l'autoctonia <b>dipende dalla regione</b>.</li><li>Funziona <b>senza connessione</b>, con un doppio clic.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S47">
+  <h2>La dashboard delle piante: come è nata</h2>
+  <div class="g4" style="gap:24px">
+    <div class="passo"><span>01 · ARCHIVIO</span>Libri e PDF. Es. l'Atlante del Parco Sud: 10 PDF, 487 pagine, molte schede come immagine</div>
+    <div class="passo"><span>02 · MARKDOWN</span>Estrazione del testo e OCR, controllati a blocchi di 10 schede</div>
+    <div class="passo"><span>03 · SCRIPT</span>Un programma legge tutti i file e prepara i dati</div>
+    <div class="passo"><span>04 · PAGINA WEB</span>Filtri, schede, incongruenze</div>
+  </div>
+  <div class="g3" style="margin-top:34px;gap:20px;height:250px">
+    <div class="colshot"><div class="shot"><div class="vuoto">[ la scheda nel PDF ]</div></div></div>
+    <div class="colshot"><div class="shot"><div class="vuoto">[ la stessa scheda in Markdown ]</div></div></div>
+    <div class="colshot"><div class="shot"><div class="vuoto">[ la stessa scheda nella dashboard ]</div></div></div>
+  </div>
+  <p class="sotto" style="margin-top:26px;text-align:center">Il lavoro vero è <b class="acc">portare l'archivio in un formato che l'AI sa leggere</b>.</p>
+  <aside class="note">La dashboard non è nata in un colpo: ogni nuova fonte è un passaggio in più. L'AI sbaglia anche qui: errori di OCR, refusi delle fonti (es. "Acer campestrestris" in PlantEX), dati che non tornano tra un libro e l'altro. Per questo si controlla a blocchi e i dati dubbi restano [DA VERIFICARE]. Idea per Terraviva: lo stesso metodo per il loro archivio di relazioni, schede o prezzi.</aside>
+  <aside class="punti"><ul><li>Come è nata: <b>archivio → Markdown → script → pagina web</b>.</li><li>L'Atlante del Parco Sud: <b>10 PDF, 487 pagine</b>, controllati <b>a blocchi di 10 schede</b>.</li><li>Il lavoro vero è portare l'archivio <b>in un formato che l'AI sa leggere</b>.</li><li>Anche qui l'AI <b>sbaglia</b>: errori di OCR, refusi delle fonti.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S48">
+  <h2>Gli agenti che lavorano sulle cartelle</h2>
+  <div class="box blu" style="max-width:1150px;margin:0 auto;width:100%"><div class="et">Esempio di compito</div>
+<pre style="font-size:23px">Converti in PDF tutti i Word della cartella della pratica,
+rinominali con data e titolo e fammi l'elenco
+delle scadenze trovate.</pre></div>
+  <div class="g4" style="margin-top:40px;gap:24px">
+    <div class="passo"><span>RISCHIO</span>Accesso solo a cartelle dedicate</div>
+    <div class="passo"><span>RISCHIO</span>Backup prima di iniziare</div>
+    <div class="passo"><span>RISCHIO</span>Istruzioni nascoste in siti o documenti</div>
+    <div class="passo"><span>RISCHIO</span>Costi dei piani</div>
+  </div>
+  <aside class="note">Il passo successivo: l'AI non risponde soltanto, esegue compiti sui file del computer. Collegamento a S47 [DA VERIFICARE: strumento usato per la conversione dell'atlante].</aside>
+  <aside class="punti"><ul><li>Il passo successivo: <b>agenti</b> che eseguono compiti sui <b>file del computer</b>.</li><li>Esempio: converti, rinomina, <b>elenca le scadenze</b>.</li><li>Rischi: solo <b>cartelle dedicate</b>, <b>backup</b>, <b>istruzioni nascoste</b> nei documenti, <b>costi</b>.</li></ul></aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- PARTE B — DIMOSTRAZIONE PRATICA                                   -->
+<!-- ================================================================ -->
+
+<section class="slide div centro" data-cod="S49">
+  <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
+  <div class="tondo" style="right:130px;top:170px" data-img="parte-b"></div>
+  <div class="n">B</div>
+  <h1>Adesso lavoriamo dal vivo</h1>
+  <p class="sotto">Caso VIncA · rendering · i vostri casi</p>
+  <aside class="note">Avvisare che dal vivo qualcosa può andare storto: fa parte della dimostrazione.</aside>
+  <aside class="punti"><ul><li><b>Parte B</b>: adesso <b>lavoriamo dal vivo</b>.</li><li>Caso VIncA, rendering e <b>i vostri casi</b>.</li><li>Dal vivo <b>qualcosa può andare storto</b>: fa parte della dimostrazione.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S50" style="padding-top:56px">
+  <div class="live"><i></i>DAL VIVO · 20'</div>
+  <h2 class="sx" style="margin-bottom:22px">P1 · Integrazioni VIncA, dalla PEC alla lettera</h2>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;flex:1;min-height:0">
+    <div class="box"><div class="et">1 · Capire la richiesta</div><p class="xs">Leggi la richiesta di integrazioni della Provincia allegata. Elenca tutte le richieste numerate, riportando per ciascuna il testo esatto e, in una riga, cosa ci viene chiesto di produrre. Alla fine indica il termine per rispondere.</p></div>
+    <div class="box"><div class="et">2 · Piano di lavoro</div><p class="xs">Per ogni richiesta indica: quali documenti del progetto contengono già le informazioni, cosa manca, e se serve una ricerca esterna (sito dell'ente, normativa, formulario del sito). <span class="k">Non scrivere ancora le risposte.</span></p></div>
+    <div class="box"><div class="et">3 · Ricerca</div><p class="xs">Cerca sul sito della Regione Lombardia o dell'ente gestore le misure di conservazione vigenti del <span class="seg">[SITO NATURA 2000]</span> e indicami il documento e il link. <span class="k">Riporta solo fonti ufficiali.</span></p></div>
+    <div class="box"><div class="et">4 · Risposte</div><p class="xs">Scrivi la risposta alla richiesta n. 1, usando solo le informazioni dei documenti allegati e della fonte trovata. Stile della nostra relazione. Dove manca un dato scrivi <span class="seg">[DA COMPLETARE]</span>.</p></div>
+    <div class="box blu"><div class="et">5 · Lettera e controllo</div><p class="xs">Prepara la lettera di accompagnamento alla Provincia con l'elenco delle integrazioni trasmesse. Poi confronta le richieste del passo 1 con le risposte scritte e dimmi se ce n'è qualcuna non coperta o coperta solo in parte.</p></div>
+  </div>
+  <p class="piccolo" style="margin-top:18px">Caso reale portato da Terraviva, anonimizzato · riserva: screenshot di ogni passo</p>
+  <aside class="note">Progetto dedicato con relazione di VIncA, richiesta di integrazioni, allegati, modulo regionale. Se il caso non arriva in tempo, ripiego: Aneco 2019.</aside>
+  <aside class="punti"><ul><li>Caso reale: <b>integrazioni VIncA</b>, dalla PEC alla lettera, in <b>cinque passi</b>.</li><li>1 <b>capire la richiesta</b>, 2 <b>piano di lavoro</b> senza scrivere, 3 <b>ricerca</b> solo su fonti ufficiali.</li><li>4 <b>risposte</b> con [DA COMPLETARE], 5 <b>lettera</b> e <b>controllo</b> di copertura.</li><li>Notate: <b>un passo alla volta</b>, non tutto in un unico prompt.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S51">
+  <div class="live"><i></i>DAL VIVO · 15'</div>
+  <h2 class="sx">P2 · Rendering dal vivo</h2>
+  <div class="g2w" style="grid-template-columns:1.25fr 1fr">
+    <div class="box blu"><div class="et">R1 · Inserire la fascia di mitigazione</div>
+<pre class="s">Nella foto allegata inserisci una fascia boscata di
+mitigazione lungo il confine in primo piano:
+larghezza circa 10 m, arbusti alti 2-3 m davanti e
+alberi alti 8-12 m dietro, specie di latifoglie di
+pianura, aspetto naturale e non geometrico.
+Mantieni invariati edificio, cielo, luce e
+inquadratura. Stile fotografico realistico.</pre></div>
+    <div style="display:grid;gap:14px">
+      <div class="box"><div class="et">Correzione 1</div><pre class="s">Gli alberi sono troppo regolari: rendi la
+fascia più irregolare, con altezze diverse.</pre></div>
+      <div class="box"><div class="et">Correzione 2 · R4</div><pre class="s">Togli la recinzione in primo piano e
+lascia tutto il resto uguale.</pre></div>
+      <div class="box"><div class="et">Correzione 3</div><pre class="s">Mostra la stessa vista in inverno,
+con le latifoglie senza foglie.</pre></div>
+    </div>
+  </div>
+  <aside class="note">Strumento: [GEMINI o CHATGPT, dopo la prova]. L'ultima correzione serve a spiegare che la schermatura invernale è diversa: un tema che il tecnico conosce e l'AI no.</aside>
+  <aside class="punti"><ul><li><b>Rendering dal vivo</b>: inserire una <b>fascia di mitigazione</b> nella foto.</li><li>Correggo <b>a parole</b>: più irregolare, togli la recinzione.</li><li>Ultima correzione: <b>la stessa vista in inverno</b>. Con le latifoglie spoglie la schermatura cambia: lo sa <b>il tecnico, non l'AI</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S52">
+  <div class="live"><i></i>DAL VIVO · 20'</div>
+  <h2 class="sx">P3 · Simulazioni insieme</h2>
+  <div class="g3" style="gap:30px">
+    <div class="passo"><span>01</span>Un partecipante descrive un compito reale in due frasi</div>
+    <div class="passo"><span>02</span>Scrivo il prompt ragionando ad alta voce, con la scheda del buon prompt</div>
+    <div class="passo"><span>03</span>Il gruppo guarda il risultato e propone le correzioni</div>
+  </div>
+  <p class="piccolo" style="margin:46px 0 16px">Compiti di riserva</p>
+  <div class="g3" style="gap:20px">
+    <div class="box"><div class="et">T5 · Sintesi non tecnica</div><p style="font-size:18px;line-height:1.45">«Trasforma questo capitolo tecnico in una sintesi non tecnica per il pubblico, massimo 300 parole.»</p></div>
+    <div class="box"><div class="et">T9 · Relazione agronomica</div><p style="font-size:18px;line-height:1.45">«Fammi le domande per scrivere una relazione agronomica per <span class="amb">[TIPO DI PRATICA]</span>.»</p></div>
+    <div class="box"><div class="et">G3 · Offerta da appunti</div><p style="font-size:18px;line-height:1.45">«Da questi appunti di una telefonata prepara una bozza di offerta con attività, tempi e cosa è escluso.»</p></div>
+  </div>
+  <aside class="punti"><ul><li><b>Simulazioni insieme</b>: un partecipante descrive un <b>compito reale</b> in due frasi.</li><li>Scrivo il prompt <b>ragionando ad alta voce</b>, con la scheda del buon prompt.</li><li>Il gruppo guarda il risultato e <b>propone le correzioni</b>.</li><li>Di riserva: <b>sintesi non tecnica</b>, <b>relazione agronomica</b>, <b>offerta da appunti</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S52A">
+  <h2>L'AI ci ruberà il lavoro?</h2>
+  <div class="risposte">
+    <p class="risp r1">Probabilmente no. Per ora lavoriamo <span class="amb">di più</span>.</p>
+    <p class="risp r2">La scelta è lavorare <span class="acc">meglio</span>.</p>
+  </div>
+  <!-- disegno costruito dallo script -->
+  <svg class="tempo" viewBox="0 0 1380 420" style="width:100%;flex:1;min-height:0"></svg>
+  <p class="piccolo suggerimento" style="text-align:center;margin-top:10px">Il tempo risparmiato non sparisce: si sposta · clic su un deposito per spostarci 10 minuti</p>
+  <aside class="note">Interattiva, flussi tra depositi: <b>→</b> 1) «Probabilmente no»: l'ora risparmiata scorre tutta in «più lavoro»; 2) «La scelta è lavorare meglio»: l'ora si divide tra verifica, formazione e tempo libero. Poi clic su un deposito per spostarci 10 minuti (li toglie al deposito più pieno); <b>R</b> ricomincia. Riprendere l'alzata di mano di S44A: chi ha l'impressione di lavorare di più da quando usa l'AI? Il lavoro del tecnico resta perché resta la responsabilità (S09) e la L. 132/2025, art. 13 c. 1, ammette l'AI solo come supporto, con prevalenza del lavoro intellettuale (S43). «Probabilmente no» è un giudizio, non un dato: presentarlo così. Spunto dal talk «Ma non dovevamo lavorare meno? [Talk AIWEEK 2026]».</aside>
+  <aside class="punti"><ul><li><b>L'AI ci ruberà il lavoro?</b> Probabilmente no: per ora lavoriamo <b>di più</b>.</li><li>→ l'ora risparmiata finisce tutta in <b>più lavoro</b>.</li><li>→ la scelta è lavorare <b>meglio</b>: verifica, formazione, tempo libero.</li><li>Il lavoro resta perché resta la <b>responsabilità</b> del tecnico. «Probabilmente no» è un <b>giudizio</b>, non un dato.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S52B">
+  <h2>Sei consigli per non farsi sommergere</h2>
+  <div class="criteri-modello">
+    <div class="criterio"><div class="n-criterio">01</div><h3>Prima le domande</h3><p>«Prima di… fammi delle domande per capire se ne vale la pena.»</p></div>
+    <div class="criterio"><div class="n-criterio">02</div><h3>Selezionare, non moltiplicare</h3><p>Non tutte le richieste di preventivo meritano un'offerta.</p></div>
+    <div class="criterio"><div class="n-criterio">03</div><h3>Eliminare, delegare, rimandare</h3><p>Prima di mettere in ordine le attività della giornata.</p></div>
+    <div class="criterio"><div class="n-criterio">04</div><h3>Discutere i compiti ripetitivi</h3><p>Serve ancora? C'è un modo diverso di ottenere lo stesso risultato?</p></div>
+    <div class="criterio"><div class="n-criterio">05</div><h3>Dal caso singolo al metodo</h3><p>Profilo dello studio, progetti, skill: la seconda pratica parte dalla prima.</p></div>
+    <div class="criterio"><div class="n-criterio">06</div><h3>Meno fonti, scelte meglio</h3><p>Disiscriversi, invece di farsi riassumere tutto.</p></div>
+  </div>
+  <div class="formula-claude"><b>L'AI propone, il tecnico verifica e firma.</b> E decide come usare il tempo risparmiato.</div>
+  <aside class="note">I consigli 1-4 e 6 vengono dal talk «Ma non dovevamo lavorare meno? [Talk AIWEEK 2026]» (prompt «sbagliato» e prompt corretto per ciascuno); il 5 dal corso stesso (S17F, S17I, S19). Collegare ogni consiglio a un momento della giornata: 1 → S25, 5 → S19.</aside>
+  <aside class="punti"><ul><li><b>Sei consigli</b> per non farsi sommergere.</li><li><b>Prima le domande</b>, <b>selezionare</b> invece di moltiplicare, <b>eliminare, delegare, rimandare</b>.</li><li><b>Discutere i compiti ripetitivi</b>, <b>dal caso al metodo</b>, <b>meno fonti</b> scelte meglio.</li><li>E decidete voi <b>come usare il tempo risparmiato</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S53">
+  <div class="alone a3"></div>
+  <h2>Tre cose da fare domani</h2>
+  <div class="g3" style="padding:0 30px">
+    <div class="col"><div class="num">01</div><h3>Il profilo dello studio</h3><p>Scriverlo e metterlo nelle istruzioni personalizzate.</p></div>
+    <div class="col"><div class="num">02</div><h3>Un progetto</h3><p>Crearne uno per una pratica in corso.</p></div>
+    <div class="col"><div class="num">03</div><h3>La checklist</h3><p>Usarla su ogni testo prodotto con l'AI.</p></div>
+  </div>
+  <aside class="punti"><ul><li><b>Tre cose da fare domani</b>.</li><li>1 scrivere il <b>profilo dello studio</b> e metterlo nelle istruzioni.</li><li>2 creare <b>un progetto</b> per una pratica in corso.</li><li>3 usare la <b>checklist</b> su ogni testo prodotto con l'AI.</li></ul></aside>
+</section>
+
+<section class="slide cover centro" data-cod="S54">
+  <div class="alone" style="width:520px;height:520px;right:120px;top:150px"></div>
+  <div class="tondo" style="right:110px;top:170px" data-img="grazie"></div>
+  <div class="testi">
+    <h1>Grazie<span class="sec">Domande?</span></h1>
+    <p class="sotto" style="text-align:left;margin-top:50px;font-size:22px">Matteo Oliveri · matteo.oliveri@outlook.it</p>
+    <!-- QR della dispensa (immagini/qr-dispensa.svg, generato con segno): punta all'indirizzo fisso della pagina GitHub -->
+    <div style="display:flex;gap:22px;align-items:center;margin-top:24px">
+      <div style="background:#fff;padding:10px;border:1.5px solid var(--bordo);line-height:0"><svg viewBox="0 0 37 37" width="150" height="150" shape-rendering="crispEdges" aria-label="QR della dispensa"><path stroke="#0F2E7A" d="M2 2.5h7m1 0h1m2 0h1m5 0h8m1 0h7m-33 1h1m5 0h1m2 0h2m1 0h2m2 0h2m2 0h3m3 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m3 0h2m1 0h3m4 0h3m3 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m1 0h2m2 0h2m1 0h1m3 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m3 0h2m2 0h2m2 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h1m2 0h3m1 0h1m1 0h2m1 0h2m2 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-23 1h1m2 0h2m3 0h1m2 0h1m-21 1h7m5 0h6m1 0h1m3 0h1m2 0h2m3 0h1m-32 1h3m7 0h6m1 0h7m1 0h2m1 0h2m1 0h1m-33 1h2m1 0h1m1 0h2m1 0h1m2 0h1m2 0h1m3 0h1m5 0h3m1 0h1m1 0h1m-31 1h1m3 0h2m1 0h3m4 0h1m1 0h1m1 0h1m2 0h1m3 0h2m1 0h5m-33 1h1m2 0h1m2 0h2m2 0h1m2 0h1m4 0h2m2 0h1m4 0h3m1 0h2m-33 1h4m3 0h2m1 0h6m1 0h4m1 0h2m2 0h1m2 0h1m1 0h2m-33 1h1m1 0h2m1 0h3m1 0h2m1 0h1m4 0h1m3 0h1m3 0h2m1 0h2m1 0h1m-31 1h2m6 0h1m1 0h2m2 0h2m2 0h4m2 0h3m1 0h2m-30 1h1m2 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m6 0h1m1 0h1m1 0h2m3 0h1m-33 1h1m2 0h2m3 0h2m3 0h1m1 0h1m3 0h3m1 0h1m2 0h2m1 0h2m1 0h1m-33 1h1m1 0h9m5 0h1m1 0h1m5 0h5m1 0h2m-29 1h1m1 0h1m1 0h1m3 0h2m4 0h2m1 0h2m3 0h1m1 0h5m-29 1h5m1 0h6m2 0h2m1 0h1m1 0h1m1 0h2m2 0h2m2 0h1m-33 1h3m2 0h1m3 0h1m3 0h1m5 0h2m2 0h2m1 0h1m3 0h1m1 0h1m-33 1h1m1 0h1m1 0h6m3 0h1m1 0h2m3 0h1m1 0h1m2 0h5m1 0h1m-32 1h1m2 0h1m4 0h1m3 0h1m1 0h1m1 0h1m4 0h1m2 0h2m1 0h1m1 0h3m-32 1h1m2 0h1m1 0h8m2 0h1m1 0h1m1 0h2m1 0h7m2 0h2m-25 1h2m1 0h1m1 0h5m1 0h3m1 0h2m3 0h1m1 0h1m1 0h1m-33 1h7m1 0h2m1 0h1m2 0h1m3 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h2m-32 1h1m5 0h1m1 0h3m1 0h5m4 0h4m3 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1m1 0h6m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h5m2 0h7m2 0h2m2 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h1m7 0h3m1 0h2m1 0h1m-30 1h1m5 0h1m1 0h1m1 0h1m2 0h4m1 0h5m5 0h3m-31 1h7m4 0h1m3 0h4m3 0h4m1 0h1m1 0h1m1 0h1"/></svg></div>
+      <div><div class="et" style="font:600 22px var(--titolo);text-transform:uppercase;color:var(--blu)">La dispensa del corso</div>
+        <p style="font-family:var(--mono);font-size:16px;color:var(--tenue);margin-top:6px">mett-89.github.io/corso-ai-terraviva</p></div>
+    </div>
+    <div class="box" style="margin-top:34px;max-width:640px"><div class="et">Dopo il corso</div>
+      <p style="font-size:19px;line-height:1.5">Ci rivediamo per un secondo incontro: rivedremo insieme i primi prompt e i problemi incontrati.</p></div>
+  </div>
+  <aside class="note">Data e orario del secondo incontro: dirli a voce. Chiedere di annotare fino ad allora cosa ha funzionato e cosa no: sarà il materiale del secondo incontro.</aside>
+  <aside class="punti"><ul><li><b>Grazie</b>: domande?</li><li>Il QR porta alla <b>dispensa</b>, con tutti i prompt della giornata.</li><li><b>Secondo incontro</b>: data e orario a voce. Fino ad allora annotate <b>cosa funziona e cosa no</b>.</li></ul></aside>
+</section>
+
+<div class="nav">← → scorrere · P relatore · N note · F schermo intero · R ricomincia animazione · <span id="pos"></span></div>
+<div id="pannello"></div>
+
+<script>
+// trama binaria
+let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+let bin='';for(let r=0;r<56*240;r++)bin+=(r%240===0&&r?' ':'')+(rnd()<.5?'0':'1');
+
+// cornici circolari con immagine (immagini/<id>.png) o segnaposto
+document.querySelectorAll('.tondo[data-img]').forEach(t=>{
+  const id=t.dataset.img, rot=t.dataset.rot?` transform="rotate(${t.dataset.rot} 280 280)"`:'';
+  t.innerHTML=`<div class="foto"><span>[ immagini/${id}.png ]</span><img src="immagini/${id}.png" alt="" onerror="this.remove()"></div>
+  <svg viewBox="0 0 560 560"><use href="#anelli"${rot}/></svg>`;
+});
+
+const slides=[...document.querySelectorAll('.slide')];
+slides.forEach((s,k)=>{
+  if(s.dataset.fondo==='video')return; // sfondo video: niente trama, alone e circuito
+  const d=document.createElement('div');d.className='binario';d.textContent=bin;s.prepend(d);
+  if(!s.querySelector('.tondo')&&!s.querySelector('.alone')){
+    const a=document.createElement('div');a.className='alone '+(['a1','a2','a3'][k%3]);s.prepend(a);}
+  const b=document.createElementNS('http://www.w3.org/2000/svg','svg');b.setAttribute('class','bordi');b.setAttribute('viewBox','0 0 1600 900');
+  b.innerHTML=k%2?'<use href="#circuito" transform="translate(0 900) scale(1 -1)"/>':'<use href="#circuito" transform="translate(1600 0) scale(-1 1)"/>';
+  s.prepend(b);
+  if(!s.classList.contains('cover')&&s.dataset.piede!=='no'){const p=document.createElement('div');p.className='piede';
+    p.innerHTML=`<span>L'AI nello studio tecnico · Terraviva</span><span class="cod">${s.dataset.cod} · ${k+1}/${slides.length}</span>`;s.append(p);}
+});
+
+// S05 — animazione "prossima parola": → avanza di un passo, R ricomincia
+(function(){
+  const s=slides.find(x=>x.dataset.cod==='S05');if(!s)return;
+  const INIZIO='«La siepe campestre è composta da specie arbustive';
+  const PASSI=[ // probabilità di esempio, a scopo illustrativo (non calcolate da un modello)
+    [['autoctone',.58],['ornamentali',.17],['sempreverdi',.11]],
+    [['disposte',.41],['tipiche',.22],['e',.18]],
+    [['su',.63],['in',.24],['lungo',.07]],
+    [['due',.48],['una',.29],['più',.15]],
+    [['file',.69],['filari',.21],['livelli',.05]]];
+  const frase=s.querySelector('.frase'),nota=s.querySelector('.frase-nota'),righe=s.querySelector('.pr-righe'),
+    passoEt=s.querySelector('.pr-passo'),prossima=s.querySelector('.prossima'),limiti=s.querySelector('.limiti');
+  const ridotto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // profilo Corporate (skill motion-design): entrate ease-out, uscite ease-in, spostamenti ease-in-out
+  const STD='cubic-bezier(0.2,0,0,1)',ESCE='cubic-bezier(0.3,0,1,1)',VOLO='cubic-bezier(0.4,0,0.2,1)';
+  let passo=0,occupato=false,veloce=false,gen=0;
+  const T=ms=>veloce||ridotto?0:ms;
+  const ANNULLA={},vivo=g=>{if(g!==gen)throw ANNULLA};
+  const pausa=ms=>new Promise(r=>setTimeout(r,T(ms)));
+  const css=a=>typeof CSSAnimation!=='undefined'&&a instanceof CSSAnimation; // il cursore lampeggiante
+  // lo stato finale è già nello stile dell'elemento: l'animazione parte dallo stato iniziale e lo raggiunge
+  const anima=(el,da,a,ms,ritardo=0,curva=STD)=>el.animate([da,a],{duration:T(ms),delay:T(ritardo),easing:curva,fill:'backwards'}).finished;
+
+  function azzera(){
+    gen++;passo=0;occupato=false;veloce=false;
+    s.getAnimations({subtree:true}).forEach(a=>{if(!css(a))a.cancel()});
+    s.querySelectorAll('.volante').forEach(v=>v.remove());
+    frase.innerHTML=INIZIO+'<span class="cursore"></span>';
+    righe.innerHTML='';passoEt.textContent='';
+    nota.style.opacity=prossima.style.opacity=prossima.style.visibility=limiti.style.opacity='';
+  }
+
+  async function parola(k,g){
+    const dati=PASSI[k];
+    passoEt.textContent=`Passo ${k+1} di ${PASSI.length}`;
+    // escono i candidati del passo precedente
+    const vecchie=[...righe.children];
+    if(vecchie.length){
+      await Promise.all(vecchie.map(r=>r.animate([{opacity:getComputedStyle(r).opacity},{opacity:0,transform:'translateY(-8px)'}],
+        {duration:T(160),easing:ESCE,fill:'forwards'}).finished));vivo(g);}
+    // entrano i nuovi candidati, poi le barre si riempiono
+    righe.innerHTML=dati.map(([w,p])=>`<div class="riga"><span class="w">${w}</span><span class="barra"><i style="transform:scaleX(${p})"></i></span><span class="pct">${Math.round(p*100)}%</span></div>`).join('');
+    const rr=[...righe.children];
+    await Promise.all(rr.flatMap((r,j)=>[
+      anima(r,{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'none'},250,j*60),
+      anima(r.querySelector('i'),{transform:'scaleX(0)'},{transform:r.querySelector('i').style.transform},600,200+j*80),
+      anima(r.querySelector('.pct'),{opacity:0},{opacity:1},200,600+j*80)]));vivo(g);
+    // scelta della più probabile
+    await pausa(250);vivo(g);
+    const vince=rr[0];vince.classList.add('scelta');rr.slice(1).forEach(r=>r.classList.add('scartata'));
+    await pausa(350);vivo(g);
+    // la parola scelta vola nella frase, con un arco
+    const cur=frase.querySelector('.cursore');
+    cur.insertAdjacentHTML('beforebegin',(k?' <span class="amb">→</span>':'')+` <b class="acc">${dati[0][0]}</b>`);
+    const nuova=cur.previousElementSibling,freccia=k?nuova.previousElementSibling:null;
+    nuova.style.opacity=0;if(freccia)freccia.style.opacity=0;
+    const w=vince.querySelector('.w'),sr=s.getBoundingClientRect(),sc=sr.width/1600,da=w.getBoundingClientRect(),a=nuova.getBoundingClientRect();
+    const s0=26/30,h=30*1.6,x0=(da.left-sr.left)/sc,y0=(da.top-sr.top+da.height/2)/sc-h*s0/2;
+    const dx=(a.left-sr.left)/sc-x0,dy=(a.top-sr.top)/sc-y0;
+    const v=document.createElement('div');v.className='volante';v.textContent=dati[0][0];
+    v.style.left=x0+'px';v.style.top=y0+'px';s.append(v);w.style.visibility='hidden';
+    await v.animate([{transform:`translate(0,0) scale(${s0})`},
+      {offset:.5,transform:`translate(${dx/2}px,${dy/2-40}px) scale(${(s0+1)/2})`},
+      {transform:`translate(${dx}px,${dy}px) scale(1)`}],{duration:T(560),easing:VOLO,fill:'forwards'}).finished;vivo(g);
+    nuova.style.opacity='';v.remove();w.style.visibility='';
+    const arrivo=[anima(nuova,{transform:'scale(1.04)'},{transform:'none'},220)];
+    if(freccia){freccia.style.opacity='';arrivo.push(anima(freccia,{opacity:0},{opacity:1},200))}
+    await Promise.all(arrivo);vivo(g);
+    // frase completa
+    if(k===PASSI.length-1){
+      cur.replaceWith('…»');nota.style.opacity=1;
+      await anima(nota,{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'},300);vivo(g);}
+  }
+
+  async function mostraLimiti(g){
+    await prossima.animate([{opacity:1},{opacity:0}],{duration:T(180),easing:ESCE,fill:'forwards'}).finished;vivo(g);
+    prossima.style.visibility='hidden';limiti.style.opacity=1;
+    await Promise.all([...limiti.children].map((c,j)=>anima(c,{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'},300,j*80)));
+  }
+
+  async function esegui(fn){
+    const g=gen;occupato=true;
+    try{await fn(g)}catch(e){if(e!==ANNULLA&&g===gen)console.error(e)}
+    if(g===gen){occupato=false;veloce=false}
+  }
+  // → durante un passo lo completa subito; a passi finiti restituisce false e si va alla slide successiva
+  s._passo=()=>{
+    if(occupato){veloce=true;s.getAnimations({subtree:true}).forEach(a=>{if(!css(a))try{a.finish()}catch(e){}});return true}
+    if(passo>PASSI.length)return false;
+    const k=passo++;esegui(g=>k<PASSI.length?parola(k,g):mostraLimiti(g));return true;
+  };
+  // entrando in avanti si parte da zero; tornando indietro si mostra lo stato finale
+  s._entra=dir=>{azzera();
+    if(dir==='indietro'){veloce=true;passo=PASSI.length+1;
+      esegui(async g=>{for(let k=0;k<PASSI.length;k++)await parola(k,g);await mostraLimiti(g)})}};
+})();
+
+// S06 — quattro video comandati da →: entrando il video 1 resta sul primo fotogramma (titolo e domanda, da spiegare a voce);
+// → avvia il video 1; → avvia il video 2, che si ferma da solo sulla domanda scritta; → salta alla scomposizione in token;
+// → video 3; → video 4. R ricomincia; ogni video resta fermo sull'ultimo fotogramma
+(function(){
+  const s=slides.find(x=>x.dataset.cod==='S06');if(!s)return;
+  const vids=[...s.querySelectorAll('.seq-video')];let k=0,sosta=false,attivo=0;
+  const SOSTA=2.5, RIPRESA=11.8; // secondi nel video 2: domanda scritta per intero / poco prima che si spezzi in token
+  const mostra=n=>vids.forEach((v,j)=>{v.style.visibility=j===n?'visible':'hidden';if(j!==n)v.pause()});
+  const parti=n=>{const v=vids[n];v.currentTime=0;attivo=n;
+    // il video nuovo si mostra solo quando ha già il primo fotogramma: niente lampi neri tra un tratto e l'altro
+    const vai=()=>{v.removeEventListener('playing',vai);if(attivo===n)mostra(n)};v.addEventListener('playing',vai);v.play().catch(()=>mostra(n))};
+  vids[1].addEventListener('timeupdate',()=>{if(sosta&&vids[1].currentTime>=SOSTA){vids[1].pause();sosta=false}});
+  const PASSI=[null,()=>parti(0),()=>{sosta=true;parti(1)},()=>{sosta=false;vids[1].currentTime=RIPRESA;vids[1].play().catch(()=>{})},()=>parti(2),()=>parti(3)];
+  s._passo=()=>{if(k>=PASSI.length-1)return false;k++;PASSI[k]();return true};
+  s._entra=dir=>{sosta=false;
+    if(dir==='indietro'){k=PASSI.length-1;const v=vids[3];mostra(3);
+      const fine=()=>{v.currentTime=Math.max(0,v.duration-0.05)};v.readyState>=1?fine():v.addEventListener('loadedmetadata',fine,{once:true})}
+    else{k=0;attivo=0;vids.forEach(v=>{v.pause();v.currentTime=0});mostra(0)}};
+})();
+
+// ===== Slide interattive (02/11/2026, spunto: libro «Every Joule») =====
+const RIDOTTO=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS_SVG='http://www.w3.org/2000/svg';
+// slide a n passi: → avanza, R ricomincia, tornando indietro si vede lo stato finale; disegna(k, subito) aggiorna la slide
+function aPassi(cod,n,disegna){
+  const s=slides.find(x=>x.dataset.cod===cod);if(!s)return null;
+  let k=0;
+  const vai=(m,subito)=>{k=m;if(subito)s.classList.add('fermo');
+    for(let j=1;j<=n;j++)s.classList.toggle('p'+j,j<=k);
+    disegna(k,subito);
+    if(subito){s.offsetWidth;s.classList.remove('fermo')}};
+  s._passo=()=>{if(k>=n)return false;vai(k+1,false);return true};
+  s._entra=dir=>vai(dir==='indietro'?n:0,true);
+  return s;
+}
+
+// S08 e S08A — alza la linguetta: → (o clic) apre una scheda alla volta
+// tipo del timbro: 'no' = non trovata (rosso) · 'altro' = esiste ma dice altro (ambra) · 'ok' = esiste (verde) · 'nd' = da verificare (grigio)
+function linguette(cod,SENTENZE){
+  const s=slides.find(x=>x.dataset.cod===cod);if(!s)return;
+  const box=s.querySelector('.sentenze');
+  box.innerHTML=SENTENZE.map(x=>`<div class="sentenza ctrl"><div class="cit">${x.cit}</div><div class="princ">${x.princ}</div>
+    <div class="verifica"><span class="esito">${x.esito}</span><span class="timbro ${x.tipo}">${x.timbro}</span><div class="linguetta">Alza per verificare ↑</div></div></div>`).join('');
+  const carte=[...box.children];
+  carte.forEach(c=>c.addEventListener('click',()=>c.classList.toggle('aperta')));
+  s._passo=()=>{const c=carte.find(c=>!c.classList.contains('aperta'));if(!c)return false;c.classList.add('aperta');return true};
+  s._entra=dir=>{s.classList.add('fermo');carte.forEach(c=>c.classList.toggle('aperta',dir==='indietro'));s.offsetWidth;s.classList.remove('fermo')};
+}
+// S08 — Llama 3 8B sul PC, senza ricerca web (prova del 07/11/2026); verifica con ricerca web del 07/11/2026
+linguette('S08',[
+  {cit:'Cons. Stato, 21/02/2006, n. 4766',princ:'«Procedimento di prevenzione e di informazione sugli impatti sull\'ambiente e sull\'uomo»',esito:'Nessuna traccia. E scrive ZSC = «zona di speciale coltivazione».',timbro:'Non trovata',tipo:'no'},
+  {cit:'Cons. Stato, 14/04/2010, n. 9343',princ:'«Va eseguita anche quando l\'opera non ha un impatto significativo»',esito:'Nessuna traccia. Il «caso» è identico nelle tre sentenze.',timbro:'Non trovata',tipo:'no'},
+  {cit:'Cons. Stato, 25/06/2013, n. 26215',princ:'«Va eseguita anche se l\'impatto è minimo o nullo»',esito:'Nessuna traccia: numero fuori scala per il Consiglio di Stato.',timbro:'Non trovata',tipo:'no'}]);
+// S08A — Claude Sonnet 5.5 con ricerca web (claude.ai, 07/11/2026); verifica con ricerca web del 07/11/2026
+linguette('S08A',[
+  {cit:'Cons. Stato, sez. VI, n. 388/2025',princ:'Stazione radio base vicino a una ZSC: prima lo screening; niente precauzione su «mere ipotesi astratte»',esito:'Esiste: 20/01/2025, screening e limiti del principio di precauzione.',timbro:'Esiste',tipo:'ok'},
+  {cit:'Cons. Stato, sez. IV, n. 9440/2023',princ:'Parco eolico: conta l\'impatto cumulativo; l\'esclusione della VIncA va motivata',esito:'Non trovata con la ricerca web: controllare su giustizia-amministrativa.it.',timbro:'Da verificare',tipo:'nd'},
+  {cit:'Cons. Stato, sez. IV, n. 5888/2025',princ:'Eolico in PAUR: VIncA anche per i progetti esterni al sito',esito:'Non trovata con la ricerca web: controllare su giustizia-amministrativa.it.',timbro:'Da verificare',tipo:'nd'}]);
+
+// S14 — prevedi, prova, verifica: a ogni → si accende una domanda e la mail si trasforma
+(function(){
+  const S='<span class="seg">',F='</span>';
+  const MAIL=[
+`Gentile Cliente,
+le scrivo per chiederle cortesemente di inviarci i documenti necessari.
+Resto a disposizione per qualsiasi chiarimento.
+Cordiali saluti.`,
+`Gentile Cliente,
+<mark>sono l'agronomo che segue per il nostro studio la Valutazione di Incidenza del suo progetto.</mark>
+Le chiedo cortesemente di inviarci i documenti necessari <mark>per proseguire con lo studio</mark>.
+Resto a disposizione per qualsiasi chiarimento.
+Cordiali saluti.`,
+`<mark>Buongiorno sig. ${S}[Cognome]${F},</mark>
+sono l'agronomo che segue per il nostro studio la Valutazione di Incidenza <mark>per l'ampliamento del capannone della sua azienda</mark>.
+Le chiedo cortesemente di inviarci i documenti necessari per proseguire con lo studio.
+Resto a disposizione per qualsiasi chiarimento.
+Cordiali saluti.`,
+`Buongiorno sig. ${S}[Cognome]${F},
+sono l'agronomo che segue per il nostro studio la Valutazione di Incidenza per l'ampliamento del capannone della sua azienda.
+<mark>La Provincia ci ha chiesto alcune integrazioni. Per rispondere ci servono:
+– la planimetria di progetto, in dwg o pdf;
+– foto recenti dell'area, soprattutto dei filari lungo il fosso;
+– il calendario previsto dei lavori.
+Dovremmo riceverli entro il ${S}[DATA]${F}, perché la Provincia ci ha dato 30 giorni.</mark>
+Resto a disposizione per qualsiasi chiarimento.
+Cordiali saluti.`,
+`Buongiorno sig. ${S}[Cognome]${F},
+<mark>seguo io</mark> la Valutazione di Incidenza per l'ampliamento del suo capannone.
+La Provincia ci ha chiesto alcune integrazioni. <mark>Per rispondere mi servono tre cose:</mark>
+– la planimetria di progetto, in dwg o pdf;
+– foto recenti dell'area, soprattutto dei filari lungo il fosso;
+– il calendario previsto dei lavori.
+<mark>Me le può mandare entro il ${S}[DATA]${F}?</mark> La Provincia ci ha dato 30 giorni.
+<mark>Grazie, a presto.</mark>`,
+`Buongiorno sig. ${S}[Cognome]${F},
+seguo io la Valutazione di Incidenza per l'ampliamento del suo capannone<mark>: è lo studio che verifica che i lavori non danneggino l'area protetta vicina</mark>.
+La Provincia ci ha chiesto alcune integrazioni. Per rispondere mi servono tre cose:
+– <mark>il disegno del progetto (il file del progettista, in dwg o pdf);</mark>
+– foto recenti dell'area, soprattutto dei filari lungo il fosso;
+– <mark>le date in cui pensa di iniziare e finire i lavori.</mark>
+Me le può mandare entro il ${S}[DATA]${F}? La Provincia ci ha dato 30 giorni.
+Grazie, a presto.`,
+`Buongiorno sig. ${S}[Cognome]${F},
+seguo io la Valutazione di Incidenza per l'ampliamento del suo capannone: è lo studio che verifica che i lavori non danneggino l'area protetta vicina.
+La Provincia ci ha chiesto alcune integrazioni <mark>(le inoltro la lettera)</mark>. Per rispondere mi servono tre cose:
+– il disegno del progetto (il file del progettista, in dwg o pdf);
+– foto recenti dell'area, soprattutto dei filari lungo il fosso<mark>: la Provincia le chiede al punto 2, meglio se riprese da più punti e anche da lontano;</mark>
+– le date in cui pensa di iniziare e finire i lavori<mark>: il punto 3 chiede se cadono nel periodo di nidificazione.</mark>
+Me le può mandare entro il ${S}[DATA]${F}? La Provincia ci ha dato 30 giorni.
+Grazie, a presto.`];
+  let tok=0;
+  const s=aPassi('S14',6,(k,subito)=>{
+    s.querySelectorAll('.dom').forEach((d,j)=>{d.classList.toggle('on',j<k);d.classList.toggle('ora',j===k-1)});
+    s.querySelector('.mail-v').textContent=k?`Versione ${k} di 6`:'Prompt «a secco»';
+    const testo=s.querySelector('.mail'),t=++tok;
+    if(subito||RIDOTTO){testo.getAnimations().forEach(a=>a.cancel());testo.innerHTML=MAIL[k];return}
+    testo.animate([{opacity:1},{opacity:0}],{duration:150,easing:'cubic-bezier(0.3,0,1,1)',fill:'forwards'}).finished.then(()=>{
+      if(t!==tok)return;testo.innerHTML=MAIL[k];
+      testo.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:280,easing:'cubic-bezier(0.2,0,0,1)',fill:'forwards'})});
+  });
+})();
+
+// S17J — cosa legge il modello: ogni fonte versa nella finestra di contesto (altezze illustrative, non token)
+(function(){
+  const FONTI=[ // titolo, sottotitolo, colore, altezza nella finestra
+    ['Istruzioni personalizzate','in ogni conversazione','#2BB3DA',45],
+    ['Progetto: istruzioni e file','nelle chat del progetto','#1641A8',130],
+    ['Memoria','se è attiva','#5B7FD0',35],
+    ['Connettori e ricerca web','solo quando servono','#7FD8F0',50],
+    ['La conversazione','cresce a ogni messaggio','#8A94A6',100],
+    ['Il vostro prompt','l\'ultima richiesta','#C77800',30]];
+  const DIDA=[
+    'Il modello legge solo ciò che entra nella <b class="acc">finestra di contesto</b>. Da dove arriva?',
+    '<b class="acc">Istruzioni personalizzate</b>: entrano in ogni conversazione.',
+    '<b class="acc">Progetto</b>: istruzioni e file della pratica. Se i file sono molti, entra la parte pertinente.',
+    '<b class="acc">Memoria</b>: ciò che l\'app ricorda di voi, se è attiva.',
+    '<b class="acc">Connettori e ricerca web</b>: solo quando servono al compito.',
+    '<b class="acc">La conversazione</b>: ogni domanda e ogni risposta si aggiungono.',
+    '<b class="acc">Il vostro prompt</b>: l\'ultima richiesta, letta insieme a tutto il resto.',
+    'La <b class="acc">risposta</b> nasce da tutto ciò che sta nella finestra, non solo dal prompt.',
+    'Chat lunghissima: la finestra si riempie e <b class="amb">le parti più vecchie vengono riassunte o escluse</b>.',
+    '<b class="acc">Nuova conversazione</b>: la chat riparte da zero; istruzioni, progetto e memoria restano.'];
+  const X0=330,VX=620,VW=220,TOP=40,FONDO=500,CHAT_PIENA=170,RX=1060;
+  const yFonte=j=>20+(FONTI.length-1-j)*78; // dal basso in alto, come gli strati nella finestra: i flussi non si incrociano
+  let segm=[],flussi=[],fonti=[],esce,trab;
+  const s=aPassi('S17J',9,k=>{
+    const h=FONTI.map((f,j)=>k<=j||(k>=9&&j>=4)?0:(k===8&&j===4?CHAT_PIENA:f[3]));
+    let y=FONDO;const mezzo=[];
+    h.forEach((a,j)=>{y-=a;segm[j].setAttribute('y',y);segm[j].setAttribute('height',a);segm[j].style.y=y+'px';segm[j].style.height=a+'px';mezzo[j]=y+a/2});
+    const ora=k<=6?k-1:(k===8?4:-1);
+    fonti.forEach((g,j)=>g.classList.toggle('on',h[j]>0));
+    flussi.forEach((g,j)=>{g.classList.toggle('on',h[j]>0);g.classList.toggle('ora',j===ora);
+      if(h[j]>0){const y1=yFonte(j)+31,y2=mezzo[j];g.querySelectorAll('path').forEach(p=>p.setAttribute('d',`M${X0} ${y1} C${X0+160} ${y1} ${VX-160} ${y2} ${VX} ${y2}`))}});
+    esce.forEach(e=>e.classList.toggle('on',k===7||k===8));
+    trab.forEach(e=>e.classList.toggle('on',k===8));
+    s.querySelector('.ctx-dida').innerHTML=DIDA[k];
+  });
+  if(!s)return;
+  const svg=s.querySelector('svg.ctx');
+  svg.innerHTML=
+    FONTI.map(([, ,c])=>`<g class="flusso"><path class="fl-base" stroke="${c}" stroke-width="16"/><path class="fl-luce" stroke="${c}" stroke-width="6"/></g>`).join('')+
+    `<g class="esce flusso"><path class="fl-base" stroke="#0F2E7A" stroke-width="16" d="M${VX+VW} 270 H${RX}"/><path class="fl-luce" stroke="#0F2E7A" stroke-width="6" d="M${VX+VW} 270 H${RX}"/></g>`+
+    `<path class="vaso" d="M${VX} ${TOP-14} V${FONDO} H${VX+VW} V${TOP-14}"/>`+
+    FONTI.map(([, ,c])=>`<rect class="segm" x="${VX+5}" y="${FONDO}" width="${VW-10}" height="0" fill="${c}"/>`).join('')+
+    `<g class="trabocco"><rect x="${VX+5}" y="${TOP-58}" width="${VW-10}" height="58" fill="url(#tratteggio)"/>
+      <text x="${VX+VW+24}" y="${TOP-30}" class="st2" style="fill:#8A5300">parti più vecchie:</text><text x="${VX+VW+24}" y="${TOP-10}" class="st2" style="fill:#8A5300">riassunte o escluse</text></g>`+
+    `<line class="limite" x1="${VX-22}" x2="${VX+VW+22}" y1="${TOP}" y2="${TOP}"/>`+
+    `<text x="${VX+VW+24}" y="${TOP+24}" class="st2">limite della finestra</text>`+
+    `<text x="${VX+VW/2}" y="${FONDO+34}" class="st1" text-anchor="middle">Finestra di contesto</text>`+
+    FONTI.map(([t,st,c],j)=>`<g class="fonte"><rect class="sc" x="0" y="${yFonte(j)}" width="${X0}" height="62"/><rect x="0" y="${yFonte(j)}" width="8" height="62" fill="${c}"/>
+      <text x="24" y="${yFonte(j)+27}" class="st1">${t}</text><text x="24" y="${yFonte(j)+50}" class="st2">${st}</text></g>`).join('')+
+    `<g class="esce"><rect class="sc" x="${RX}" y="210" width="320" height="120"/><rect x="${RX}" y="210" width="320" height="7" fill="#0F2E7A"/>
+      <text x="${RX+24}" y="262" class="st1" style="font-size:30px">Risposta</text><text x="${RX+24}" y="292" class="st2">nasce da tutta la finestra</text></g>`;
+  segm=[...svg.querySelectorAll('.segm')];
+  flussi=[...svg.querySelectorAll('.flusso:not(.esce)')];
+  fonti=[...svg.querySelectorAll('.fonte')];
+  esce=[...svg.querySelectorAll('.esce')];
+  trab=[...svg.querySelectorAll('.trabocco')];
+})();
+
+// S52A — un'ora risparmiata: dove va? → 1) tutta in «più lavoro» 2) divisa meglio; clic su un deposito: +10 minuti
+(function(){
+  const DEP=[['Più lavoro','altre pratiche, altre offerte','#C77800'],['Verifica e qualità','controllare, rileggere, firmare','#1641A8'],
+    ['Formazione','imparare, aggiornarsi','#2BB3DA'],['Tempo libero','famiglia, passioni, riposo','#3F9B63']];
+  const PASSI=[[0,0,0,0],[60,0,0,0],[15,20,10,15]];
+  const CX=150,CY=205,DX=780,DW=600,yDep=d=>10+d*102;
+  let dist=[0,0,0,0],dep=[],fl=[];
+  function disegna(){
+    dist.forEach((m,d)=>{
+      const g=dep[d],w=m?4+m*.55:0;
+      g.style.opacity=m?1:.45;
+      g.querySelector('.riemp').style.width=(DW*m/60)+'px';g.querySelector('.riemp').setAttribute('width',DW*m/60);
+      g.querySelector('.min').textContent=m+'′';
+      fl[d].classList.toggle('on',m>0);fl[d].classList.toggle('ora',m>0);
+      fl[d].querySelector('.fl-base').style.strokeWidth=w;fl[d].querySelector('.fl-luce').style.strokeWidth=Math.max(3,w*.35);
+    });
+  }
+  const s=aPassi('S52A',2,k=>{dist=[...PASSI[k]];disegna()});
+  if(!s)return;
+  const svg=s.querySelector('svg.tempo');
+  svg.innerHTML=
+    DEP.map(([, ,c],d)=>{const y=yDep(d)+42;
+      return `<g class="flusso"><path class="fl-base" stroke="${c}" d="M${CX+105} ${CY} C${CX+380} ${CY} ${DX-240} ${y} ${DX} ${y}"/><path class="fl-luce" stroke="${c}" d="M${CX+105} ${CY} C${CX+380} ${CY} ${DX-240} ${y} ${DX} ${y}"/></g>`}).join('')+
+    `<circle cx="${CX}" cy="${CY}" r="112" fill="#7FD8F0" fill-opacity=".35" filter="url(#bagliore)"/>
+     <circle cx="${CX}" cy="${CY}" r="104" class="sc" style="stroke:#2BB3DA;stroke-width:3"/>
+     <text x="${CX}" y="${CY+8}" text-anchor="middle" class="st1" style="font-size:60px">1 ora</text>
+     <text x="${CX}" y="${CY+40}" text-anchor="middle" class="st2" style="font-size:17px">risparmiata con l'AI</text>`+
+    DEP.map(([t,st,c],d)=>{const y=yDep(d);
+      return `<g class="dep ctrl"><rect class="sc" x="${DX}" y="${y}" width="${DW}" height="84"/>
+        <rect class="riemp" x="${DX}" y="${y}" width="0" height="84" fill="${c}" fill-opacity=".16"/>
+        <rect x="${DX}" y="${y}" width="8" height="84" fill="${c}"/>
+        <text x="${DX+28}" y="${y+36}" class="st1" style="font-size:25px">${t}</text><text x="${DX+28}" y="${y+62}" class="st2">${st}</text>
+        <text x="${DX+DW-24}" y="${y+56}" text-anchor="end" class="min" style="font:600 42px var(--titolo);fill:${c}"></text></g>`}).join('');
+  dep=[...svg.querySelectorAll('.dep')];fl=[...svg.querySelectorAll('.flusso')];
+  // il tempo si conserva: i 10 minuti si tolgono al deposito più pieno
+  dep.forEach((g,d)=>g.addEventListener('click',()=>{
+    if(!s.classList.contains('p1')||dist[d]>=60)return;
+    let da=-1;dist.forEach((m,j)=>{if(j!==d&&m>0&&(da<0||m>dist[da]))da=j});
+    const q=Math.min(10,dist[da]);dist[da]-=q;dist[d]+=q;disegna()}));
+})();
+
+let i=0,passiFatti=0,dirCorr='avanti';const pan=document.getElementById('pannello');
+// finestra relatore: la stessa pagina aperta con ?relatore; le due finestre si parlano con postMessage
+const RELATORE=new URLSearchParams(location.search).has('relatore');
+let finRel=null;
+const stato=()=>({tipo:'stato',i,dir:dirCorr,passi:passiFatti});
+function invia(m){if(RELATORE)return;try{if(finRel&&!finRel.closed)finRel.postMessage(m,'*')}catch(e){}}
+function titolo(s){if(s?.dataset.titolo)return s.dataset.titolo;const h=s?.querySelector('h1,h2,.grande');return h?h.textContent.replace(/\s+/g,' ').trim():(s?.dataset.cod||'')}
+
+function fit(){
+  if(RELATORE){const pv=document.getElementById('rel-prev');const sc=pv.clientWidth/1600;slides.forEach(el=>el.style.transform=`scale(${sc})`);return}
+  const sc=Math.min(innerWidth/1600,innerHeight/900);slides.forEach(el=>el.style.transform=`scale(${sc})`)}
+function show(n,dir){const prima=i;i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((el,k)=>el.classList.toggle('on',k===i));
+  dirCorr=dir||(i>=prima?'avanti':'indietro');passiFatti=0;
+  slides[i]._entra?.(dirCorr);
+  document.getElementById('pos').textContent=`${slides[i].dataset.cod} · ${i+1}/${slides.length}`;
+  const pu=slides[i].querySelector('.punti'),n2=slides[i].querySelector('.note');
+  pan.innerHTML=`<b>${slides[i].dataset.cod}</b> — `+(pu?pu.innerHTML:'')+(n2?`<div class="regia">${n2.innerHTML}</div>`:'');
+  if(!RELATORE)history.replaceState(null,'','#'+(i+1));
+  // il video di sfondo gira solo sulla slide attiva
+  document.querySelectorAll('.sfondo-video').forEach(v=>{v.closest('.slide.on')?v.play().catch(()=>{}):v.pause()});
+  document.querySelectorAll('.seq-video').forEach(v=>{if(!v.closest('.slide.on'))v.pause()});
+  invia(stato());if(RELATORE)aggiornaRel();}
+function comando(k){
+  if(['ArrowRight','PageDown',' '].includes(k)){if(slides[i]._passo?.()){passiFatti++;invia(stato())}else show(i+1)}
+  if(['ArrowLeft','PageUp'].includes(k))show(i-1);
+  if((k==='r'||k==='R')&&slides[i]._entra){slides[i]._entra('avanti');dirCorr='avanti';passiFatti=0;invia(stato())}
+  if(k==='Home')show(0); if(k==='End')show(slides.length-1);
+}
+// se il video manca o non si apre, torna la trama binaria
+document.querySelectorAll('.sfondo-video').forEach(v=>{
+  const ripiego=()=>{if(!v.isConnected)return;const d=document.createElement('div');d.className='binario';d.textContent=bin;v.closest('.slide').prepend(d);v.remove()};
+  v.addEventListener('error',ripiego); if(v.error)ripiego();});
+addEventListener('resize',fit);
+addEventListener('keydown',e=>{
+  if(RELATORE){
+    if(e.key==='t'||e.key==='T'){t0=Date.now();return}
+    if(['ArrowRight','PageDown',' ','ArrowLeft','PageUp','r','R','Home','End'].includes(e.key)){e.preventDefault();manda(e.key)}
+    return}
+  comando(e.key);
+  if(e.key==='n'||e.key==='N')pan.classList.toggle('on');
+  if(e.key==='p'||e.key==='P')finRel=window.open(location.pathname+'?relatore','relatore-corso-ai','width=1400,height=850');
+  if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+});
+addEventListener('click',e=>{if(RELATORE||e.target.closest('a')||e.target.closest('#pannello')||e.target.closest('.ctrl'))return;comando(e.clientX>innerWidth/2?'ArrowRight':'ArrowLeft')});
+addEventListener('message',e=>{const m=e.data;if(!m||typeof m!=='object')return;
+  if(!RELATORE){if(m.tipo==='ciao'){finRel=e.source;invia(stato())} if(m.tipo==='tasto')comando(m.key);return}
+  if(m.tipo==='stato')specchio(m);});
+
+// ----- finestra relatore -----
+let t0=Date.now();
+function manda(key){try{window.opener?.postMessage({tipo:'tasto',key},'*')}catch(e){}}
+// riproduce nella finestra relatore lo stato della finestra principale (slide, direzione d'ingresso, passi già fatti)
+function specchio(m){
+  if(m.i!==i||m.dir!==dirCorr||m.passi<passiFatti)show(m.i,m.dir);
+  while(passiFatti<m.passi&&slides[i]._passo?.())passiFatti++;
+  aggiornaRel();}
+function aggiornaRel(){if(!RELATORE)return;const s=slides[i],nx=slides[i+1];
+  const pu=s.querySelector('.punti'),no=s.querySelector('.note');
+  document.getElementById('r-pos').textContent=`${s.dataset.cod} · slide ${i+1} di ${slides.length}`+(passiFatti?` · passo ${passiFatti}`:'');
+  document.getElementById('r-tit').textContent=titolo(s);
+  document.getElementById('r-punti').innerHTML=pu?pu.innerHTML:'<ul><li>—</li></ul>';
+  document.getElementById('r-regia').innerHTML=no?'<b>Regia</b> · '+no.innerHTML:'';
+  document.getElementById('r-pross').textContent=nx?`Prossima: ${nx.dataset.cod} · ${titolo(nx)}`:'Fine';}
+if(RELATORE){
+  document.body.classList.add('relatore');document.title='Relatore · '+document.title;
+  const r=document.createElement('div');r.id='rel';
+  r.innerHTML=`<div class="testa"><span class="crono" id="r-crono">00:00</span><span id="r-pos"></span><span class="aiuto-rel">← → comandano la presentazione · T azzera il cronometro</span></div>
+    <div class="sx"><div id="rel-prev"></div><div class="pross" id="r-pross"></div>
+      <div class="tasti"><button data-k="ArrowLeft">◀ Indietro</button><button data-k="ArrowRight">Avanti ▶</button><button data-k="R">↺ Ricomincia animazione</button></div></div>
+    <div class="dx"><div class="tit-rel" id="r-tit"></div><div class="punti-rel" id="r-punti"></div><div class="regia" id="r-regia"></div></div>`;
+  document.body.append(r);
+  const pv=document.getElementById('rel-prev');slides.forEach(s=>pv.append(s));
+  r.querySelectorAll('.tasti button').forEach(b=>b.addEventListener('click',()=>manda(b.dataset.k)));
+  setInterval(()=>{const c=Math.floor((Date.now()-t0)/1000);document.getElementById('r-crono').textContent=String(Math.floor(c/60)).padStart(2,'0')+':'+String(c%60).padStart(2,'0')},500);
+  // la finestra principale può essere ricaricata: ogni 2 s il relatore si ripresenta
+  const saluta=()=>{try{window.opener?.postMessage({tipo:'ciao'},'*')}catch(e){}};saluta();setInterval(saluta,2000);
+  fit();show(0);
+}else{fit();show((parseInt(location.hash.slice(1))||1)-1);}
+</script>
+</body>
+</html>

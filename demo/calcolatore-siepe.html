@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolatore siepe</title>
+<style>
+  :root {
+    --bg: #f6f7f5; --panel: #ffffff; --text: #1d2420; --muted: #5d6862;
+    --line: #d9ded9; --accent: #2f6f4e; --accent-soft: #e3efe8; --warn: #a3471b; --warn-soft: #fbece4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151a17; --panel: #1e2521; --text: #e7ece8; --muted: #9aa69f;
+      --line: #334039; --accent: #7cc49b; --accent-soft: #24362c; --warn: #f0a37e; --warn-soft: #3a2519;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151a17; --panel: #1e2521; --text: #e7ece8; --muted: #9aa69f;
+    --line: #334039; --accent: #7cc49b; --accent-soft: #24362c; --warn: #f0a37e; --warn-soft: #3a2519;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.5 system-ui, "Segoe UI", sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 24px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+  h2 { font-size: 1.05rem; margin: 0 0 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; }
+  label { display: block; font-size: .85rem; color: var(--muted); margin-bottom: 4px; }
+  input { width: 100%; padding: 8px 10px; font: inherit; color: var(--text); background: var(--bg);
+          border: 1px solid var(--line); border-radius: 8px; }
+  input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .check { display: flex; gap: 8px; align-items: center; margin-top: 14px; color: var(--muted); font-size: .9rem; }
+  .check input { width: auto; }
+  .row { display: grid; grid-template-columns: 1fr 110px 40px; gap: 10px; margin-bottom: 8px; }
+  button { font: inherit; cursor: pointer; border-radius: 8px; border: 1px solid var(--line);
+           background: var(--panel); color: var(--text); padding: 8px 12px; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+  button.del { padding: 0; color: var(--muted); }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .kpi { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 14px; }
+  .kpi div { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+  .kpi b { display: block; font-size: 1.4rem; }
+  .kpi span { font-size: .8rem; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  tfoot td { font-weight: 600; border-bottom: none; }
+  .msg { padding: 10px 12px; border-radius: 8px; background: var(--warn-soft); color: var(--warn); margin-bottom: 12px; display: none; }
+  .note { color: var(--muted); font-size: .85rem; margin-top: 12px; }
+  @media (max-width: 480px) { .row { grid-template-columns: 1fr 80px 36px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Calcolatore siepe</h1>
+  <p class="sub">Numero di piante per specie a partire da lunghezza, file, sesto e composizione percentuale.</p>
+
+  <section class="panel">
+    <h2>Dati dell'impianto</h2>
+    <div class="grid">
+      <div><label for="len">Lunghezza (m)</label><input id="len" type="number" min="0" step="0.5" value="180"></div>
+      <div><label for="rows">Numero di file</label><input id="rows" type="number" min="1" step="1" value="2"></div>
+      <div><label for="step">Sesto sulla fila (m)</label><input id="step" type="number" min="0.1" step="0.1" value="1"></div>
+    </div>
+    <label class="check"><input id="ends" type="checkbox"> Pianta anche all'estremità finale di ogni fila (+1 per fila)</label>
+  </section>
+
+  <section class="panel">
+    <h2>Composizione</h2>
+    <div id="species"></div>
+    <div class="actions"><button id="add" type="button">+ Aggiungi specie</button></div>
+  </section>
+
+  <section class="panel">
+    <h2>Risultato</h2>
+    <div id="msg" class="msg"></div>
+    <div class="kpi">
+      <div><b id="perRow">–</b><span>piante per fila</span></div>
+      <div><b id="total">–</b><span>piante totali</span></div>
+      <div><b id="pct">–</b><span>somma percentuali</span></div>
+    </div>
+    <table>
+      <thead><tr><th>Specie</th><th class="n">%</th><th class="n">Calcolo</th><th class="n">Piante</th></tr></thead>
+      <tbody id="out"></tbody>
+      <tfoot><tr><td>Totale</td><td class="n" id="fPct"></td><td></td><td class="n" id="fTot"></td></tr></tfoot>
+    </table>
+    <div class="actions"><button id="copy" type="button" class="primary">Copia tabella per Excel</button></div>
+    <p class="note">Arrotondamento con il metodo dei resti maggiori: il totale per specie coincide sempre con il totale delle piante. Verificare sempre il risultato prima dell'uso in progetto.</p>
+  </section>
+</main>
+
+<script>
+  const start = [
+    ["Acer campestre", 30], ["Cornus sanguinea", 25], ["Viburnum opulus", 25], ["Ligustrum vulgare", 20]
+  ];
+  const box = document.getElementById("species");
+  const $ = id => document.getElementById(id);
+
+  function addRow(name = "", pct = "") {
+    const r = document.createElement("div");
+    r.className = "row";
+    r.innerHTML = '<input class="sp" placeholder="Specie" aria-label="Specie">' +
+                  '<input class="pc" type="number" min="0" max="100" step="1" placeholder="%" aria-label="Percentuale">' +
+                  '<button type="button" class="del" aria-label="Rimuovi">✕</button>';
+    r.querySelector(".sp").value = name;
+    r.querySelector(".pc").value = pct;
+    r.querySelector(".del").onclick = () => { r.remove(); calc(); };
+    r.querySelectorAll("input").forEach(i => i.addEventListener("input", calc));
+    box.appendChild(r);
+  }
+
+  let lastRows = [];
+  function calc() {
+    const len = parseFloat($("len").value) || 0;
+    const rows = parseInt($("rows").value) || 0;
+    const step = parseFloat($("step").value) || 0;
+    const perRow = step > 0 ? Math.floor(len / step + 1e-9) + ($("ends").checked ? 1 : 0) : 0;
+    const total = perRow * rows;
+    const sp = [...box.querySelectorAll(".row")].map(r => ({
+      name: r.querySelector(".sp").value.trim() || "(senza nome)",
+      pct: parseFloat(r.querySelector(".pc").value) || 0
+    }));
+    const sum = sp.reduce((a, s) => a + s.pct, 0);
+
+    // metodo dei resti maggiori
+    const raw = sp.map(s => sum > 0 ? total * s.pct / sum : 0);
+    const n = raw.map(Math.floor);
+    let left = total - n.reduce((a, b) => a + b, 0);
+    raw.map((v, i) => [v - Math.floor(v), i]).sort((a, b) => b[0] - a[0])
+       .forEach(([, i]) => { if (left > 0) { n[i]++; left--; } });
+
+    $("perRow").textContent = perRow;
+    $("total").textContent = total;
+    $("pct").textContent = sum + "%";
+    const msg = $("msg");
+    if (Math.abs(sum - 100) > 0.001 && sp.length) {
+      msg.style.display = "block";
+      msg.textContent = "Le percentuali sommano a " + sum + "%: il calcolo le riproporziona su 100%, ma conviene correggerle.";
+    } else msg.style.display = "none";
+
+    lastRows = sp.map((s, i) => [s.name, s.pct, raw[i], n[i]]);
+    $("out").innerHTML = lastRows.map(([name, pct, r, v]) =>
+      `<tr><td><i>${name.replace(/</g, "&lt;")}</i></td><td class="n">${pct}</td><td class="n">${r.toFixed(1)}</td><td class="n">${v}</td></tr>`
+    ).join("");
+    $("fPct").textContent = sum;
+    $("fTot").textContent = n.reduce((a, b) => a + b, 0);
+  }
+
+  $("copy").onclick = async () => {
+    const tsv = ["Specie\t%\tPiante", ...lastRows.map(([a, b, , d]) => `${a}\t${b}\t${d}`),
+                 `Totale\t${$("fPct").textContent}\t${$("fTot").textContent}`].join("\n");
+    try { await navigator.clipboard.writeText(tsv); $("copy").textContent = "Copiata ✔"; }
+    catch { $("copy").textContent = "Copia non riuscita"; }
+    setTimeout(() => $("copy").textContent = "Copia tabella per Excel", 1800);
+  };
+  $("add").onclick = () => { addRow(); calc(); };
+  ["len", "rows", "step", "ends"].forEach(id => $(id).addEventListener("input", calc));
+  start.forEach(([a, b]) => addRow(a, b));
+  calc();
+</script>
+</body>
+</html>
