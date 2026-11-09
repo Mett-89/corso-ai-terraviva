@@ -171,6 +171,36 @@ td b{color:var(--blu2)}
 .shot{background:#fff;border:1.5px solid var(--bordo);box-shadow:0 14px 40px rgba(22,65,168,.12);position:relative;flex:1;min-height:200px}
 .shot .barra-f{height:26px;background:#EEF1F6;border-bottom:1px solid #DDE2EA}
 .shot .vuoto{position:absolute;inset:26px 0 0;display:flex;align-items:center;justify-content:center;color:#93A0B5;font:15px var(--mono);text-align:center;padding:20px}
+.risp-mail{font-size:17.5px;line-height:1.45;white-space:pre-line;margin-top:6px}
+.risp-mail b{color:var(--blu)}
+.migliorato{display:grid;grid-template-columns:118px 1fr;gap:9px 14px;font-size:17px;line-height:1.4;margin-top:8px}
+.migliorato dt{font:600 14px var(--mono);color:var(--blu);padding-top:3px}
+.cambiato{margin-top:14px;padding-top:12px;border-top:1px solid var(--bordo);font-size:16.5px;line-height:1.45}
+.cambiato li{margin:3px 0 3px 20px}
+.tre-fonti .shot{overflow:hidden;min-height:0}
+.tre-fonti .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left}
+.tre-fonti .shot pre{position:absolute;inset:0;margin:0;padding:12px 16px;font:13.5px/1.45 var(--mono);color:var(--testo);background:#FBFCFE;white-space:pre-wrap;overflow:hidden}
+.tre-fonti .shot pre .k{color:var(--blu);font-weight:500}
+.tre-fonti a{text-decoration:none;display:flex;flex-direction:column;min-height:0;height:100%}
+.tre-fonti a:hover .shot{box-shadow:0 14px 40px rgba(22,65,168,.28)}
+.fonti-nb{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.fonti-nb .gr{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start;padding:10px 0;border-top:1px solid var(--bordo)}
+.fonti-nb .gr:first-child{border-top:0}
+.fonti-nb .n{font:600 30px/1 var(--titolo);color:var(--blu);text-align:right}
+.fonti-nb h3{font-size:20px;margin:0 0 3px}
+.fonti-nb p{font-size:16.5px;line-height:1.4;color:var(--tenue);margin:0}
+.fonti-nb .gr.cap .n{color:var(--ambra)}
+.capitoli{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.capitoli span{font:500 13.5px var(--mono);border:1.5px solid var(--ambra);color:var(--testo);padding:3px 8px;background:#FFF8EC}
+.audio-nb{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.audio-nb .a{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--bordo)}
+.audio-nb .a:first-child{border-top:0}
+.audio-nb .a i{font-style:normal;color:var(--blu);font-size:22px;line-height:1}
+.audio-nb .a b{font-weight:500;font-size:17.5px;line-height:1.3;display:block}
+.audio-nb .a small{font:13.5px var(--mono);color:var(--tenue)}
+.audio-nb .a .dur{font:600 24px var(--titolo);color:var(--blu)}
+.rend .shot{flex:none;aspect-ratio:3/2;min-height:0;overflow:hidden}
+.rend .shot img{width:100%;height:100%;object-fit:cover;display:block}
 .didasc{margin-top:12px;font-family:var(--titolo);text-transform:uppercase;font-size:19px;color:var(--blu)}
 .avviso{margin-top:20px;font-size:20px;display:flex;gap:14px;align-items:center;line-height:1.4}
 .avviso b{font-family:var(--titolo);border:1.5px solid var(--ambra);color:var(--ambra);padding:2px 12px;font-size:17px;letter-spacing:.06em;white-space:nowrap}
@@ -412,7 +442,7 @@ body.relatore #rel{display:grid;position:fixed;inset:0;grid-template-columns:min
     <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg><span>Claude</span></div>
     <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg><span>ChatGPT</span></div>
     <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg><span>Gemini</span></div>
-    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.999 3.201C5.372 3.201 0 8.528 0 15.101V20.8h2.212v-.568c0-2.666 2.178-4.827 4.866-4.827 2.688 0 4.866 2.16 4.866 4.827v.568h2.212v-.568c0-3.877-3.17-7.019-7.078-7.019A7.075 7.075 0 0 0 2.992 14.5a7.355 7.355 0 0 1 6.568-4.016c4.057 0 7.347 3.264 7.347 7.287V20.8h2.212V17.77c0-5.235-4.28-9.481-9.56-9.481a9.563 9.563 0 0 0-6.217 2.28A9.795 9.795 0 0 1 12 5.393c5.406 0 9.788 4.346 9.788 9.707V20.8H24V15.1c-.001-6.573-5.373-11.9-12.001-11.9Z"/></svg><span>NotebookLM</span></div>
+    <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.999 3.201C5.372 3.201 0 8.528 0 15.101V20.8h2.212v-.568c0-2.666 2.178-4.827 4.866-4.827 2.688 0 4.866 2.16 4.866 4.827v.568h2.212v-.568c0-3.877-3.17-7.019-7.078-7.019A7.075 7.075 0 0 0 2.992 14.5a7.355 7.355 0 0 1 6.568-4.016c4.057 0 7.347 3.264 7.347 7.287V20.8h2.212V17.77c0-5.235-4.28-9.481-9.56-9.481a9.563 9.563 0 0 0-6.217 2.28A9.795 9.795 0 0 1 12 5.393c5.406 0 9.788 4.346 9.788 9.707V20.8H24V15.1c-.001-6.573-5.373-11.9-12.001-11.9Z"/></svg><span>Gemini Notebook</span></div>
     <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.3977 7.0896h-2.3106V.0676l-7.5094 6.3542V.1577h-1.1554v6.1966L4.4904 0v7.0896H1.6023v10.3976h2.8882V24l6.932-6.3591v6.2005h1.1554v-6.0469l6.9318 6.1807v-6.4879h2.8882V7.0896zm-3.4657-4.531v4.531h-5.355l5.355-4.531zm-13.2862.0676 4.8691 4.4634H5.6458V2.6262zM2.7576 16.332V8.245h7.8476l-6.1149 6.1147v1.9723H2.7576zm2.8882 5.0404v-3.8852h.0001v-2.6488l5.7763-5.7764v7.0111l-5.7764 5.2993zm12.7086.0248-5.7766-5.1509V9.0618l5.7766 5.7766v6.5588zm2.8882-5.0652h-1.733v-1.9723L13.3948 8.245h7.8478v8.087z"/></svg><span>Perplexity</span></div>
     <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="12" y="16.2" text-anchor="middle" font-size="10.5" font-weight="600" fill="currentColor" font-family="Fira Sans,sans-serif">Co</text></svg><span>Copilot</span></div>
     <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.143 3.429v3.428h-3.429v3.429h-3.428V6.857H6.857V3.43H3.43v13.714H0v3.428h10.286v-3.428H6.857v-3.429h3.429v3.429h3.429v-3.429h3.428v3.429h-3.428v3.428H24v-3.428h-3.43V3.429z"/></svg><span>Le Chat</span></div>
@@ -430,13 +460,13 @@ body.relatore #rel{display:grid;position:fixed;inset:0;grid-template-columns:min
     <div class="voce"><div class="mini"><img src="immagini/prog-02.png" alt="" onerror="this.remove()"><span>02</span></div><h3>Il contesto</h3><p>40'</p></div>
     <div class="voce"><div class="mini"><img src="immagini/prog-03.png" alt="" onerror="this.remove()"><span>03</span></div><h3>Il prompt</h3><p>30'</p></div>
     <div class="voce"><div class="mini"><img src="immagini/prog-04.png" alt="" onerror="this.remove()"><span>04</span></div><h3>Casi d'uso nello studio</h3><p>30'</p></div>
-    <div class="voce"><div class="mini"><img src="immagini/prog-05.png" alt="" onerror="this.remove()"><span>05</span></div><h3>NotebookLM</h3><p>10'</p></div>
+    <div class="voce"><div class="mini"><img src="immagini/prog-05.png" alt="" onerror="this.remove()"><span>05</span></div><h3>Gemini Notebook</h3><p>10'</p></div>
     <div class="voce"><div class="mini"><img src="immagini/prog-06.png" alt="" onerror="this.remove()"><span>06</span></div><h3>Usare l'AI in modo corretto</h3><p>15'</p></div>
     <div class="voce"><div class="mini"><img src="immagini/prog-07.png" alt="" onerror="this.remove()"><span>07</span></div><h3>Vibe coding</h3><p>10'</p></div>
     <div class="voce"><div class="mini b"><img src="immagini/prog-b.png" alt="" onerror="this.remove()"><span>B</span></div><h3>Dimostrazione dal vivo</h3><p>60'</p></div>
   </div>
   <p class="piccolo" style="text-align:center;margin-top:30px">Pausa di 10' dopo il blocco 3</p>
-  <aside class="punti"><ul><li>Sette blocchi, poi un'ora di <b>dimostrazione dal vivo</b>.</li><li>Il cuore della giornata sono <b>contesto (40')</b> e <b>prompt (30')</b>: lì si decide la qualità.</li><li>Poi <b>casi d'uso</b> reali, <b>NotebookLM</b>, <b>uso corretto</b> e un cenno al <b>vibe coding</b>.</li><li><b>Pausa di 10'</b> dopo il blocco 3.</li></ul></aside>
+  <aside class="punti"><ul><li>Sette blocchi, poi un'ora di <b>dimostrazione dal vivo</b>.</li><li>Il cuore della giornata sono <b>contesto (40')</b> e <b>prompt (30')</b>: lì si decide la qualità.</li><li>Poi <b>casi d'uso</b> reali, <b>Gemini Notebook</b> (ex NotebookLM), <b>uso corretto</b> e un cenno al <b>vibe coding</b>.</li><li><b>Pausa di 10'</b> dopo il blocco 3.</li></ul></aside>
 </section>
 
 <!-- ================================================================ -->
@@ -571,7 +601,7 @@ indica numero, anno e principio affermato.</pre></div>
     <!-- schede costruite dallo script (array SENTENZE) -->
     <div class="sentenze"></div>
   </div>
-  <aside class="note">Interattiva, «alza la linguetta»: prima far votare per alzata di mano quali sentenze esistono, poi <b>→</b> (o clic su una scheda) alza una linguetta alla volta e mostra l'esito della verifica con il timbro; <b>R</b> richiude tutto. Prova del 07/11/2026 con Llama 3 8B in locale (Ollama), seconda esecuzione: nella prima aveva dato solo data e sezione, senza numero. Le stesse domande a Claude Haiku 4.5 e Haiku 5.5, senza ricerca web, hanno avuto tre rifiuti su tre («non posso indicarti sentenze con sufficiente affidabilità»): oggi i modelli grandi in cloud tendono a non inventare, quelli piccoli sì. Verifica del 07/11/2026 con ricerca web: nessuna traccia delle tre sentenze. Il n. 26215 è fuori scala per il Consiglio di Stato, che numera le decisioni nell'ordine delle migliaia l'anno. Il «caso» descritto (Regione che autorizza un'opera pubblica in ZSC senza VIncA) è identico nelle tre risposte e nessun principio parla di siepi. ZSC è la Zona Speciale di Conservazione, non la «zona di speciale coltivazione». Per sicurezza, controllare i tre estremi anche su giustizia-amministrativa.it prima del corso.</aside>
+  <aside class="note">Interattiva, «alza la linguetta»: prima far votare per alzata di mano quali sentenze esistono, poi <b>→</b> (o clic su una scheda) alza una linguetta alla volta e mostra l'esito della verifica con il timbro; <b>R</b> richiude tutto. Prova del 07/11/2026 con Llama 3 8B in locale (Ollama), seconda esecuzione: nella prima aveva dato solo data e sezione, senza numero. Le stesse domande a Claude Haiku 4.5 e Haiku 5.5, senza ricerca web, hanno avuto tre rifiuti su tre («non posso indicarti sentenze con sufficiente affidabilità»): oggi i modelli grandi in cloud tendono a non inventare, quelli piccoli sì. Verifica del 07/11/2026 con ricerca web: nessuna traccia delle tre sentenze. Il n. 26215 è fuori scala per il Consiglio di Stato, che numera le decisioni nell'ordine delle migliaia l'anno. Il «caso» descritto (Regione che autorizza un'opera pubblica in ZSC senza VIncA) è identico nelle tre risposte e nessun principio parla di siepi. ZSC è la Zona Speciale di Conservazione, non la «zona di speciale coltivazione». Altro indizio, verificato il 09/11/2026: numeri e date non sono compatibili. Il Consiglio di Stato numera le decisioni in ordine di deposito nell'anno: a febbraio o aprile i numeri sono bassi, non 4766 o 9343, e nessun anno arriva a 26215.</aside>
   <aside class="punti"><ul><li>Prima del voto: <b>quali di queste sentenze esistono davvero?</b> Alzata di mano.</li><li>Modello: <b>Llama 3, 8 miliardi di parametri</b>, sul nostro PC, <b>senza ricerca web</b>.</li><li>Alzo <b>una linguetta alla volta</b> e mostro l'esito della verifica.</li><li>Inventa <b>numero, data e caso</b>; scrive che ZSC è la «<b>zona di speciale coltivazione</b>».</li><li>Il «caso» è <b>copiato identico</b> nelle tre sentenze e nessuna parla di siepi.</li><li>Quando non sa, spesso <b>inventa con sicurezza</b>. Haiku senza web invece si è <b>rifiutato</b>.</li></ul></aside>
 </section>
 
@@ -589,8 +619,8 @@ indica numero, anno e principio affermato.</pre></div>
     <!-- schede costruite dallo script (array in linguette('S08A', …)) -->
     <div class="sentenze"></div>
   </div>
-  <aside class="note">Interattiva come S08: <b>→</b> (o clic) alza una linguetta alla volta; <b>R</b> richiude. Risposta di Claude Sonnet 5.5 su claude.ai con ricerca web, 07/11/2026 (screenshot di Matteo). Verifica del 07/11/2026 con ricerca web: la Sez. VI n. 388/2025 esiste (20/01/2025; screening e limiti del principio di precauzione, scheda della Regione Veneto), ma la scheda non conferma il caso della stazione radio base. La Sez. IV n. 9440/2023 e la n. 5888/2025 non sono state trovate con la ricerca web: non vuol dire che non esistano, vanno controllate su giustizia-amministrativa.it prima del corso, poi aggiornare il timbro. Altre decisioni citate da Sonnet ma non lette da lui: IV 4327/2017, IV 505/2019, IV 6773/2018, IV 2651/2019, IV 3258/2018, IV 8187/2023, VI 5092/2014. Messaggio: la ricerca web non rende infallibili, ma il modello dichiara cosa ha trovato e cosa no. Collegare a S06C (gli attrezzi) e a S09 (la regola d'oro).</aside>
-  <aside class="punti"><ul><li>Stessa domanda, ma con <b>Claude Sonnet 5.5</b> e la <b>ricerca web attiva</b>.</li><li>Prima frase: «<b>non ho trovato</b> nessuna sentenza sulle siepi». Non inventa.</li><li>Propone tre sentenze sulla VIncA <b>in generale</b> e dice che i principi sono <b>sintesi sue</b>.</li><li>Alzo le linguette: la <b>388/2025 esiste</b>, le altre due sono <b>da verificare</b>.</li><li>Chiude con «<b>controlla il testo integrale</b>»: è la regola d'oro detta dal modello stesso.</li></ul></aside>
+  <aside class="note">Interattiva come S08: <b>→</b> (o clic) alza una linguetta alla volta; <b>R</b> richiude. Risposta di Claude Sonnet 5.5 su claude.ai con ricerca web, 07/11/2026 (screenshot di Matteo). Verifica del 07/11/2026 con ricerca web: la Sez. VI n. 388/2025 esiste (20/01/2025; screening e limiti del principio di precauzione, scheda della Regione Veneto), ma la scheda non conferma il caso della stazione radio base. Verifica del 09/11/2026 con ricerca web: la Sez. IV n. 9440 del 02/11/2023 esiste e riguarda un parco eolico vicino alla ZPS del fiume Tammaro (esclusione della VIncA non motivata, effetto cumulativo con gli impianti esistenti): il principio indicato da Sonnet torna. La Sez. IV n. 5888 del 07/07/2025 esiste ed è un PAUR per un parco eolico in provincia di Firenze con la VIncA integrata, ma nelle sintesi trovate non compare il principio «VIncA anche per i progetti esterni al sito»: timbro ambra, va letto il testo integrale. Il 07/11 la ricerca web non le aveva trovate: anche la verifica va fatta bene. Altre decisioni citate da Sonnet ma non lette da lui: IV 4327/2017, IV 505/2019, IV 6773/2018, IV 2651/2019, IV 3258/2018, IV 8187/2023, VI 5092/2014. Messaggio: la ricerca web non rende infallibili, ma il modello dichiara cosa ha trovato e cosa no. Collegare a S06C (gli attrezzi) e a S09 (la regola d'oro).</aside>
+  <aside class="punti"><ul><li>Stessa domanda, ma con <b>Claude Sonnet 5.5</b> e la <b>ricerca web attiva</b>.</li><li>Prima frase: «<b>non ho trovato</b> nessuna sentenza sulle siepi». Non inventa.</li><li>Propone tre sentenze sulla VIncA <b>in generale</b> e dice che i principi sono <b>sintesi sue</b>.</li><li>Alzo le linguette: <b>tutte e tre esistono</b>, ma per la <b>5888/2025</b> il principio citato <b>non torna</b> nelle sintesi.</li><li>Esistere non basta: bisogna controllare che dica <b>quello che il modello le attribuisce</b>.</li><li>Chiude con «<b>controlla il testo integrale</b>»: è la regola d'oro detta dal modello stesso.</li></ul></aside>
 </section>
 
 <section class="slide messaggio centro" data-cod="S09">
@@ -613,14 +643,14 @@ indica numero, anno e principio affermato.</pre></div>
     <tr><td><b>Copilot</b></td><td>Ricerca web con citazioni, integrato in Windows ed Edge</td><td class="c v">n.v.</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
     <tr><td><b>Le Chat</b></td><td>Mistral, europeo: ricerca web con fonti, immagini</td><td class="c v">n.v.</td><td class="c">●</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
     <tr><td><b>Perplexity</b></td><td>Ricerca con le fonti; nel Pro sceglie tra più modelli</td><td class="c m">◐</td><td class="c">●</td><td class="c v">n.v.</td><td class="c m">◐</td><td class="c n">–</td></tr>
-    <tr><td><b>NotebookLM</b></td><td>Risponde <b>solo sulle fonti caricate</b>: normativa, piani</td><td class="c v">n.v.</td><td class="c">●</td><td class="c">●</td><td class="c v">n.v.</td><td class="c n">–</td></tr>
+    <tr><td><b>Gemini Notebook</b></td><td>Risponde <b>solo sulle fonti caricate</b>: normativa, piani</td><td class="c v">n.v.</td><td class="c">●</td><td class="c">●</td><td class="c v">n.v.</td><td class="c n">–</td></tr>
     <tr><td><b>Ollama</b></td><td>Modelli aperti sul vostro PC: i dati non escono</td><td class="c n">–</td><td class="c v">n.v.</td><td class="c">●</td><td class="c n">–</td><td class="c">●</td></tr>
     <tr><td><b>DeepL</b></td><td>Traduce documenti mantenendo l'impaginazione</td><td class="c">●</td><td class="c n">–</td><td class="c v">n.v.</td><td class="c n">–</td><td class="c n">–</td></tr>
     <tr><td><b>noScribe</b></td><td>Trascrive le riunioni e separa le voci, sul PC</td><td class="c">●</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c">●</td></tr>
   </table>
   <p class="legenda">● disponibile, anche gratis con limiti · ◐ solo a pagamento · – no · n.v. non verificato<br>Le capacità dipendono dall'app e dal piano, non dal modello · situazione al 07/11/2026</p>
-  <aside class="note">Tabella aggiornata con una ricerca del 07/11/2026 (fonti in ../2026-11-07-ricerca-capacita-strumenti-ai.md). Dati da verificare prima di affermarli: modello Gemini di punta (Gemini 4 non confermato da Google); creazione di file in Copilot, Le Chat e NotebookLM; lettura di immagini in Perplexity e DeepL; ricerca web nell'app Ollama; ChatGPT e PowerPoint (fonti in conflitto); limiti dei piani gratuiti. DeepSeek escluso dalla tabella: nel gennaio 2025 il Garante privacy aveva disposto il blocco dell'app in Italia, stato attuale non verificato. Formati GIS e CAD (shapefile, KML, DXF): nessuna fonte, da provare prima di citarli. Piani e prezzi [DA VERIFICARE alla data del corso].</aside>
-  <aside class="punti"><ul><li>La mappa di <b>chi fa cosa</b> a novembre 2026: sulle righe gli strumenti, sulle colonne le capacità.</li><li><b>Claude</b> scrive documenti ma <b>non genera foto</b>; <b>ChatGPT</b> e <b>Gemini</b> sì.</li><li><b>Gemini</b> legge anche <b>video e audio</b>; <b>NotebookLM</b> risponde <b>solo sulle fonti</b> caricate.</li><li><b>Ollama</b> e <b>noScribe</b> girano <b>sul vostro PC</b>: i dati non escono.</li><li><b>Non serve sceglierne uno per sempre</b>: le capacità cambiano ogni pochi mesi.</li></ul></aside>
+  <aside class="note">Tabella aggiornata con una ricerca del 07/11/2026 (fonti in ../2026-11-07-ricerca-capacita-strumenti-ai.md). Dati da verificare prima di affermarli: modello Gemini di punta (Gemini 4 non confermato da Google); creazione di file in Copilot, Le Chat e Gemini Notebook (ex NotebookLM, rinominato il 16/07/2026); lettura di immagini in Perplexity e DeepL; ricerca web nell'app Ollama; ChatGPT e PowerPoint (fonti in conflitto); limiti dei piani gratuiti. DeepSeek escluso dalla tabella: nel gennaio 2025 il Garante privacy aveva disposto il blocco dell'app in Italia, stato attuale non verificato. Formati GIS e CAD (shapefile, KML, DXF): nessuna fonte, da provare prima di citarli. Piani e prezzi [DA VERIFICARE alla data del corso].</aside>
+  <aside class="punti"><ul><li>La mappa di <b>chi fa cosa</b> a novembre 2026: sulle righe gli strumenti, sulle colonne le capacità.</li><li><b>Claude</b> scrive documenti ma <b>non genera foto</b>; <b>ChatGPT</b> e <b>Gemini</b> sì.</li><li><b>Gemini</b> legge anche <b>video e audio</b>; <b>Gemini Notebook</b> (ex NotebookLM) risponde <b>solo sulle fonti</b> caricate.</li><li><b>Ollama</b> e <b>noScribe</b> girano <b>sul vostro PC</b>: i dati non escono.</li><li><b>Non serve sceglierne uno per sempre</b>: le capacità cambiano ogni pochi mesi.</li></ul></aside>
 </section>
 
 <!-- ================================================================ -->
@@ -673,10 +703,23 @@ per chiedergli:
 ci ha dato 30 giorni per le integrazioni.
 <span class="k">Tono</span> cordiale e diretto, frasi brevi, niente termini
 tecnici non spiegati. Massimo 12 righe.</pre></div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S13 ]</div></div><div class="didasc">Chi scrive · a chi · cosa · perché · entro quando · tono</div></div>
+    <div class="colshot"><div class="box" style="flex:1;padding:22px 28px"><div class="et">Risposta · Claude Sonnet 5.5</div>
+<div class="risp-mail"><b>Oggetto:</b> Ampliamento capannone: 3 cose che ci servono entro [DATA]
+
+Buongiorno [Nome],
+sto preparando lo studio che la Provincia richiede per l'ampliamento del capannone di [NOME AZIENDA AGRICOLA]. Serve a dimostrare che i lavori non disturbano l'area protetta vicina ([SITO NATURA 2000]).
+La Provincia ci ha dato 30 giorni per completare i documenti. Mi servono quindi i seguenti materiali <b>entro [DATA]</b>:
+1. <b>La planimetria di progetto</b> (il disegno dell'ampliamento), in formato DWG o PDF.
+2. <b>Alcune foto recenti dell'area</b>, soprattutto delle file di alberi e siepi lungo il fosso. Vanno bene anche quelle scattate col cellulare.
+3. <b>Il calendario previsto dei lavori</b>, anche di massima: quando iniziano e quanto durano.
+Se qualcosa non è chiaro, mi chiami pure.
+Grazie per la collaborazione e cordiali saluti,
+[Nome e cognome]</div>
+<p class="piccolo" style="margin-top:10px">Prova reale del 09/11/2026 · nessuno strumento attivo</p></div>
+<div class="didasc">Chi scrive · a chi · cosa · perché · entro quando · tono</div></div>
   </div>
-  <aside class="note">Evidenziare cosa ha aggiunto il contesto: chi scrive, a chi, cosa serve, perché, entro quando, con che tono e lunghezza.</aside>
-  <aside class="punti"><ul><li>Stessa mail, con <b>chi scrive, a chi, cosa, perché, entro quando, tono</b>.</li><li>Ne esce una mail che si può <b>mandare quasi così com'è</b>.</li><li>I <b>segnaposto</b> tra parentesi quadre: i dati del cliente si inseriscono dopo, non si caricano.</li></ul></aside>
+  <aside class="note">Evidenziare cosa ha aggiunto il contesto: chi scrive, a chi, cosa serve, perché, entro quando, con che tono e lunghezza. Risposta reale di Claude Sonnet 5.5 del 09/11/2026 (Claude Code, senza strumenti e senza istruzioni personalizzate); testo integrale in esempi-output/2026-11-09-prove-sonnet-S13-S28.md. Da notare: ha spiegato da solo a cosa serve la VIncA («dimostrare che i lavori non disturbano l'area protetta») senza nominarla, ha tradotto «filari» in «file di alberi e siepi», ha aggiunto «vanno bene anche quelle col cellulare». Ha lasciato i segnaposto tra parentesi e ne ha aggiunti due ([Nome], [Nome e cognome]). Il limite delle 12 righe è rispettato solo in parte: il corpo della mail è più lungo. Spunto: «ditelo e verificate».</aside>
+  <aside class="punti"><ul><li>Stessa mail, con <b>chi scrive, a chi, cosa, perché, entro quando, tono</b>.</li><li>Risposta reale di <b>Claude Sonnet 5.5</b>: si può <b>mandare quasi così com'è</b>.</li><li>Ha spiegato la VIncA <b>senza nominarla</b> e ha tradotto «filari» in <b>«file di alberi e siepi»</b>.</li><li>Le <b>12 righe</b> non le ha rispettate del tutto: <b>il controllo resta nostro</b>.</li><li>I <b>segnaposto</b> tra parentesi quadre: i dati del cliente si inseriscono dopo, non si caricano.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S14">
@@ -1100,7 +1143,7 @@ sicuro dell'autoctonia.</pre></div>
 
 <section class="slide" data-cod="S28">
   <h2>Farsi scrivere il prompt dall'AI</h2>
-  <div class="g2" style="flex:1;min-height:0;align-items:stretch">
+  <div class="g2" style="grid-template-columns:1fr 1.55fr;flex:1;min-height:0;align-items:stretch">
     <div class="box blu"><div class="et">Prompt</div>
 <pre>Sei un esperto di prompt. Migliora questo
 prompt perché produca un risultato preciso
@@ -1111,10 +1154,19 @@ poi spiegami in 3 righe cosa hai cambiato.
 Prompt da migliorare:
 <span class="seg">"Fammi una tabella delle prescrizioni
 dell'autorizzazione"</span></pre></div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S28 ]</div></div></div>
+    <div class="box" style="padding:22px 28px"><div class="et">Risposta · Claude Sonnet 5.5 (in sintesi)</div>
+      <dl class="migliorato">
+        <dt>RUOLO</dt><dd>Consulente tecnico-ambientale esperto di procedimenti autorizzativi (AIA, AUA, VIA, scarichi, emissioni, rifiuti)</dd>
+        <dt>CONTESTO</dt><dd>Ti allego l'autorizzazione <span class="seg">[tipo]</span> rilasciata da <span class="seg">[ente]</span>, atto n. <span class="seg">[numero]</span>. Serve per <span class="seg">[scopo]</span>, la leggerà <span class="seg">[destinatario]</span></dd>
+        <dt>COMPITO</dt><dd>Estrai <b>tutte</b> le prescrizioni e organizzale in una tabella</dd>
+        <dt>FORMATO</dt><dd>N. · Matrice · Prescrizione · Riferimento · Scadenza · Soggetto obbligato · Ente · Note; in fondo i «Punti da verificare»</dd>
+        <dt>VINCOLI</dt><dd>Solo dati del documento · «non specificato» se manca · solo prescrizioni vincolanti · limiti e unità come nel testo · una riga per prescrizione</dd>
+      </dl>
+      <div class="cambiato"><b class="acc">Cosa ho cambiato</b><ol><li>Ruolo e contesto: il modello calibra termini e dettaglio sull'uso nella relazione.</li><li>Formato: colonne, ordine e verifica finale, tabella riutilizzabile.</li><li>Vincoli: fedeltà al testo, meno invenzioni e imprecisioni.</li></ol></div>
+      <p class="piccolo" style="margin-top:10px">Prova reale del 09/11/2026 · sintesi fedele, testo integrale negli esempi del corso</p></div>
   </div>
-  <aside class="note">Si può creare un progetto "Migliora prompt" con dentro una guida di prompt engineering.</aside>
-  <aside class="punti"><ul><li>Farsi <b>scrivere il prompt dall'AI</b>: «migliora questo prompt».</li><li>Chiedete anche di <b>spiegare cosa ha cambiato</b>: così imparate.</li><li>Idea: un progetto <b>«Migliora prompt»</b> con dentro una guida.</li></ul></aside>
+  <aside class="note">Si può creare un progetto "Migliora prompt" con dentro una guida di prompt engineering. Risposta reale di Claude Sonnet 5.5 del 09/11/2026 (Claude Code, senza strumenti né istruzioni personalizzate); in slide è riassunta, il testo integrale è in esempi-output/2026-11-09-prove-sonnet-S13-S28.md e si può aprire dal vivo. Da far notare: ha messo i segnaposto tra parentesi quadre per i dati che non conosce, ha chiesto di allegare il documento e ha aggiunto da solo i vincoli contro le invenzioni («non specificato» se manca, solo dati del documento). Il ruolo è generico (AIA, AUA, VIA…) perché il prompt di partenza non diceva di che autorizzazione si tratta: per Terraviva va adattato, per esempio a un'autorizzazione paesaggistica o a un decreto di VIncA.</aside>
+  <aside class="punti"><ul><li>Farsi <b>scrivere il prompt dall'AI</b>: «migliora questo prompt».</li><li>Chiedete anche di <b>spiegare cosa ha cambiato</b>: così imparate.</li><li>Sonnet 5.5 ha aggiunto <b>ruolo, contesto, formato e vincoli</b>, con i <b>segnaposto</b> per i dati che non conosce.</li><li>Da sola ha messo la regola <b>«non specificato» se manca</b>: niente invenzioni.</li><li>Idea: un progetto <b>«Migliora prompt»</b> con dentro una guida.</li></ul></aside>
 </section>
 
 <section class="slide centro" data-cod="S29">
@@ -1325,15 +1377,27 @@ agricole per segnalare il bando.</pre></div></div>
 
 <section class="slide" data-cod="S37">
   <h2>R2 · Il rendering: l'impianto nel tempo</h2>
-  <div class="g4" style="grid-template-columns:repeat(4,1fr);gap:20px;flex:1;min-height:0">
-    <div class="colshot"><div class="shot"><div class="vuoto">[ foto stato di fatto ]</div></div><div class="didasc">Oggi</div></div>
-    <div class="colshot"><div class="shot"><div class="vuoto">[ immagine 1 ]</div></div><div class="didasc">Impianto</div></div>
-    <div class="colshot"><div class="shot"><div class="vuoto">[ immagine 2 ]</div></div><div class="didasc">5 anni</div></div>
-    <div class="colshot"><div class="shot"><div class="vuoto">[ immagine 3 ]</div></div><div class="didasc">15 anni</div></div>
+  <div class="g4 rend" style="grid-template-columns:repeat(4,1fr);gap:18px;margin-top:6px">
+    <div class="colshot"><div class="shot"><img src="immagini/rend-0-prima.jpg" alt="Collinetta inerbita prima dell'impianto"></div><div class="didasc">Prima</div></div>
+    <div class="colshot"><div class="shot"><img src="immagini/rend-1-impianto.jpg" alt="Subito dopo l'impianto, con shelter e pacciamatura"></div><div class="didasc">Impianto</div></div>
+    <div class="colshot"><div class="shot"><img src="immagini/rend-2-5anni.jpg" alt="Siepe dopo 5 anni"></div><div class="didasc">5 anni</div></div>
+    <div class="colshot"><div class="shot"><img src="immagini/rend-3-15anni.jpg" alt="Siepe e ciliegi dopo 15 anni"></div><div class="didasc">15 anni</div></div>
   </div>
-  <div class="avviso"><b>DICHIARARE</b> Immagine generata con AI — resa indicativa, non fotoinserimento tecnico.</div>
-  <aside class="note">Strumento: ChatGPT o Gemini (dopo la prova). Prompt: "Questa è la foto di un'area agricola dove verrà piantata una siepe campestre lungo il fosso sul lato destro dell'immagine. Genera tre versioni della stessa foto, stessa inquadratura e stessa luce: 1) subito dopo l'impianto: piantine alte 60-80 cm con shelter e pacciamatura; 2) dopo 5 anni: siepe arbustiva continua alta circa 2-3 m; 3) dopo 15 anni: siepe matura con alcuni alberi alti 8-10 m. Non modificare il resto dell'immagine. Stile fotografico realistico." Togliere i dati EXIF e GPS dalla foto prima del caricamento.</aside>
-  <aside class="punti"><ul><li><b>Rendering</b>: la stessa foto all'<b>impianto</b>, a <b>5 anni</b> e a <b>15 anni</b>.</li><li>Strumento: ChatGPT o Gemini, perché <b>Claude non genera immagini</b>.</li><li>Va <b>dichiarato</b>: immagine generata con AI, <b>resa indicativa</b>, non fotoinserimento tecnico.</li><li>Prima di caricare la foto togliete i dati <b>EXIF e GPS</b>.</li></ul></aside>
+  <div class="g2" style="grid-template-columns:1.4fr 1fr;gap:28px;margin-top:26px;align-items:stretch">
+    <div class="box blu"><div class="et">Prompt · Gemini (Nano Banana), immagine allegata</div>
+<pre class="s">Modifica questa immagine. Mantieni identici inquadratura, luce,
+stagione, recinzione e ogni altro elemento: cambia solo la
+vegetazione sulla collinetta. <span class="k">Non aggiungere edifici.</span>
+Siepe di ligustro, biancospino, sanguinello, pallon di maggio
+e ciliegi selvatici ogni 10 m circa. <span class="k">Dopo 5 anni:</span> siepe
+continua alta 2-2,5 m, ciliegi alti 5-6 m.</pre></div>
+    <div class="flex1">
+      <div class="avviso" style="margin-top:0"><b>DICHIARARE</b> Immagine generata con AI — resa indicativa, non fotoinserimento tecnico.</div>
+      <p class="piccolo" style="margin-top:16px;line-height:1.5">Base: rendering di progetto di una siepe di mitigazione · stesso prompt, cambia solo la fase · prova reale del 09/11/2026</p>
+    </div>
+  </div>
+  <aside class="note">Rendering reali del 09/11/2026 con Gemini 3.1 Flash Image (Nano Banana) via Vertex AI, script slide/genera-rendering.py. Base: il rendering della tavola del verde di mitigazione di un impianto industriale (Collina1.png, senza il gelsomino escluso dal cliente), non una foto: per questo la prima immagine «Prima» è anch'essa generata, togliendo la vegetazione. Progetto: siepe a modulo ligustro-biancospino-ligustro-sanguinello-ligustro-pallon di maggio e filare di ciliegi selvatici a 10 m circa. Quattro richieste separate sulla stessa immagine di partenza, con lo stesso prompt e la sola fase diversa. Cose da far notare: alla prima prova dell'impianto il modello ha inventato delle palazzine sullo sfondo (immagini/rend-1-impianto-v1-edifici-inventati.jpg, da mostrare se c'è tempo); rifatta aggiungendo «non aggiungere edifici». La posizione della siepe cambia un po' tra le fasi (sulla cresta o vicino alla recinzione) e a 5 anni i ciliegi sembrano spogli: va bene come resa indicativa, non come fotoinserimento. Con una foto vera dello stato di fatto togliere prima i dati EXIF e GPS. Non dire il nome del cliente.</aside>
+  <aside class="punti"><ul><li><b>Rendering</b>: la stessa immagine <b>prima</b>, all'<b>impianto</b>, a <b>5</b> e a <b>15 anni</b>.</li><li>Fatti con <b>Gemini (Nano Banana)</b>: <b>Claude non genera immagini</b>.</li><li>Stesso prompt, cambia <b>solo la fase</b>: inquadratura e luce restano.</li><li>Alla prima prova ha <b>inventato delle palazzine</b>: rifatto con «<b>non aggiungere edifici</b>».</li><li>Va <b>dichiarato</b>: immagine generata con AI, <b>resa indicativa</b>, non fotoinserimento tecnico.</li></ul></aside>
 </section>
 
 <!-- ================================================================ -->
@@ -1344,9 +1408,10 @@ agricole per segnalare il bando.</pre></div></div>
   <div class="alone" style="width:520px;height:520px;right:140px;top:170px"></div>
   <div class="tondo" style="right:130px;top:170px" data-img="blocco-05"></div>
   <div class="n">05</div>
-  <h1>NotebookLM</h1>
-  <p class="sotto">Un assistente che legge solo i vostri documenti, e cita il punto da cui prende l'informazione.</p>
-  <aside class="punti"><ul><li>Blocco 5: <b>NotebookLM</b>.</li><li>Un assistente che legge <b>solo i vostri documenti</b> e <b>cita</b> il punto da cui prende l'informazione.</li></ul></aside>
+  <h1>Gemini Notebook</h1>
+  <p class="sotto">Un assistente che legge solo i vostri documenti, e cita il punto da cui prende l'informazione.<br><span class="piccolo">Fino a luglio 2026: NotebookLM</span></p>
+  <aside class="note">Il 16/07/2026 Google ha rinominato NotebookLM in Gemini Notebook: stesso prodotto autonomo (notebook.google.com), con i notebook sincronizzati anche nell'app Gemini. Molti tutorial e video usano ancora il vecchio nome. Fonte: https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/</aside>
+  <aside class="punti"><ul><li>Blocco 5: <b>Gemini Notebook</b>. Fino a luglio 2026 si chiamava <b>NotebookLM</b>: è lo stesso strumento.</li><li>Un assistente che legge <b>solo i vostri documenti</b> e <b>cita</b> il punto da cui prende l'informazione.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S39">
@@ -1354,7 +1419,7 @@ agricole per segnalare il bando.</pre></div></div>
   <p class="piccolo" style="text-align:center;margin:-16px 0 22px">Fonti → notebook → domande con citazione · sintesi · slide · audio · mappe mentali · quiz</p>
   <div class="g2" style="flex:1;min-height:0;align-items:stretch">
     <div class="flex1">
-      <div class="box blu"><div class="et">Prompt · in NotebookLM</div>
+      <div class="box blu"><div class="et">Prompt · in Gemini Notebook</div>
 <pre class="s">Il progetto prevede l'ampliamento di un capannone
 agricolo e la realizzazione di una siepe a circa 300 m
 dal confine del sito, in un'area agricola.
@@ -1369,6 +1434,39 @@ dillo esplicitamente.</span></pre></div>
   </div>
   <aside class="note">È lo strumento giusto per normativa e piani: riduce le invenzioni e permette di controllare subito la fonte. Cliccare dal vivo una citazione. Idea d'uso: un notebook con tutta la normativa VIncA regionale per chi entra nuovo nello studio.</aside>
   <aside class="punti"><ul><li>Carico <b>piano di gestione, misure di conservazione e formulario</b> del sito.</li><li>Domanda: quali <b>divieti e obblighi</b> valgono per il mio intervento? Con <b>documento e articolo</b>.</li><li>«<b>Se un aspetto non è trattato, dillo</b>»: evita le invenzioni.</li><li>Clicco dal vivo una <b>citazione</b>: si apre il punto esatto della fonte.</li><li>Idea: un notebook con la <b>normativa VIncA regionale</b> per chi entra nello studio.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S39A" data-titolo="Il mio notebook: approfondimenti da ascoltare">
+  <h2>Il mio notebook: approfondimenti da ascoltare</h2>
+  <p class="piccolo" style="text-align:center;margin:-16px 0 22px">Notebook reale «Adattamento climatico in Lombardia» · 39 fonti</p>
+  <div class="g2" style="grid-template-columns:1fr 1.15fr;flex:1;min-height:0;align-items:stretch">
+    <div class="box"><div class="et">Le fonti, per gruppi</div>
+      <div class="fonti-nb">
+        <div class="gr cap"><div class="n">5</div><div><h3>Piano nazionale di adattamento (PNACC)</h3><p>Il piano diviso nelle sue parti:</p>
+          <div class="capitoli"><span>Documento di piano</span><span>All. I · piani regionali</span><span>All. II · piani locali</span><span>All. III · impatti e vulnerabilità</span></div></div></div>
+        <div class="gr cap"><div class="n">7</div><div><h3>DNSH</h3><p>Il Vademecum diviso in quaderni, più la guida ai programmi 2021-2027:</p>
+          <div class="capitoli"><span>Quaderno 1</span><span>Quaderno 2</span><span>Quaderno 3</span><span>Quaderno 4</span><span>All. 1</span><span>All. 2</span></div></div></div>
+        <div class="gr"><div class="n">6</div><div><h3>Regione Lombardia</h3><p>Documento di azione, linee guida PACC, due DGR, rapporto di sintesi</p></div></div>
+        <div class="gr"><div class="n">2</div><div><h3>Commissione europea</h3><p>Orientamenti tecnici sulla verifica climatica</p></div></div>
+        <div class="gr"><div class="n">19</div><div><h3>Un progetto reale</h3><p>Studio d'impatto e 18 relazioni specialistiche</p></div></div>
+      </div></div>
+    <div class="flex1">
+      <div class="box blu"><div class="et">Gli audio generati · formato approfondimento</div>
+        <div class="audio-nb">
+          <div class="a"><i>▶</i><div><b>Logistica clima-resiliente: guida pratica per progettare hub e DNSH in Lombardia</b><small>20 fonti scelte su 39</small></div><span class="dur">32'</span></div>
+          <div class="a"><i>▶</i><div><b>Polo logistico: luci e ombre tra mitigazione, resilienza e standard europei</b><small>39 fonti</small></div><span class="dur">21'</span></div>
+          <div class="a"><i>▶</i><div><b>Progetti infrastrutturali a prova di clima: dal PNRR al progetto, tra norme e realtà</b><small>39 fonti</small></div><span class="dur">19'</span></div>
+          <div class="a"><i>▶</i><div><b>Resilienza climatica negli aeroporti senza verde</b><small>39 fonti · un anno dopo, nuovo incarico</small></div><span class="dur">21'</span></div>
+        </div></div>
+      <div class="g2" style="gap:14px 24px;margin-top:22px">
+        <div class="passo"><span>01 · SCEGLIERE</span>Tutte le fonti o solo quelle che servono</div>
+        <div class="passo"><span>02 · CHIEDERE</span>Overview audio → approfondimento, con il <b>progetto</b> nelle istruzioni</div>
+      </div>
+      <p class="didasc" style="margin-top:18px">20-30 minuti di approfondimento, da ascoltare in macchina.</p>
+    </div>
+  </div>
+  <aside class="note">Notebook reale di Matteo «Lombardy Climate Adaptation Strategy: Impacts and Responses», 39 fonti, creato il 07/09/2025; fonti e audio letti il 09/11/2026. Quattro overview audio in formato Approfondimento: «Logistica clima-resiliente…» 32:11 su 20 fonti selezionate; «Polo logistico… luci e ombre…» 20:38, «Progetti infrastrutturali a prova di clima…» 19:20 e «Resilienza climatica negli aeroporti senza verde» 21:18, tutti su 39 fonti. I primi tre sono di settembre 2025 (polo logistico), l'ultimo di giugno 2026 per un aeroporto: lo stesso notebook è servito un anno dopo per un altro incarico. Titoli generati dallo strumento, in slide è tolto il nome della città del progetto: non dirlo. Il gruppo «progetto reale» sono i documenti di quel progetto. Consiglio da dare: per andare più a fondo su un piano lungo, caricarlo diviso in capitoli e generare un audio selezionando una sola fonte (il PNACC qui è già in quattro parti, il Vademecum DNSH in sei). Nel notebook il documento di piano del PNACC è caricato due volte: spunto per togliere i duplicati. Attenzione: nell'interfaccia di novembre 2026 lo strumento si presenta come «Gemini Notebook» (titolo della pagina e avvisi), con le voci Overview audio, Overview video, Presentazione, Mappa mentale, Report, Flashcard, Quiz, Infografica: verificare il nome il giorno del corso. Se possibile far partire dal vivo un minuto di audio.</aside>
+  <aside class="punti"><ul><li>Il mio notebook reale sull'<b>adattamento climatico</b>: 39 fonti, divise <b>per gruppi</b>.</li><li>Da qui ho generato <b>4 audio di approfondimento</b>, da <b>19 a 32 minuti</b>: li ascolto <b>in macchina</b>.</li><li>Nelle istruzioni metto il <b>progetto</b>: l'audio parla del mio caso, non in generale.</li><li>Uno l'ho fatto su <b>20 fonti scelte</b>: si può restringere il campo.</li><li>Un anno dopo lo stesso notebook è servito per un <b>aeroporto</b>: il lavoro di raccolta <b>si riusa</b>.</li><li>Per andare più a fondo: il piano <b>a capitoli</b> e un audio per capitolo.</li></ul></aside>
 </section>
 
 <!-- ================================================================ -->
@@ -1493,14 +1591,27 @@ Il Committente può chiedere che determinate attività o documenti siano esclusi
     <div class="passo"><span>03 · SCRIPT</span>Un programma legge tutti i file e prepara i dati</div>
     <div class="passo"><span>04 · PAGINA WEB</span>Filtri, schede, incongruenze</div>
   </div>
-  <div class="g3" style="margin-top:34px;gap:20px;height:250px">
-    <div class="colshot"><div class="shot"><div class="vuoto">[ la scheda nel PDF ]</div></div></div>
-    <div class="colshot"><div class="shot"><div class="vuoto">[ la stessa scheda in Markdown ]</div></div></div>
-    <div class="colshot"><div class="shot"><div class="vuoto">[ la stessa scheda nella dashboard ]</div></div></div>
+  <!-- link per le domande: si aprono in una nuova scheda (percorsi del workspace) -->
+  <div class="g3 tre-fonti" style="margin-top:28px;gap:22px;height:310px">
+    <a><div class="colshot" style="height:100%"><div class="shot"><img src="immagini/s47-pdf.png" alt="La scheda dell'acero campestre nel PDF dell'Atlante"></div><div class="didasc">PDF · Atlante, p. 175</div></div></a>
+    <a><div class="colshot" style="height:100%"><div class="shot"><pre><span class="k">### Acer campestre L. – Acero campestre</span>
+*Cap7.pdf pag. 8 · libro pag. 175*
+
+- <span class="k">**Famiglia:**</span> Aceraceae
+- <span class="k">**Forma biologica:**</span> P scap
+- <span class="k">**Fioritura:**</span> V
+| U | R | N | L | T | C |
+| 3 | 4 | 3 | 3 | 4 | 2 |
+- <span class="k">**Corologia:**</span> Euro-Caucasica
+- <span class="k">**Autoctonia:**</span> sì
+- <span class="k">**Frequenza:**</span> comune
+
+<span class="k">**Distribuzione:**</span> Molto frequente…</pre></div><div class="didasc">Markdown · il testo per l'AI</div></div></a>
+    <a><div class="colshot" style="height:100%"><div class="shot"><img src="immagini/s47-dashboard.png" alt="L'acero campestre nella dashboard, con nove fonti"></div><div class="didasc">Dashboard · 9 fonti</div></div></a>
   </div>
-  <p class="sotto" style="margin-top:26px;text-align:center">Il lavoro vero è <b class="acc">portare l'archivio in un formato che l'AI sa leggere</b>.</p>
-  <aside class="note">La dashboard non è nata in un colpo: ogni nuova fonte è un passaggio in più. L'AI sbaglia anche qui: errori di OCR, refusi delle fonti (es. "Acer campestrestris" in PlantEX), dati che non tornano tra un libro e l'altro. Per questo si controlla a blocchi e i dati dubbi restano [DA VERIFICARE]. Idea per Terraviva: lo stesso metodo per il loro archivio di relazioni, schede o prezzi.</aside>
-  <aside class="punti"><ul><li>Come è nata: <b>archivio → Markdown → script → pagina web</b>.</li><li>L'Atlante del Parco Sud: <b>10 PDF, 487 pagine</b>, controllati <b>a blocchi di 10 schede</b>.</li><li>Il lavoro vero è portare l'archivio <b>in un formato che l'AI sa leggere</b>.</li><li>Anche qui l'AI <b>sbaglia</b>: errori di OCR, refusi delle fonti.</li></ul></aside>
+  <p class="sotto" style="margin-top:22px;text-align:center">Il lavoro vero è <b class="acc">portare l'archivio in un formato che l'AI sa leggere</b>.</p>
+  <aside class="note">La dashboard non è nata in un colpo: ogni nuova fonte è un passaggio in più. L'AI sbaglia anche qui: errori di OCR, refusi delle fonti (es. "Acer campestrestris" in PlantEX), dati che non tornano tra un libro e l'altro. Per questo si controlla a blocchi e i dati dubbi restano [DA VERIFICARE]. Idea per Terraviva: lo stesso metodo per il loro archivio di relazioni, schede o prezzi. Le tre immagini sono la stessa scheda, l'acero campestre (Atlante, Cap. 7, p. 175): cliccandole si aprono in una nuova scheda il PDF alla pagina giusta, il Markdown completo e la dashboard già aperta sulla specie. Funzionano solo aprendo le slide dal PC del workspace (percorsi relativi), non dalla versione online. Nel PDF il testo è leggibile ma la tabella ecologica e la carta sono immagini; nel Markdown restano i dati, la carta diventa un rimando alla pagina.</aside>
+  <aside class="punti"><ul><li>Come è nata: <b>archivio → Markdown → script → pagina web</b>.</li><li>L'Atlante del Parco Sud: <b>10 PDF, 487 pagine</b>, controllati <b>a blocchi di 10 schede</b>.</li><li>La stessa scheda in tre forme: <b>PDF → Markdown → dashboard</b>. Acero campestre, p. 175.</li><li>Il lavoro vero è portare l'archivio <b>in un formato che l'AI sa leggere</b>.</li><li>Se ci sono domande: <b>clic sull'immagine</b> e apro il file vero.</li><li>Anche qui l'AI <b>sbaglia</b>: errori di OCR, refusi delle fonti.</li></ul></aside>
 </section>
 
 <section class="slide centro" data-cod="S48">
@@ -1829,8 +1940,8 @@ linguette('S08',[
 // S08A — Claude Sonnet 5.5 con ricerca web (claude.ai, 07/11/2026); verifica con ricerca web del 07/11/2026
 linguette('S08A',[
   {cit:'Cons. Stato, sez. VI, n. 388/2025',princ:'Stazione radio base vicino a una ZSC: prima lo screening; niente precauzione su «mere ipotesi astratte»',esito:'Esiste: 20/01/2025, screening e limiti del principio di precauzione.',timbro:'Esiste',tipo:'ok'},
-  {cit:'Cons. Stato, sez. IV, n. 9440/2023',princ:'Parco eolico: conta l\'impatto cumulativo; l\'esclusione della VIncA va motivata',esito:'Non trovata con la ricerca web: controllare su giustizia-amministrativa.it.',timbro:'Da verificare',tipo:'nd'},
-  {cit:'Cons. Stato, sez. IV, n. 5888/2025',princ:'Eolico in PAUR: VIncA anche per i progetti esterni al sito',esito:'Non trovata con la ricerca web: controllare su giustizia-amministrativa.it.',timbro:'Da verificare',tipo:'nd'}]);
+  {cit:'Cons. Stato, sez. IV, n. 9440/2023',princ:'Parco eolico: conta l\'impatto cumulativo; l\'esclusione della VIncA va motivata',esito:'Esiste: 2/11/2023, parco eolico vicino alla ZPS del fiume Tammaro. Il principio torna.',timbro:'Esiste',tipo:'ok'},
+  {cit:'Cons. Stato, sez. IV, n. 5888/2025',princ:'Eolico in PAUR: VIncA anche per i progetti esterni al sito',esito:'Esiste: 7/7/2025, eolico nel Fiorentino in PAUR. Il principio citato non compare nelle sintesi: va letto il testo.',timbro:'Esiste, ma…',tipo:'altro'}]);
 
 // S14 — prevedi, prova, verifica: a ogni → si accende una domanda e la mail si trasforma
 (function(){
