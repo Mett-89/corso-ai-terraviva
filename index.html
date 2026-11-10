@@ -201,6 +201,40 @@ td b{color:var(--blu2)}
 .audio-nb .a .dur{font:600 24px var(--titolo);color:var(--blu)}
 .rend .shot{flex:none;aspect-ratio:3/2;min-height:0;overflow:hidden}
 .rend .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.chat{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.chat .m,.chat .u{font-size:16.5px;line-height:1.38;padding:9px 14px;max-width:92%}
+.chat .m{background:#EEF3FB;border-left:3px solid var(--blu);align-self:flex-start}
+.chat .u{background:#FFF6E6;border-right:3px solid var(--ambra);align-self:flex-end;text-align:right}
+.chat .m b{color:var(--blu)}
+.chat small{display:block;font:12.5px var(--mono);color:var(--tenue);margin-top:3px}
+.grezzo{font:13.5px/1.5 var(--mono);color:#5B6170;background:#FBFCFE;padding:12px 14px;height:100%;overflow:hidden}
+.grezzo s{text-decoration:none;background:#FDE2E2}
+.verbale{font-size:15.5px;line-height:1.4}
+.verbale h4{font:600 15px var(--titolo);text-transform:uppercase;color:var(--blu);margin:8px 0 3px}
+.verbale h4:first-child{margin-top:0}
+.verbale table{border-collapse:collapse;width:100%;font-size:14.5px}
+.verbale td{border-top:1px solid var(--bordo);padding:3px 6px;vertical-align:top}
+.verbale .st{color:var(--ambra);font-weight:600;white-space:nowrap}
+.tab-out{border-collapse:collapse;width:100%;font-size:14px;line-height:1.3;margin-top:6px}
+.tab-out th{font:600 12.5px var(--mono);color:var(--blu);text-align:left;padding:4px 6px;border-bottom:1.5px solid var(--blu)}
+.tab-out td{border-top:1px solid var(--bordo);padding:4px 6px;vertical-align:top}
+.tab-out .ip{color:var(--ambra);font-weight:700;white-space:nowrap}
+.tab-out .no{color:#C8473B;font-weight:700}
+.tab-out .n{font-family:var(--mono);color:var(--blu)}
+.trovato{margin-top:8px;font-size:14.5px;line-height:1.35;background:#FFF6E6;border-left:3px solid var(--ambra);padding:6px 10px}
+.dv{background:#FFF1C9;color:#8A5A00;font:600 12px var(--mono);padding:0 4px;white-space:nowrap}
+.verbale ul{margin:2px 0 0 18px;padding:0}
+.verbale li{margin:2px 0}
+.shot.foto{overflow:hidden;min-height:0}
+.shot.foto img{position:absolute;inset:26px 0 0;width:100%;height:calc(100% - 26px);object-fit:contain;object-position:center top}
+.citaz{font-size:24px;line-height:1.5;border-left:4px solid var(--blu);padding:4px 0 4px 16px;margin:6px 0 0}
+.fonte-ctx{margin-top:26px;font-size:20px;line-height:1.45;color:var(--tenue)}
+.esito{display:flex;gap:18px;align-items:center;margin-top:34px}
+.esito .da,.esito .a{font:700 44px var(--titolo);color:var(--blu);white-space:nowrap}
+.esito .da{color:#B9C1CF;text-decoration:line-through}
+.esito .fr{font-size:34px;color:var(--ciano2)}
+.esito p{font-size:20px;line-height:1.4;margin:0}
+.caso-bosco pre.s{font-size:21px}
 .didasc{margin-top:12px;font-family:var(--titolo);text-transform:uppercase;font-size:19px;color:var(--blu)}
 .avviso{margin-top:20px;font-size:20px;display:flex;gap:14px;align-items:center;line-height:1.4}
 .avviso b{font-family:var(--titolo);border:1.5px solid var(--ambra);color:var(--ambra);padding:2px 12px;font-size:17px;letter-spacing:.06em;white-space:nowrap}
@@ -406,7 +440,7 @@ body.relatore #rel{display:grid;position:fixed;inset:0;grid-template-columns:min
 <!-- ================================================================ -->
 
 <section class="slide cover centro" data-cod="S01" data-fondo="video">
-  <!-- sfondo video 60 s in loop: progetto in ../video/sfondo-s01/ (al posto di alone e tondo "copertina") -->
+  <!-- sfondo video 60 s in loop: progetto in video/sfondo-s01/ (al posto di alone e tondo "copertina") -->
   <video class="sfondo-video" src="video/sfondo-s01.mp4" muted loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="velo"></div>
   <div class="testi">
@@ -507,7 +541,7 @@ body.relatore #rel{display:grid;position:fixed;inset:0;grid-template-columns:min
 </section>
 
 <section class="slide" data-cod="S06" data-fondo="video" data-piede="no" data-titolo="Stessa domanda, 7 modelli (video)">
-  <!-- quattro video in sequenza: progetto in ../video/confronto-modelli/ · dati: ../esempi-output/confronto-modelli-2026-10-20.md -->
+  <!-- quattro video in sequenza: progetto in video/confronto-modelli/ · dati: ../esempi-output/confronto-modelli-2026-10-20.md -->
   <video class="seq-video" src="video/s06-confronto-1.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
   <video class="seq-video" src="video/s06-confronto-2.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
   <video class="seq-video" src="video/s06-confronto-3.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
@@ -1007,6 +1041,28 @@ Se mancano informazioni necessarie, fammi una domanda prima di rispondere.</pre>
   <aside class="punti"><ul><li>Il <b>profilo dello studio</b> è il vero punto di partenza.</li><li>Un file <b>Markdown</b>: chi siete, servizi, territorio e normativa, clienti tipo, <b>tono</b>, modelli, <b>regole</b>.</li><li>Si allega a <b>ogni progetto</b>.</li><li>È la prima cosa da fare <b>lunedì mattina</b>.</li></ul></aside>
 </section>
 
+<section class="slide caso-bosco" data-cod="S19A" data-titolo="Caso vero · Il bosco di 27 ettari">
+  <h2>Caso vero · Il bosco di 27 ettari</h2>
+  <p class="piccolo" style="text-align:center;margin:-16px 0 22px">Nuovo bosco in Emilia-Romagna · ottobre 2026 · cliente reso anonimo</p>
+  <div class="io">
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Cosa ho chiesto</div>
+<pre class="s">Aiutami a fare dei pensieri.
+Devo fare un bosco su 27 ettari.</pre>
+<pre class="s" style="margin-top:14px">Regione Lombardia ricordo che prevede una
+densità minima di 1300 piante per ettaro.
+Corretto? Quanto prevede l'Emilia-Romagna?</pre>
+      <p class="fonte-ctx">Nessuna domanda sulla VIA. Nelle cartelle dello studio però c'era la <b>normativa già salvata</b>: schede VIA, Vademecum DNSH, criteri di screening dell'Emilia-Romagna.</p></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Cosa mi ha risposto, senza che lo chiedessi</div>
+      <p class="citaz">«<b>Verifica di assoggettabilità a VIA.</b> È il punto da non perdere. Per l'“iniziale forestazione di una superficie superiore a 20 ettari” la verifica è dovuta (All. IV, punto 1, lett. b, D.Lgs. 152/2006), e la soglia scende a <b>10 ha in aree protette e Natura 2000</b>. <b>Con 27 ha si supera.</b>»</p>
+      <div class="esito"><span class="da">27 ha</span><span class="fr">→</span><span class="a">19 ha</span><p>Il progetto è stato ridotto <b>sotto la soglia</b>, per non fare la verifica di assoggettabilità.</p></div>
+    </div></div>
+  </div>
+  <div class="avviso"><b>VERIFICA</b> Soglia controllata sul testo vigente. Restano da escludere aree protette (soglia a 10 ha) e altri imboschimenti vicini, da sommare.</div>
+  <aside class="note">Caso reale del 19/10/2026 (prospect di Te.A., nuovo bosco in Emilia-Romagna; nome del cliente da non dire). La conversazione è partita da «Aiutami a fare dei pensieri. Devo fare un bosco su 27 ettari» e poi da una domanda sulla densità minima. Mentre cercava le densità, Claude ha letto la normativa archiviata nel workspace: il passaggio sull'«iniziale forestazione di una superficie superiore a 20 ettari (10 ettari in aree protette e nelle aree Natura 2000)» era nel Vademecum DNSH trascritto e nella scheda sui criteri di screening VIA dell'Emilia-Romagna (voce B.2.4 della L.R. 4/2018). Nella risposta lo ha messo come «il punto da non perdere». Da far notare in aula: anche piantare un bosco, sopra una certa superficie, va a verifica di assoggettabilità.La soglia è stata poi verificata su Normattiva (D.Lgs. 152/2006, All. IV, punto 1, lett. b) e il progetto è stato impostato su 19 ha. Avvertenze rimaste aperte: la soglia scende a 10 ha (D.M. 52/2015) in aree sensibili come Natura 2000 e zone umide; altri imboschimenti entro 1 km si sommano (cumulo); la superficie va misurata in GIS includendo radure e viabilità interne; non si può frazionare il progetto in lotti per stare sotto soglia. Collegamento con S19: è l'effetto del profilo dello studio e della normativa nelle cartelle. Senza contesto la stessa domanda dà una risposta generica.</aside>
+  <aside class="punti"><ul><li>Caso vero: «<b>devo fare un bosco su 27 ettari</b>», e una domanda sulla densità.</li><li>Della VIA <b>non avevo chiesto nulla</b>.</li><li>Nelle cartelle c'era la <b>normativa già salvata</b>: l'ha letta e ha trovato la soglia.</li><li>Anche un <b>nuovo bosco</b> sopra i <b>20 ettari</b> va a verifica di assoggettabilità a VIA (10 in aree protette).</li><li>Risultato: progetto a <b>19 ettari</b>. È il valore del <b>contesto</b>.</li><li>Ma la soglia l'ho <b>controllata sul testo di legge</b>, e restano aree protette e cumulo.</li></ul></aside>
+</section>
+
 <!-- ================================================================ -->
 <!-- BLOCCO 3 — IL PROMPT                                              -->
 <!-- ================================================================ -->
@@ -1102,10 +1158,18 @@ per fare un buon lavoro, una alla volta,
 e aspetta la mia risposta.</pre></div>
       <p class="sotto" style="margin-top:24px">Il modo più semplice per ottenere un prompt completo è farselo chiedere.</p>
     </div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S25:<br>le prime 3 domande del modello ]</div></div></div>
+    <div class="box" style="padding:20px 26px"><div class="et">Le prime tre domande · Claude Sonnet 5.5</div>
+      <div class="chat">
+        <div class="m"><b>1.</b> In quale comune e regione si trova l'intervento? Strumento urbanistico vigente e zona agricola (E1, E2…)?<small>La disciplina delle zone agricole varia da regione a regione</small></div>
+        <div class="u">Bereguardo (PV), Lombardia. PGT vigente, ambito agricolo E1.</div>
+        <div class="m"><b>2.</b> Che tipo di intervento è previsto? Nuova costruzione, residenza, ampliamento, cambio d'uso… Con dimensioni indicative.<small>La L.R. 12/2005, artt. 59-62, distingue le opere agricole da quelle residenziali</small></div>
+        <div class="u">Capannone per ricovero attrezzi, circa 600 m², altezza 7 m.</div>
+        <div class="m"><b>3.</b> Chi è il richiedente e che titolo ha? IAP, coltivatore diretto, società agricola? Proprietario o affittuario? Fascicolo aziendale aggiornato?<small>L'art. 60 lega il permesso alla qualifica del richiedente</small></div>
+      </div>
+      <p class="piccolo" style="margin-top:10px">Prova reale del 10/11/2026 · risposte di esempio · domande riassunte</p></div>
   </div>
-  <aside class="note">In alternativa: "Prima di scrivere, elencami le informazioni che ti mancano".</aside>
-  <aside class="punti"><ul><li>Il modo più semplice per avere un prompt completo: <b>farselo chiedere</b>.</li><li>«<b>Non iniziare ancora a scrivere.</b> Fammi le domande, <b>una alla volta</b>.»</li><li>Mostro le <b>prime tre domande</b> del modello.</li></ul></aside>
+  <aside class="note">In alternativa: "Prima di scrivere, elencami le informazioni che ti mancano". Conversazione reale con Claude Sonnet 5.5 del 10/11/2026 (Claude Code, senza strumenti né istruzioni personalizzate), testo integrale in esempi-output/2026-11-10-prove-sonnet-S25-S35.md; le risposte (Bereguardo, capannone di 600 m²) sono dati di esempio. Da far notare: ha rispettato «una alla volta», ha spiegato perché gli serve ogni informazione e ha agganciato le domande alla norma giusta solo dopo aver saputo la regione (L.R. 12/2005, Titolo III, artt. 59-62; l'art. 60 riguarda i presupposti soggettivi e oggettivi). Il riferimento va comunque controllato sul testo vigente. Dopo 6-8 domande si può chiedere: «ora scrivi tu il prompt completo con queste informazioni».</aside>
+  <aside class="punti"><ul><li>Il modo più semplice per avere un prompt completo: <b>farselo chiedere</b>.</li><li>«<b>Non iniziare ancora a scrivere.</b> Fammi le domande, <b>una alla volta</b>.»</li><li>Prova reale con <b>Claude Sonnet 5.5</b>: le prime <b>tre domande</b>, una alla volta.</li><li>Prima chiede <b>dove</b>: le regole sulle zone agricole cambiano da <b>regione a regione</b>.</li><li>Poi <b>cosa si costruisce</b> e <b>chi lo chiede</b> (IAP, coltivatore diretto): è l'<b>art. 60 della L.R. 12/2005</b>.</li><li>Ogni domanda dice <b>perché</b> gli serve: si impara anche cosa deve contenere la relazione.</li></ul></aside>
 </section>
 
 <section class="slide centro" data-cod="S26">
@@ -1234,10 +1298,19 @@ la presenza dei contenuti.
 Se un contenuto è trattato solo in parte, spiega
 in una riga cosa manca.</pre></div><div class="didasc">Input · relazione VIncA + Allegato F lombardo</div></div>
     <div class="freccia">→</div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S31:<br>tabella con 3-4 righe «in parte» ]</div></div><div class="didasc">Output · richiesto / presente / mancante</div></div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 20px"><div class="et">Claude Sonnet 5.5 · estratto della tabella</div>
+      <table class="tab-out"><tr><th>Contenuto richiesto</th><th>Presente</th><th>Cosa manca</th></tr>
+        <tr><td>Presa visione di obiettivi e misure di conservazione</td><td class="ip">In parte</td><td>Piano di gestione citato, ma nessuna dichiarazione esplicita</td></tr>
+        <tr><td>Distanza dal sito e connessioni ecologiche</td><td class="ip">In parte</td><td>Distanza solo indicativa («più di 4 km»), connessioni non analizzate</td></tr>
+        <tr><td>Documentazione cartografica</td><td class="ip">In parte</td><td>Solo carte di area vasta: mancano planimetrie e foto</td></tr>
+        <tr><td>Condizioni d'obbligo</td><td class="no">No</td><td>Non trattate</td></tr>
+        <tr><td>Cronoprogramma</td><td class="no">No</td><td>Nessun cronoprogramma</td></tr></table>
+      <div class="trovato"><b>Trovato da solo:</b> nella matrice del cap. 5 il codice del sito è diverso da quello usato nel resto della relazione.</div>
+      <p class="piccolo" style="margin-top:8px">26 voci: 6 sì · 10 in parte · 9 no · 1 n.a. · prova reale del 10/11/2026, documenti anonimizzati</p></div><div class="didasc">Output · richiesto / presente / mancante</div></div>
   </div>
   <div class="avviso"><b>VERIFICA</b> Le linee guida in ingresso devono essere quelle giuste: l'AI confronta, non sceglie la norma.</div>
-  <aside class="punti"><ul><li><b>La relazione è completa?</b> Confronto tra la relazione VIncA e i <b>contenuti richiesti</b> dalle linee guida.</li><li>Esce una tabella <b>presente / in parte / mancante</b>, con capitolo e pagina.</li><li>«<b>Non giudicare la qualità</b>, verifica solo la presenza.»</li><li>Le linee guida giuste le scegliete <b>voi</b>: l'AI confronta, <b>non sceglie la norma</b>.</li></ul></aside>
+  <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate). Input: una relazione di screening VIncA del marzo 2019 di un impianto rifiuti nel Milanese (cliente reale, anonimizzata: società, comune, indirizzo, sito, tecnici) e l'elenco dei contenuti dell'Allegato F alla DGR 4488/2021 (modulo di screening per il proponente). Testo integrale in esempi-output/2026-11-10-prove-sonnet-S31-S32.md. Da far notare: la relazione è precedente al modulo del 2021, per questo molte voci sono «in parte»: il modello lo ha detto da solo. Ha trovato un errore reale (codice del sito sbagliato nella matrice finale). Nel testo estratto dal PDF non c'erano i numeri di pagina e ha indicato i capitoli invece di inventare le pagine: allegare il PDF con il numero di pagina leggibile. Attenzione al riepilogo: prima ha scritto «No: 7 voci», poi si è corretto a 9 nella stessa risposta. Anche i conteggi del modello vanno controllati.</aside>
+  <aside class="punti"><ul><li>Prova vera: una <b>relazione di screening del 2019</b> confrontata con l'<b>Allegato F della DGR 4488/2021</b>.</li><li>Su 26 voci: <b>6 presenti, 10 in parte, 9 mancanti</b>. La relazione è più vecchia del modulo, e lo dice da solo.</li><li>Ha trovato un <b>errore reale</b>: il codice del sito sbagliato nella matrice finale.</li><li>Ma nel riepilogo si è <b>contraddetto sui conteggi</b> (7, poi 9): <b>contate voi</b>.</li><li><b>La relazione è completa?</b> Confronto tra la relazione VIncA e i <b>contenuti richiesti</b> dalle linee guida.</li><li>Esce una tabella <b>presente / in parte / mancante</b>, con capitolo e pagina.</li><li>«<b>Non giudicare la qualità</b>, verifica solo la presenza.»</li><li>Le linee guida giuste le scegliete <b>voi</b>: l'AI confronta, <b>non sceglie la norma</b>.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S32">
@@ -1254,10 +1327,19 @@ nell'atto.
 <span class="k">Alla fine indica quante prescrizioni hai trovato</span>,
 così posso controllare di non averne perse.</pre></div></div>
     <div class="freccia">→</div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S32 ]</div></div></div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 20px"><div class="et">Claude Sonnet 5.5 · estratto della tabella</div>
+      <table class="tab-out"><tr><th>n.</th><th>Prescrizione</th><th>Scadenza</th><th>Documento</th></tr>
+        <tr><td class="n">1</td><td>Barriera verde continua di 20 piante lungo le recinzioni</td><td>Non indicata</td><td>Nel documento del n. 12</td></tr>
+        <tr><td class="n">2-3</td><td>7 + 10 piante «autoctone» (<i>Morus alba</i>) nelle due aree verdi</td><td>Non indicata</td><td>Nel documento del n. 12</td></tr>
+        <tr><td class="n">8</td><td>Monitoraggio della qualità dell'aria con centralina esterna</td><td>«ante operam e post operam (frequenza una tantum)»</td><td>Non indicato dall'atto</td></tr>
+        <tr><td class="n">11</td><td>Nuova campagna di rilievi acustici</td><td>«Entro n. 6 mesi dall'avvenuta realizzazione del progetto»</td><td>Esiti dei rilievi</td></tr>
+        <tr><td class="n">12</td><td>Sviluppare tutte le condizioni in un documento allegato al progetto (art. 208)</td><td>Con il progetto definitivo</td><td>Documento delle condizioni</td></tr></table>
+      <div class="trovato"><b>Totale: 12 prescrizioni.</b> E segnala: <b>20 piante</b> nella barriera, ma le due aree ne elencano <b>7 + 10 = 17</b>.</div>
+      <p class="piccolo" style="margin-top:8px">Decreto di esclusione dalla VIA, 2019, anonimizzato · prova reale del 10/11/2026</p></div></div>
   </div>
-  <div class="avviso"><b>VERIFICA</b> Il conteggio finale serve al tecnico per confrontare con l'atto.</div>
-  <aside class="punti"><ul><li><b>Tabella di ottemperanza</b>: tutte le prescrizioni di un atto, con scadenze e responsabili.</li><li>Le scadenze vanno riportate <b>esattamente come scritte</b> nell'atto.</li><li>Il trucco: <b>«alla fine indica quante prescrizioni hai trovato»</b>, per un controllo veloce.</li></ul></aside>
+  <div class="avviso"><b>VERIFICA</b> Il conteggio finale serve al tecnico per confrontare con l'atto. L'errore agronomico lo vedete voi.</div>
+  <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate). Input: il decreto di esclusione dalla VIA (2019) dello stesso progetto di S31, anonimizzato (società, comune, indirizzo, fontanile, funzionari, protocolli). Testo integrale in esempi-output/2026-11-10-prove-sonnet-S31-S32.md. Ha trovato 12 prescrizioni e ha spiegato come le ha contate (raggruppando i punti dell'atto sarebbero circa 7): è il motivo per cui si chiede il conteggio. Ha riportato le scadenze tra virgolette come nell'atto, ha segnalato l'incongruenza 20 contro 7 + 10 = 17 piante e ha escluso dal conteggio le soglie degli indici, i ricorsi e gli adempimenti dell'amministrazione, dicendolo. Spunto per agronomi: l'atto chiama «piante autoctone, classificabili come arbusti, della tipologia Morus Alba» il gelso bianco, che è un albero ed è esotico. Il modello non lo segnala perché il prompt chiedeva di estrarre, non di giudicare: l'errore tecnico lo vede il professionista. Chiedere all'aula prima di dirlo.</aside>
+  <aside class="punti"><ul><li><b>Tabella di ottemperanza</b>: tutte le prescrizioni di un atto, con scadenze e responsabili.</li><li>Le scadenze vanno riportate <b>esattamente come scritte</b> nell'atto.</li><li>Il trucco: <b>«alla fine indica quante prescrizioni hai trovato»</b>, per un controllo veloce.</li><li>Prova vera su un <b>decreto di esclusione dalla VIA</b>: <b>12 prescrizioni</b>, con le scadenze tra virgolette.</li><li>Trova l'incongruenza: <b>20 piante</b> nella barriera, ma <b>7 + 10 = 17</b> nelle due aree.</li><li>Domanda all'aula: cosa c'è di strano in «piante <b>autoctone</b>… arbusti… <b>Morus alba</b>»?</li><li>Il gelso bianco è un <b>albero esotico</b>: il modello estrae, <b>l'errore agronomico lo vedete voi</b>.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S33">
@@ -1290,24 +1372,42 @@ copiare in Excel. <span class="k">Mostra il calcolo.</span></pre></div>
 <section class="slide" data-cod="S34">
   <h2>T11 · Dal sopralluogo al verbale</h2>
   <div class="io">
-    <div class="colshot"><div class="box" style="flex:1"><div class="et">Prompt · trascrizione di una nota vocale</div>
-<pre class="s">Questa è la trascrizione di una nota vocale che ho
-registrato durante un sopralluogo.
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Prompt · trascrizione automatica del sopralluogo</div>
+<pre class="s">Questa è la trascrizione automatica della registrazione
+che ho fatto durante un sopralluogo.
 Trasformala in un verbale con queste sezioni:
 data e luogo | presenti | stato dei luoghi | rilievi |
 criticità | azioni da fare (chi, entro quando).
 Non aggiungere informazioni che non sono nella
 trascrizione.
 Segna <span class="seg">[DA VERIFICARE]</span> le parole trascritte male
-o i nomi di specie dubbi.
+o i termini tecnici dubbi.
 """
-<span class="seg">[TRASCRIZIONE]</span>
+<span style="color:#7A7F8C">[SPEAKER_01]: …ha fine vita della soluzione,
+questa viene scaricata in una botanica nel
+retrocapo… con il suo vaccino di contenimento…
+c'è una cisterna di 30.000 litri… asserve il
+gruppo elettronico.</span>
 """</pre></div></div>
     <div class="freccia">→</div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S34 ]</div></div></div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 22px"><div class="et">Il verbale · Claude Sonnet 5.5 (estratto)</div>
+      <div class="verbale">
+        <h4>Data e luogo · presenti</h4>
+        <p>Data e luogo non indicati <span class="dv">[DA VERIFICARE]</span> · quattro voci, «senza nomi né ruoli».</p>
+        <h4>Stato dei luoghi</h4>
+        <ul><li>Box di stoccaggio dei chimici esausti; la soluzione è scaricata in una «botanica nel retrocapo» <span class="dv">[DA VERIFICARE]</span></li>
+        <li>Griglia e pendenza del piazzale verso l'impianto di trattamento in caso di sversamento</li>
+        <li>Cisterna di gasolio da 30.000 litri al servizio del «gruppo elettronico» <span class="dv">[DA VERIFICARE]</span>; travaso manuale</li></ul>
+        <h4>Criticità</h4>
+        <ul><li>Compatibilità acidi/basi nello stesso box</li><li>Alla domanda su prima e seconda pioggia <b>non c'è risposta</b> nella registrazione</li></ul>
+        <h4>Azioni</h4>
+        <p>Nessuna azione assegnata: solo «schede di sicurezza in aggiornamento», chi e quando non indicati.</p>
+      </div>
+      <p class="piccolo" style="margin-top:8px">Circa 25 segnalazioni [DA VERIFICARE] · prova reale del 10/11/2026 · audit ambientale, dati anonimi</p></div></div>
   </div>
-  <div class="avviso"><b>VERIFICA</b> Nomi e misure.</div>
-  <aside class="punti"><ul><li><b>Dal sopralluogo al verbale</b>: una <b>nota vocale</b> registrata in campo.</li><li>Il prompt dà le <b>sezioni</b> del verbale: presenti, stato dei luoghi, rilievi, criticità, azioni.</li><li><b>[DA VERIFICARE]</b> per le parole trascritte male e i <b>nomi di specie</b> dubbi.</li><li>Si verificano sempre <b>nomi e misure</b>.</li></ul></aside>
+  <div class="avviso"><b>VERIFICA</b> Nomi e misure. Le parole segnate si controllano riascoltando l'audio.</div>
+  <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate) su circa due minuti della trascrizione automatica di un sopralluogo di audit ambientale (azienda di microelettronica, giugno 2026; nessun nome di persona o di azienda nel testo usato). Testo integrale in esempi-output/2026-11-10-prova-sonnet-S34.md. Da far notare: non ha inventato data, luogo, nomi o responsabili e lo ha scritto; ha segnato circa 25 parole dubbie invece di correggerle a caso («gruppo elettronico» è quasi certamente il gruppo elettrogeno, «vaccino di contenimento» il bacino); ha notato che alla domanda su prima e seconda pioggia nella registrazione non c'è risposta. Per un sopralluogo agronomico scrivere «nomi di specie dubbi» al posto di «termini tecnici dubbi». Collegamento con S34A: la qualità del verbale dipende dalla qualità della registrazione; in un'altra parte dello stesso audio la trascrizione automatica ripete in loop una frase inventata («E' un record per lui? No, non ce l'ho cittadina.»), tipico errore di Whisper sui silenzi.</aside>
+  <aside class="punti"><ul><li><b>Dal sopralluogo al verbale</b>: due minuti della <b>registrazione vera</b> di un sopralluogo, trascritta in automatico.</li><li>La trascrizione è piena di errori: «<b>botanica nel retrocapo</b>», «<b>vaccino</b> di contenimento».</li><li>Il verbale <b>non inventa</b> data, presenti e responsabili: scrive che <b>mancano</b>.</li><li>Segna circa <b>25 parole dubbie</b> invece di correggerle a caso: «gruppo elettronico» è il <b>gruppo elettrogeno</b>.</li><li>Nota anche una <b>domanda rimasta senza risposta</b>: prima e seconda pioggia.</li><li>Il prompt dà le <b>sezioni</b> del verbale: presenti, stato dei luoghi, rilievi, criticità, azioni.</li><li><b>[DA VERIFICARE]</b> per le parole trascritte male e i <b>nomi di specie</b> dubbi.</li><li>Si verificano sempre <b>nomi e misure</b>.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S34A">
@@ -1340,17 +1440,31 @@ sicurezza, segnalo <span class="seg">[DA VERIFICARE]</span>.</pre></div>
 <section class="slide" data-cod="S35">
   <h2>G2 · Il verbale di riunione</h2>
   <div class="io">
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ trascrizione grezza della riunione<br>del 27/09/2026 in cui è nato questo corso ]</div></div>
+    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="grezzo">[00:00] Stiamo registrando delle idee per fare un corso di informazione di circa tre ore presso Terraviva…<br>[01:01] Poi vorrei però iniziare subito a far vedere una <s>parolamica</s> delle principali e quindi a parlare di ChatGPT, di <s>Cloud</s>, di Gemini.<br>[01:45] Infatti vorrei fare degli esempi dove…<br>[01:50] Faccio vedere come lo so, gli scrivi questa mail, è un robot che funziona, ma se gli scrivi questa mail dando, enfatizzando questo aspetto oppure utilizzando un tono diverso, dando delle… eccetera eccetera…<br>[03:56] Cosa ne dici della domanda?<br>[04:02] Allora sì, io spiegherei anche proprio, per esempio una cosa è come strutturare il prompt, cioè andare proprio nel concreto, quindi come strutturare il prompt, spiegare anche la questione degli abstract.<br>[08:29] Fatto che invece magari chat GPT e <s>Gmd</s> possono essere migliori per fare qualche produzione di immagini,<br>[11:41] Se parli di <s>minca</s>, di via, di…</div></div>
       <div class="box" style="margin-top:16px"><pre class="s">Dalla trascrizione allegata prepara un verbale con:
 argomenti, decisioni prese, attività con responsabile
 e scadenza, questioni aperte.
 <span class="k">Distingui ciò che è stato deciso da ciò che è stato
 solo proposto.</span></pre></div></div>
     <div class="freccia">→</div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S35: verbale ordinato ]</div></div></div>
+    <div class="box" style="padding:18px 24px"><div class="et">Il verbale · Claude Sonnet 5.5 (estratto)</div>
+      <div class="verbale">
+        <h4>Decisioni prese</h4>
+        <p>Nessuna decisione formale: la riunione è stata un brainstorming. Dati per acquisiti: corso per Terraviva, taglio pratico.</p>
+        <h4>Proposte (non ancora decise)</h4>
+        <table><tr><td>Esempi di mail con e senza contesto</td><td class="st">Proposta</td></tr>
+        <tr><td>La tecnica «fammi delle domande»</td><td class="st">Proposta</td></tr>
+        <tr><td>Caso guida: integrazioni VIncA della Provincia</td><td class="st">Proposta</td></tr>
+        <tr><td>Esempi sui lavori reali, con screenshot</td><td class="st">Consenso verbale</td></tr></table>
+        <h4>Questioni aperte</h4>
+        <p>Durata: 3 ore o 4? (all'inizio «tre», a 07:28 «quattro»). Data e sede non indicate.</p>
+        <h4>Note sulla trascrizione</h4>
+        <p>«parolamica» → <b>panoramica</b> · «Cloud» → <b>Claude</b> · «minca» → <b>VIncA</b></p>
+      </div>
+      <p class="piccolo" style="margin-top:8px">Prova reale del 10/11/2026 · estratto fedele</p></div>
   </div>
-  <aside class="note">Esempio "meta": mostrare la trascrizione grezza (confusa, frasi spezzate) e il risultato ordinato. Buon momento per sorridere.</aside>
-  <aside class="punti"><ul><li>Dalla trascrizione al <b>verbale</b>: argomenti, <b>decisioni</b>, attività con <b>responsabile e scadenza</b>, questioni aperte.</li><li>La frase chiave: <b>distingui ciò che è stato deciso da ciò che è stato solo proposto</b>.</li><li>Esempio «meta»: la <b>riunione in cui è nato questo corso</b>.</li></ul></aside>
+  <aside class="note">Esempio "meta": mostrare la trascrizione grezza (confusa, frasi spezzate) e il risultato ordinato. Buon momento per sorridere. A sinistra righe reali della trascrizione automatica del 27/09/2026 (Inbox/2026-09-27_2026-09-27-CorsoAI_trascrizione.md), in rosa le parole sbagliate dal riconoscimento vocale. A destra un estratto del verbale prodotto da Claude Sonnet 5.5 il 10/11/2026 (Claude Code, senza strumenti né istruzioni personalizzate), testo integrale in esempi-output/2026-11-10-prove-sonnet-S25-S35.md. Da far notare: grazie alla frase «distingui deciso e proposto» non ha inventato decisioni né responsabili (le attività le ha lasciate «da assegnare»); ha trovato da solo l'incoerenza sulla durata (tre o quattro ore) e ha corretto i refusi, elencandoli per farli controllare. Nel verbale integrale compare il nome di una persona citata nella riunione, trascritto in modo incerto: in slide è omesso.</aside>
+  <aside class="punti"><ul><li>Dalla trascrizione al <b>verbale</b>: argomenti, <b>decisioni</b>, attività con <b>responsabile e scadenza</b>, questioni aperte.</li><li>La frase chiave: <b>distingui ciò che è stato deciso da ciò che è stato solo proposto</b>.</li><li>Esempio «meta»: la <b>riunione in cui è nato questo corso</b>, trascritta dal telefono.</li><li>A sinistra la trascrizione vera: «<b>parolamica</b>», «<b>Cloud</b>», frasi spezzate.</li><li>Il verbale di <b>Sonnet 5.5</b>: <b>nessuna decisione formale</b>, perché era un brainstorming. Non le inventa.</li><li>Trova da solo l'incoerenza: <b>tre o quattro ore?</b> E corregge i refusi elencandoli.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S36">
@@ -1369,10 +1483,26 @@ una pagina con:
 Poi scrivi una mail breve ai nostri clienti aziende
 agricole per segnalare il bando.</pre></div></div>
     <div class="freccia">→</div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S36 ]</div></div></div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 22px"><div class="et">Claude Sonnet 5.5 · bando SRD04 2024 (estratto)</div>
+      <div class="verbale" style="font-size:18.5px">
+        <h4>Prima di tutto: questa edizione è chiusa</h4>
+        <p>Domande dal 20/09 al <b>20/12/2024, ore 16:00</b> (art. 17.1).</p>
+        <h4>Contributo</h4>
+        <ul><li>100% della spesa ammessa, al netto dell'IVA (art. 13.2)</li>
+        <li>Massimo 200.000 € a domanda; siepi e filari 90.000 € (art. 13.4)</li>
+        <li>Spese generali: siepi e filari 3% (art. 7)</li></ul>
+        <h4>Punti di attenzione</h4>
+        <ul><li>Lavori solo <b>dopo</b> la domanda (artt. 10, 11.1)</li>
+        <li>Impegno di mantenimento: 10 anni per siepi e filari (art. 29)</li></ul>
+        <h4>Mail ai clienti · oggetto</h4>
+        <p>«Bando 2024 chiuso, preparatevi alla prossima apertura»</p>
+      </div>
+      <div class="trovato" style="font-size:17px;margin-top:14px"><b>Trovato da solo:</b> spese generali dei muretti a secco al 10% (art. 5.5.1) e all'8% (art. 7).<br><b>Non poteva saperlo:</b> una proroga ha spostato la chiusura al <b>29/01/2025</b>. Il decreto non era nel PDF.</div>
+    </div></div>
   </div>
-  <div class="avviso"><b>VERIFICA</b> Scadenze e requisiti, sempre sul testo del bando.</div>
-  <aside class="punti"><ul><li><b>La scheda del bando</b>: chi partecipa, cosa finanzia, contributo, <b>scadenze</b>, documenti.</li><li>«<b>Per ogni informazione indica l'articolo</b>»: così si controlla.</li><li>In più una <b>mail ai clienti</b> per segnalare il bando.</li><li>Scadenze e requisiti si verificano <b>sempre sul testo del bando</b>.</li></ul></aside>
+  <div class="avviso"><b>VERIFICA</b> Scadenze e requisiti sul testo del bando e sui decreti successivi: proroghe e rettifiche non sono nel PDF.</div>
+  <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate) sull'Allegato A «Disposizioni attuative» del bando SRD04 «Investimenti non produttivi agricoli con finalità ambientale» 2024 del CSR Lombardia (73 pagine, testo rettificato dal decreto 12270/2024). Testo integrale e verifica in esempi-output/2026-11-10-prova-sonnet-S36.md; PDF in esempi-input/S36-Bando-SRD04-2024/. Il bando è chiuso: si usa come esempio perché è il tipo di bando che interessa i clienti di uno studio agronomico (siepi, filari, fasce tampone, aree umide, fontanili). Da far notare: ha capito subito che l'edizione è chiusa (conosce la data di oggi) e ha cambiato da solo il taglio della mail («preparatevi alla prossima apertura»); ha trovato un'incongruenza vera nel testo (spese generali dei muretti 10% contro 8%) e un rinvio a un paragrafo sbagliato. Però la scadenza che riporta, 20/12/2024, è quella del PDF: il D.d.s. 19574 del 13/12/2024 l'ha prorogata al 29/01/2025 ore 16:00 e il modello non poteva saperlo. La lezione: la scheda è buona quanto i documenti che le date; la pagina del bando con proroghe e rettifiche va sempre controllata.</aside>
+  <aside class="punti"><ul><li><b>La scheda del bando</b>: chi partecipa, cosa finanzia, contributo, <b>scadenze</b>, documenti.</li><li>«<b>Per ogni informazione indica l'articolo</b>»: così si controlla.</li><li>In più una <b>mail ai clienti</b> per segnalare il bando.</li><li>Prova vera sul bando <b>SRD04 2024</b> (siepi, filari, fasce tampone): 73 pagine in una scheda.</li><li>Capisce che è <b>chiuso</b> e cambia da solo il tono della mail.</li><li>Trova un'<b>incongruenza vera</b>: spese generali dei muretti al 10% e all'8%.</li><li>Ma la scadenza è <b>sbagliata</b>: c'era una <b>proroga</b> al 29/01/2025, in un decreto che non gli abbiamo dato.</li><li>Scadenze e requisiti si verificano <b>sul bando e sui decreti successivi</b>.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S37">
@@ -1428,12 +1558,13 @@ documenti caricati sono pertinenti per questo
 intervento? Per ciascuno indica documento e articolo.
 <span class="k">Se un aspetto non è trattato nei documenti,
 dillo esplicitamente.</span></pre></div>
-      <p style="font-size:18px;color:var(--tenue);margin-top:16px;line-height:1.5">Fonti caricate: piano di gestione del <span class="amb">[SITO NATURA 2000]</span>, misure di conservazione, formulario standard.</p>
+      <p style="font-size:18px;color:var(--tenue);margin-top:16px;line-height:1.5">Fonti caricate: piano integrato della ZSC/ZPS <b>Bosco di Vanzago</b> (DGR 1305/2019), misure di conservazione (DGR 4008/2025), formulario standard (2025).</p>
+      <div class="trovato" style="margin-top:14px"><b>Fa bene:</b> distingue dentro e fuori dal sito, cita l'art. 7 «aree contermini» (solo fuochi d'artificio) ed elenca cosa <b>non è trattato</b>.<br><b>Da correggere:</b> chiama «punti 1, 2, 3» le lettere a), b), c); prende per «buffer» le distanze di una discarica e di un impianto inerti.</div>
     </div>
-    <div class="colshot"><div class="shot"><div class="barra-f"></div><div class="vuoto">[ screenshot S39:<br>risposta con citazioni cliccabili ]</div></div></div>
+    <div class="colshot"><div class="shot foto"><div class="barra-f"></div><img src="immagini/s39-notebook-citazione.png" alt="Risposta di Gemini Notebook con la citazione dell'art. 7 aperta nella fonte"></div><div class="didasc">Clicco la citazione: a sinistra si apre l'art. 7 evidenziato nel piano</div></div>
   </div>
-  <aside class="note">È lo strumento giusto per normativa e piani: riduce le invenzioni e permette di controllare subito la fonte. Cliccare dal vivo una citazione. Idea d'uso: un notebook con tutta la normativa VIncA regionale per chi entra nuovo nello studio.</aside>
-  <aside class="punti"><ul><li>Carico <b>piano di gestione, misure di conservazione e formulario</b> del sito.</li><li>Domanda: quali <b>divieti e obblighi</b> valgono per il mio intervento? Con <b>documento e articolo</b>.</li><li>«<b>Se un aspetto non è trattato, dillo</b>»: evita le invenzioni.</li><li>Clicco dal vivo una <b>citazione</b>: si apre il punto esatto della fonte.</li><li>Idea: un notebook con la <b>normativa VIncA regionale</b> per chi entra nello studio.</li></ul></aside>
+  <aside class="note">Prova reale del 10/11/2026 in Gemini Notebook, notebook «Bosco di Vanzago Natura 2000» con tre fonti pubbliche: piano integrato della Riserva e della ZSC/ZPS IT2050006 (DGR XI/1305/2019), format delle misure di conservazione (DGR XII/4008/2025), formulario standard (trasmissione MASE dicembre 2025). Testo integrale e verifica in esempi-output/2026-11-10-prova-gemini-notebook-S39.md; PDF in esempi-input/S39-Bosco-di-Vanzago/. Da far notare: separa subito dentro e fuori dal sito; i divieti dell'art. 1 valgono solo nella Riserva; l'art. 7 è l'unico sulle aree contermini e parla solo di fuochi pirotecnici e lanterne; dichiara cosa manca (nessuna fascia di rispetto, nessuna norma edilizia esterna, rinvio al PGT). Per la siepe cita l'art. 3 c.3 (specie autoctone di provenienza padana), recepito dalla misura RE del 2025. Imprecisioni trovate controllando i PDF: «punti 1, 2, 3» al posto delle lettere a), b), c); i «buffer di 400 e 800 m» sono distanze di una ex discarica e di un impianto inerti (il buffer di 500 m invece c'è); scrive che la siepe esterna «dovrà» rispettare l'art. 3, ma è una sua interpretazione. Sulla stessa frase la citazione 5 porta all'indice, la 2 apre l'articolo: aprire sempre la citazione. Idea d'uso: un notebook con tutta la normativa VIncA regionale per chi entra nuovo nello studio.</aside>
+  <aside class="punti"><ul><li>Prova vera sul <b>Bosco di Vanzago</b>: <b>piano integrato, misure di conservazione e formulario</b>, tutti pubblici.</li><li>Risposta: i divieti valgono <b>dentro</b> il sito; fuori c'è solo l'art. 7, che parla di <b>fuochi d'artificio</b>.</li><li>Dice da solo cosa <b>non è trattato</b>: niente fascia di rispetto, niente norme edilizie fuori dal sito.</li><li>Controllando i PDF: <b>lettere chiamate punti</b> e <b>distanze scambiate per buffer</b>. Piccole, ma in una relazione pesano.</li><li>Domanda: quali <b>divieti e obblighi</b> valgono per il mio intervento? Con <b>documento e articolo</b>.</li><li>«<b>Se un aspetto non è trattato, dillo</b>»: evita le invenzioni.</li><li>Clicco dal vivo una <b>citazione</b>: si apre il punto esatto della fonte.</li><li>Idea: un notebook con la <b>normativa VIncA regionale</b> per chi entra nello studio.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S39A" data-titolo="Il mio notebook: approfondimenti da ascoltare">
@@ -1578,7 +1709,7 @@ Il Committente può chiedere che determinate attività o documenti siano esclusi
     <div class="passo"><span>02</span>La scheda di una specie con i dati di tutte le fonti</div>
     <div class="passo"><span>03</span>Un'incongruenza tra fonti</div>
   </div>
-  
+  <p style="margin-top:40px"><a  target="_blank" style="color:var(--blu);font-family:var(--mono);font-size:18px">apri la dashboard →</a></p>
   <aside class="note">Far vedere un'incongruenza tra fonti per ricordare che l'autoctonia dipende dalla regione: la lista vale per il suo territorio. Riserva: 3 screenshot dei passaggi. Prima del corso rigenerare dati.js.</aside>
   <aside class="punti"><ul><li><b>Dal vivo</b>: la dashboard delle piante, <b>otto fonti</b> in un'unica tabella.</li><li>Filtri combinati: fonte, tipo, acqua, luce, <b>lista nera lombarda</b>.</li><li>Mostro un'<b>incongruenza tra fonti</b>: l'autoctonia <b>dipende dalla regione</b>.</li><li>Funziona <b>senza connessione</b>, con un doppio clic.</li></ul></aside>
 </section>
@@ -1593,8 +1724,8 @@ Il Committente può chiedere che determinate attività o documenti siano esclusi
   </div>
   <!-- link per le domande: si aprono in una nuova scheda (percorsi del workspace) -->
   <div class="g3 tre-fonti" style="margin-top:28px;gap:22px;height:310px">
-    <a><div class="colshot" style="height:100%"><div class="shot"><img src="immagini/s47-pdf.png" alt="La scheda dell'acero campestre nel PDF dell'Atlante"></div><div class="didasc">PDF · Atlante, p. 175</div></div></a>
-    <a><div class="colshot" style="height:100%"><div class="shot"><pre><span class="k">### Acer campestre L. – Acero campestre</span>
+    <a  target="_blank"><div class="colshot" style="height:100%"><div class="shot"><img src="immagini/s47-pdf.png" alt="La scheda dell'acero campestre nel PDF dell'Atlante"></div><div class="didasc">PDF · Atlante, p. 175</div></div></a>
+    <a  target="_blank"><div class="colshot" style="height:100%"><div class="shot"><pre><span class="k">### Acer campestre L. – Acero campestre</span>
 *Cap7.pdf pag. 8 · libro pag. 175*
 
 - <span class="k">**Famiglia:**</span> Aceraceae
@@ -1607,7 +1738,7 @@ Il Committente può chiedere che determinate attività o documenti siano esclusi
 - <span class="k">**Frequenza:**</span> comune
 
 <span class="k">**Distribuzione:**</span> Molto frequente…</pre></div><div class="didasc">Markdown · il testo per l'AI</div></div></a>
-    <a><div class="colshot" style="height:100%"><div class="shot"><img src="immagini/s47-dashboard.png" alt="L'acero campestre nella dashboard, con nove fonti"></div><div class="didasc">Dashboard · 9 fonti</div></div></a>
+    <a  target="_blank"><div class="colshot" style="height:100%"><div class="shot"><img src="immagini/s47-dashboard.png" alt="L'acero campestre nella dashboard, con nove fonti"></div><div class="didasc">Dashboard · 9 fonti</div></div></a>
   </div>
   <p class="sotto" style="margin-top:22px;text-align:center">Il lavoro vero è <b class="acc">portare l'archivio in un formato che l'AI sa leggere</b>.</p>
   <aside class="note">La dashboard non è nata in un colpo: ogni nuova fonte è un passaggio in più. L'AI sbaglia anche qui: errori di OCR, refusi delle fonti (es. "Acer campestrestris" in PlantEX), dati che non tornano tra un libro e l'altro. Per questo si controlla a blocchi e i dati dubbi restano [DA VERIFICARE]. Idea per Terraviva: lo stesso metodo per il loro archivio di relazioni, schede o prezzi. Le tre immagini sono la stessa scheda, l'acero campestre (Atlante, Cap. 7, p. 175): cliccandole si aprono in una nuova scheda il PDF alla pagina giusta, il Markdown completo e la dashboard già aperta sulla specie. Funzionano solo aprendo le slide dal PC del workspace (percorsi relativi), non dalla versione online. Nel PDF il testo è leggibile ma la tabella ecologica e la carta sono immagini; nel Markdown restano i dati, la carta diventa un rimando alla pagina.</aside>
@@ -1655,7 +1786,7 @@ delle scadenze trovate.</pre></div>
     <div class="box blu"><div class="et">5 · Lettera e controllo</div><p class="xs">Prepara la lettera di accompagnamento alla Provincia con l'elenco delle integrazioni trasmesse. Poi confronta le richieste del passo 1 con le risposte scritte e dimmi se ce n'è qualcuna non coperta o coperta solo in parte.</p></div>
   </div>
   <p class="piccolo" style="margin-top:18px">Caso reale portato da Terraviva, anonimizzato · riserva: screenshot di ogni passo</p>
-  <aside class="note">Progetto dedicato con relazione di VIncA, richiesta di integrazioni, allegati, modulo regionale. Se il caso non arriva in tempo, ripiego: Aneco 2019.</aside>
+  <aside class="note">Progetto dedicato con relazione di VIncA, richiesta di integrazioni, allegati, modulo regionale. Se il caso non arriva in tempo, ripiego: un caso dello studio del 2019, anonimizzato.</aside>
   <aside class="punti"><ul><li>Caso reale: <b>integrazioni VIncA</b>, dalla PEC alla lettera, in <b>cinque passi</b>.</li><li>1 <b>capire la richiesta</b>, 2 <b>piano di lavoro</b> senza scrivere, 3 <b>ricerca</b> solo su fonti ufficiali.</li><li>4 <b>risposte</b> con [DA COMPLETARE], 5 <b>lettera</b> e <b>controllo</b> di copertura.</li><li>Notate: <b>un passo alla volta</b>, non tutto in un unico prompt.</li></ul></aside>
 </section>
 
