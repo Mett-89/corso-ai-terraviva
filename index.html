@@ -165,6 +165,18 @@ td{padding:13px 16px;border-bottom:1px solid #DCE2EA;vertical-align:top;line-hei
 td b{color:var(--blu2)}
 
 /* screenshot */
+.app-shot{position:relative;background:#fff;border:1.5px solid var(--bordo);box-shadow:0 14px 40px rgba(22,65,168,.12)}
+.app-shot img{display:block;width:100%;height:auto}
+.anno{position:absolute;border:3px solid var(--ciano2);border-radius:8px}
+.anno span{position:absolute;top:-18px;left:-18px;width:36px;height:36px;border-radius:50%;background:var(--ciano2);color:#fff;font:600 19px/36px var(--mono);text-align:center}
+.percorso{font:500 21px var(--mono);color:var(--blu2);text-align:center;margin-top:18px}
+.concetti-claude.verticale{grid-template-columns:1fr;gap:14px}
+.verticale .concetto-claude{min-height:0;padding:15px 20px 14px}
+.verticale .concetto-claude h3{font-size:27px;margin-bottom:6px}
+.verticale .concetto-claude p{font-size:17.5px;line-height:1.4}
+.verticale .concetto-claude .quando{position:static;margin-top:9px;padding-top:8px;font-size:14.5px}
+.verticale .numero{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.verticale .numero b{display:inline-block;width:28px;height:28px;border-radius:50%;background:var(--ciano2);color:#fff;font:600 15px/28px var(--mono);text-align:center}
 .io{display:grid;grid-template-columns:1fr 70px 1fr;flex:1;min-height:0}
 .freccia{display:flex;align-items:center;justify-content:center;color:var(--ciano2);font-size:46px}
 .colshot{display:flex;flex-direction:column;min-height:0}
@@ -235,6 +247,13 @@ td b{color:var(--blu2)}
 .esito .fr{font-size:34px;color:var(--ciano2)}
 .esito p{font-size:20px;line-height:1.4;margin:0}
 .caso-bosco pre.s{font-size:21px}
+.ko{background:#FDE2E2;padding:0 2px}
+.trovato.buono{background:#E9F6EE;border-left-color:#2E8B57}
+.due-col{grid-template-columns:repeat(2,1fr)}
+.tab-dati{border-collapse:collapse;width:100%;font-size:19px;line-height:1.4;background:rgba(255,255,255,.85)}
+.tab-dati th{font:600 18px var(--titolo);text-transform:uppercase;color:var(--blu);text-align:left;padding:10px 14px;border-bottom:2px solid var(--blu)}
+.tab-dati td{padding:11px 14px;border-bottom:1px solid #DCE2EA;vertical-align:top}
+.tab-dati td:first-child{font-weight:600;white-space:nowrap}
 .didasc{margin-top:12px;font-family:var(--titolo);text-transform:uppercase;font-size:19px;color:var(--blu)}
 .avviso{margin-top:20px;font-size:20px;display:flex;gap:14px;align-items:center;line-height:1.4}
 .avviso b{font-family:var(--titolo);border:1.5px solid var(--ambra);color:var(--ambra);padding:2px 12px;font-size:17px;letter-spacing:.06em;white-space:nowrap}
@@ -657,6 +676,37 @@ indica numero, anno e principio affermato.</pre></div>
   <aside class="punti"><ul><li>Stessa domanda, ma con <b>Claude Sonnet 5.5</b> e la <b>ricerca web attiva</b>.</li><li>Prima frase: «<b>non ho trovato</b> nessuna sentenza sulle siepi». Non inventa.</li><li>Propone tre sentenze sulla VIncA <b>in generale</b> e dice che i principi sono <b>sintesi sue</b>.</li><li>Alzo le linguette: <b>tutte e tre esistono</b>, ma per la <b>5888/2025</b> il principio citato <b>non torna</b> nelle sintesi.</li><li>Esistere non basta: bisogna controllare che dica <b>quello che il modello le attribuisce</b>.</li><li>Chiude con «<b>controlla il testo integrale</b>»: è la regola d'oro detta dal modello stesso.</li></ul></aside>
 </section>
 
+<section class="slide" data-cod="S08B" data-titolo="Ricerca approfondita">
+  <h2>Ricerca approfondita: un rapporto, non una risposta</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box"><div class="et">Ricerca web</div>
+      <ul class="lista" style="font-size:22px"><li>Poche ricerche, risposta in pochi secondi</li><li>Per una data, un riferimento, una notizia</li><li>È quella di S08A</li></ul></div>
+    <div class="box blu"><div class="et">Ricerca approfondita · in Claude «Research»</div>
+      <ul class="lista" style="font-size:22px"><li>Molte ricerche in sequenza, poi un <b>rapporto con i link</b> alle fonti</li><li>In Claude: <b>+</b> → <b>Research</b>, con la ricerca web attiva, nei piani a pagamento</li><li>In ChatGPT e Gemini si chiama <b>Deep Research</b></li></ul></div>
+  </div>
+  <div class="box" style="margin-top:20px"><div class="et">Prompt d'esempio</div>
+<pre class="s" style="font-size:19.5px">Ricostruisci il quadro vigente in Lombardia sulla compensazione per la trasformazione del bosco:
+norme, delibere attuative, importi aggiornati. Per ogni punto il link alla fonte ufficiale.
+Distingui ciò che è vigente da ciò che è stato abrogato o modificato.</pre></div>
+  <div class="formula-claude ambra"><b>Un rapporto con trenta link non è trenta fonti verificate:</b> aprite almeno quelle su cui firmate.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Fonti per Claude: https://support.claude.com/en/articles/11088861-use-research-on-claude (piani a pagamento Pro, Max, Ultra, Team ed Enterprise, su web, desktop e mobile; si attiva con «+» → «Research», con la ricerca web accesa; gira su Opus 5.5; consuma i limiti più in fretta) e https://support.claude.com/en/articles/11095361-when-should-i-use-web-search-extended-thinking-and-research (cinque o più ricerche in 1-3 minuti). In ChatGPT e Gemini la funzione si chiama Deep Research: piani e durata [DA VERIFICARE il giorno del corso]. Il prompt d'esempio non è stato eseguito per la slide: è un caso tipico per uno studio agronomico. Idea di regia: lanciare una ricerca all'inizio del blocco e aprire il rapporto alla fine. Collegamento a S08A: anche con la ricerca la fonte va aperta.</aside>
+  <aside class="punti"><ul><li>Oltre alla ricerca web c'è la <b>ricerca approfondita</b>: tante ricerche e un <b>rapporto con le fonti</b>.</li><li>In Claude si chiama <b>Research</b> (+ → Research); in ChatGPT e Gemini <b>Deep Research</b>.</li><li>Utile per <b>ricostruire un quadro normativo</b> o una bibliografia.</li><li>Ma trenta link non sono trenta fonti verificate: <b>aprite quelle su cui firmate</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S08C" data-titolo="Stessa domanda, tre risposte diverse">
+  <h2>Stessa domanda, tre risposte diverse</h2>
+  <div class="box blu" style="padding:14px 26px"><div class="et" style="margin-bottom:6px">Prompt · ripetuto tre volte, identico</div><p style="font-size:21px;line-height:1.45">«Devo piantare lungo il confine con il vicino un ciliegio, una siepe di ligustro e una siepe di robinia. A quale distanza minima dal confine, secondo il Codice civile?»</p></div>
+  <div class="g3" style="gap:26px;margin-top:22px">
+    <div class="box"><div class="et">Prova 1</div><ul class="lista" style="font-size:22px"><li>Ciliegio · 3 m</li><li>Ligustro · 0,5 m</li><li>Robinia · <span class="ko">1 m</span></li></ul></div>
+    <div class="box"><div class="et">Prova 2</div><ul class="lista" style="font-size:22px"><li>Ciliegio · 3 m</li><li>Ligustro · 0,5 m</li><li>Robinia · <b>2 m</b></li></ul></div>
+    <div class="box"><div class="et">Prova 3</div><ul class="lista" style="font-size:22px"><li>Ciliegio · 3 m</li><li>Ligustro · 0,5 m</li><li>Robinia · <span class="ko">0,5 m</span>, «se tagliata ogni 3 anni»</li></ul></div>
+  </div>
+  <div class="trovato buono" style="font-size:20px;margin-top:20px;padding:12px 18px"><b>Art. 892 c.c.:</b> siepi di robinia a <b>2 m</b>. Giusta solo la seconda. Su ciliegio e ligustro le tre risposte concordano e sono coerenti con l'articolo.</div>
+  <div class="avviso"><b>VERIFICA</b> Dove le risposte divergono c'è il dato da controllare. Se concordano, non è ancora una prova.</div>
+  <aside class="note">Slide aggiunta l'11/11/2026. Prova reale con Claude Sonnet 5.5 (Claude Code, senza strumenti, senza ricerca web, senza istruzioni personalizzate): stesso prompt, tre esecuzioni. Testo integrale in esempi-output/2026-11-11-prove-sonnet-S08C-S35A.md. Verifica sul testo dell'art. 892 c.c. (brocardi.it, aggiornato al 31/10/2026): alberi di alto fusto 3 m; non di alto fusto 1,5 m; viti, arbusti, siepi vive e piante da frutto non oltre 2,5 m 0,5 m; siepi di ontano, castagno e simili recise periodicamente vicino al ceppo 1 m; siepi di robinie 2 m; distanze valide in mancanza di regolamenti e usi locali. La prova 1 ha confuso la robinia con le siepi recise al ceppo (1 m), la prova 3 l'ha messa tra le siepi vive e ha aggiunto una condizione («tagliata almeno ogni 3 anni») che nell'articolo non c'è. Tutte e tre ricordano che regolamenti e usi locali prevalgono. Messaggio: rigenerare la risposta è una verifica a costo zero; è lo stesso principio di S06B/S08 (il modello completa, non consulta). Con la ricerca web (S08A) o con il testo allegato (S24A) l'errore si riduce.</aside>
+  <aside class="punti"><ul><li>La <b>stessa domanda</b>, fatta tre volte, uguale.</li><li>Sulla siepe di robinia: <b>1 m, 2 m, 0,5 m</b>.</li><li>Il Codice civile dice <b>2 m</b>: giusta solo la seconda.</li><li>La terza aggiunge perfino una condizione <b>che non esiste</b>.</li><li>Rigenerare è una <b>verifica gratuita</b>: dove le risposte divergono, lì si controlla.</li><li>Se concordano, <b>non è ancora una prova</b>.</li></ul></aside>
+</section>
+
 <section class="slide messaggio centro" data-cod="S09">
   <div class="alone" style="width:480px;height:480px;left:110px;top:200px"></div>
   <div class="tondo" style="left:90px;top:170px" data-img="regola-oro" data-rot="180"></div>
@@ -710,11 +760,24 @@ indica numero, anno e principio affermato.</pre></div>
   <h2>Demo · la mail «a secco»</h2>
   <div class="g2">
     <div class="box"><div class="et">Prompt</div><pre style="font-size:24px">Scrivi una mail a un cliente
-per chiedergli dei documenti.</pre></div>
-    <div class="box"><div class="et">Risposta</div><p class="testo-es">Gentile Cliente, le scrivo per chiederle cortesemente di inviarci i documenti necessari. Resto a disposizione per qualsiasi chiarimento. Cordiali saluti.</p></div>
+per chiedergli dei documenti.</pre>
+      <p class="fonte-ctx" style="margin-top:34px">Nessun dato sul cliente, sulla pratica, sui documenti o sulla scadenza.</p></div>
+    <div class="box"><div class="et">Risposta · Claude Sonnet 5.5 (estratto)</div>
+<div class="risp-mail"><b>Oggetto:</b> Richiesta documentazione – <span class="ko">[nome pratica/progetto]</span>
+Gentile <span class="ko">[Nome Cliente]</span>,
+per poter procedere con <span class="ko">[nome pratica/progetto]</span>, avremmo bisogno dei seguenti documenti:
+1. <span class="ko">[Documento 1, ad es. visura camerale aggiornata]</span>
+2. <span class="ko">[Documento 2, ad es. planimetria dell'area/immobile]</span>
+3. <span class="ko">[Documento 3, …]</span>  4. <span class="ko">[Documento 4]</span>
+Potrebbe inviarci la documentazione, preferibilmente in PDF, entro il <span class="ko">[data]</span>? Così rispetteremo le tempistiche previste per <span class="ko">[scadenza/adempimento]</span>.
+[…] Cordiali saluti, <span class="ko">[Nome Cognome]</span> · [STUDIO] · <span class="ko">[Telefono]</span>
+
+<i>Posso adattarla meglio se mi indichi: il tipo di pratica e i documenti, il tono, la scadenza, se è un primo contatto o un sollecito.</i></div>
+<p class="piccolo" style="margin-top:10px">Prova reale del 10/11/2026 · nessuno strumento attivo</p></div>
   </div>
-  <div class="avviso" style="margin-top:40px;font-size:24px"><b>PROBLEMA</b> Corretta, ma inutile: quali documenti? Per cosa? Entro quando?</div>
-  <aside class="punti"><ul><li>Prompt «a secco»: <b>«scrivi una mail a un cliente per chiedergli dei documenti»</b>.</li><li>La risposta è <b>corretta ma inutile</b>: quali documenti? Per cosa? Entro quando?</li><li>Il modello non può sapere ciò che <b>non gli avete detto</b>.</li></ul></aside>
+  <div class="avviso" style="margin-top:28px;font-size:23px"><b>PROBLEMA</b> Corretta, ma vuota: undici segnaposto. Quali documenti, per cosa, entro quando: lo chiede lui a voi.</div>
+  <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate); testo integrale in esempi-output/2026-11-10-prove-sonnet-S12-S20-S27.md. Da far notare: un modello di oggi non scrive più la mail generica di tre righe, «Gentile Cliente, le chiedo i documenti necessari». Sa di non sapere: riempie la mail di segnaposto (undici: pratica, cliente, quattro documenti, data, scadenza, nome, telefono) e alla fine chiede le informazioni che mancano, come in S25 ma senza che glielo si chieda. Il risultato però resta inutilizzabile finché il tecnico non dà il contesto. Curiosità da raccontare: nella firma il modello ha scritto il nome dello studio e l'indirizzo mail di Matteo, presi dall'account con cui girava; in slide sono sostituiti con [STUDIO]. È contesto che entra nella conversazione senza che lo scriviate (collegamento a S17J).</aside>
+  <aside class="punti"><ul><li>Prompt «a secco»: <b>«scrivi una mail a un cliente per chiedergli dei documenti»</b>.</li><li>Prova reale con Sonnet 5.5: una mail corretta, ma con <b>undici segnaposto</b>.</li><li>Quali documenti? Per cosa? Entro quando? <b>Non può saperlo</b>, e lo dichiara.</li><li>Alla fine <b>chiede lui</b> le informazioni che mancano.</li><li>Il modello non può sapere ciò che <b>non gli avete detto</b>.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S13">
@@ -776,6 +839,26 @@ Grazie per la collaborazione e cordiali saluti,
   <aside class="punti"><ul><li><b>Sei domande</b> a cui ogni prompt deve rispondere.</li><li>A ogni → si accende una domanda e la mail <b>si trasforma</b>. Prima chiedo: <b>«cosa cambierà?»</b></li><li><b>Chi sei, per chi è, obiettivo, tono, vincoli, materiali</b>.</li><li>L'ultimo passo, i <b>materiali</b>: allegare la lettera della Provincia cambia tutto.</li></ul></aside>
 </section>
 
+<section class="slide centro" data-cod="S14A" data-titolo="Dettare invece di scrivere">
+  <h2>Dettare invece di scrivere</h2>
+  <p class="sotto" style="margin:-12px 0 24px;color:var(--tenue)">Parlando si dà più contesto: chi è il cliente, cosa è successo, cosa vi preoccupa.</p>
+  <div class="io" style="flex:none">
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Dove si detta</div>
+      <ul class="lista" style="font-size:23px"><li>Il <b>microfono</b> nella casella di Claude, ChatGPT e Gemini</li><li><b>Win + H</b>: la dettatura di Windows, in qualsiasi programma</li><li>Dal <b>telefono</b>, tra un sopralluogo e l'altro</li></ul></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Poi una frase sola</div>
+<pre class="s" style="font-size:22px;line-height:1.7">Ti ho dettato a ruota libera.
+<span class="k">Riordina quello che ho detto</span> in un prompt
+con le sei domande: chi sono, per chi è,
+obiettivo, tono, vincoli, materiali.
+Se manca qualcosa, <span class="k">chiedimelo</span>
+prima di procedere.</pre></div></div>
+  </div>
+  <div class="avviso"><b>VERIFICA</b> Rileggete nomi, numeri e sigle: la dettatura sbaglia proprio quelli.</div>
+  <aside class="note">Slide aggiunta l'11/11/2026, dall'esperienza di Matteo che detta le istruzioni a Claude invece di scriverle. Demo dal vivo, un minuto: dettare la richiesta della mail di S13 parlando liberamente, poi la frase «riordina…»; confrontare con il prompt scritto di S11. Chi scrive tende a fare richieste corte; chi parla spiega il caso, ed è il contesto che fa la differenza (S13). Il microfono nella casella di Claude si vede nello screenshot di S17A (app desktop, 10/11/2026); Win + H apre la dettatura vocale di Windows 11, che funziona in qualsiasi campo di testo. Collegamenti: S14 (le sei domande), S25 («fammi delle domande»), S34B e S34A (voce dal campo e registrazioni).</aside>
+  <aside class="punti"><ul><li>Invece di scrivere, <b>dettate</b>: si dà molto più contesto.</li><li>Il <b>microfono</b> è nella casella; in Windows c'è <b>Win + H</b> ovunque.</li><li>Si parla a ruota libera, poi: <b>«riordina quello che ho detto in un prompt con le sei domande»</b>.</li><li>Se manca qualcosa, che ve lo <b>chieda</b>.</li><li>Rileggete <b>nomi, numeri e sigle</b>.</li></ul></aside>
+</section>
+
 <section class="slide" data-cod="S15">
   <h2>Dare i file, e perché il Markdown</h2>
   <div class="g2">
@@ -795,80 +878,92 @@ Grazie per la collaborazione e cordiali saluti,
 <span class="k">## Tono</span>
 Professionale, sobrio, senza enfasi.</pre></div>
   </div>
-  <p class="sotto" style="margin-top:36px">Allegare un documento è meglio che incollare il testo. Il Markdown è testo semplice: <b class="acc">#</b> titoli, <b class="acc">-</b> elenchi.</p>
-  <aside class="note">Leggibile da persone e macchine, apribile con qualsiasi editor. I PDF scansionati sono immagini: l'AI li legge peggio.</aside>
+  <div style="display:grid;grid-template-columns:540px 1fr;gap:44px;align-items:center;margin-top:30px">
+    <div><div class="app-shot"><img src="immagini/s15-allega-file.png" alt="Il file profilo-studio-esempio.md allegato nella casella di Claude, con la richiesta di usarlo"></div><div class="didasc">Il file si trascina nella casella</div></div>
+    <p class="sotto">Allegare un documento è meglio che incollare il testo. Il Markdown è testo semplice: <b class="acc">#</b> titoli, <b class="acc">-</b> elenchi.</p>
+  </div>
+  <aside class="note">Leggibile da persone e macchine, apribile con qualsiasi editor. I PDF scansionati sono immagini: l'AI li legge peggio. Screenshot dall'app desktop di Claude, 10/11/2026: il file allegato è il profilo di uno studio inventato (esempi-input/S15-S17B-screenshot/profilo-studio-esempio.md), 31 righe. Il file si trascina nella casella oppure si allega con il «+».</aside>
   <aside class="punti"><ul><li><b>Allegare</b> un documento è meglio che <b>incollare</b> il testo.</li><li>Il <b>Markdown</b> è testo semplice: <b>#</b> per i titoli, <b>-</b> per gli elenchi.</li><li>Si legge <b>da persone e da macchine</b> e si apre con qualsiasi editor.</li><li>Attenzione ai <b>PDF scansionati</b>: sono immagini, l'AI li legge peggio.</li></ul></aside>
 </section>
 
 <section class="slide centro" data-cod="S16">
   <h2>Le istruzioni personalizzate</h2>
   <p class="sotto" style="text-align:center;margin:-14px 0 26px;color:var(--tenue)">Quello che direste in ogni chat, ditelo una volta sola.</p>
-  <div class="box blu"><div class="et">Da incollare nelle impostazioni</div>
-<pre>Lavoro in uno studio agronomico che si occupa di Valutazione di Incidenza, VIA,
-progettazione del verde e consulenza alle aziende agricole in Lombardia.
-Rispondi sempre in italiano.
-Usa un tono professionale e sobrio, senza enfasi e senza elenchi inutili.
-Quando citi una norma indica sempre la fonte; se non sei sicuro scrivi <span class="seg">[DA VERIFICARE]</span>.
-Non inventare dati, superfici, specie o riferimenti normativi.
-Se mancano informazioni necessarie, fammi una domanda prima di rispondere.</pre></div>
-  <aside class="note">In ChatGPT e Claude si trovano nelle impostazioni (nome del menu [DA VERIFICARE]).</aside>
-  <aside class="punti"><ul><li>Le <b>istruzioni personalizzate</b>: quello che direste in ogni chat, ditelo <b>una volta sola</b>.</li><li>Dentro: <b>chi siete</b>, lingua, <b>tono</b>, come citare le norme.</li><li>Le due frasi chiave: <b>non inventare</b> e <b>[DA VERIFICARE]</b> quando non è sicuro.</li><li>Si trovano nelle <b>impostazioni</b> di ChatGPT e Claude.</li></ul></aside>
+  <div class="app-shot" style="width:1260px;margin:0 auto"><img src="immagini/s16-istruzioni.png" alt="Impostazioni di Claude, campo Istruzioni per Claude con il testo dello studio agronomico"></div>
+  <div class="percorso">Claude · Impostazioni → Account → Istruzioni per Claude</div>
+  <div class="percorso" style="margin-top:8px">ChatGPT · Impostazioni → Personalizzazione → Istruzioni personalizzate</div>
+  <aside class="note">Il testo incollato: «Lavoro in uno studio agronomico che si occupa di Valutazione di Incidenza, VIA, progettazione del verde e consulenza alle aziende agricole in Lombardia. Rispondi sempre in italiano. Usa un tono professionale e sobrio, senza enfasi e senza elenchi inutili. Quando citi una norma indica sempre la fonte; se non sei sicuro scrivi [DA VERIFICARE]. Non inventare dati, superfici, specie o riferimenti normativi. Se mancano informazioni necessarie, fammi una domanda prima di rispondere.» In Claude (app desktop, verificato il 10/11/2026): Impostazioni → Account → «Istruzioni per Claude»; valgono per l'account nelle chat e in Cowork. In ChatGPT (web e desktop): Impostazioni → Personalizzazione → campo Istruzioni personalizzate, con l'interruttore di personalizzazione attivo; dal settembre 2025 personalità, istruzioni e memoria stanno tutte in Personalizzazione. Sui piani a pagamento fino a 5.000 caratteri (da luglio 2026). Fonte verificata il 10/11/2026: https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions. Le etichette italiane sono la traduzione di Settings → Personalization → Custom instructions: un'occhiata sull'account prima del corso.</aside>
+  <aside class="punti"><ul><li>Le <b>istruzioni personalizzate</b>: quello che direste in ogni chat, ditelo <b>una volta sola</b>.</li><li>Dentro: <b>chi siete</b>, lingua, <b>tono</b>, come citare le norme.</li><li>Le due frasi chiave: <b>non inventare</b> e <b>[DA VERIFICARE]</b> quando non è sicuro.</li><li>In Claude: <b>Impostazioni → Account → Istruzioni per Claude</b>. In ChatGPT: <b>Impostazioni → Personalizzazione</b>.</li></ul></aside>
 </section>
 
 <section class="slide centro" data-cod="S17">
   <h2>I progetti</h2>
   <p class="sotto" style="text-align:center;margin:-14px 0 30px;color:var(--tenue)">Una «cartella» per ogni cliente o tipo di lavoro, con file e istruzioni sempre presenti.</p>
-  <div class="g3">
-    <div class="box"><div class="et">Istruzioni</div><p style="font-size:20px;line-height:1.5">«Stai lavorando alla VIncA per… Usa la struttura delle linee guida…»</p></div>
-    <div class="box"><div class="et">File</div><ul class="lista" style="font-size:20px"><li>Relazione vigente</li><li>Richiesta di integrazioni</li><li>Planimetria</li><li>Formulario del sito</li></ul></div>
-    <div class="box"><div class="et">Chat</div><ul class="lista" style="font-size:20px"><li>Risposta punto 1</li><li>Risposta punto 2</li><li>Lettera di accompagnamento</li></ul></div>
+  <div style="display:grid;grid-template-columns:560px 1fr;gap:44px;align-items:center">
+    <div class="app-shot"><img src="immagini/s17-progetto.png" alt="Finestra Crea un progetto: nome, istruzioni, cartella e visibilità"></div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="box"><div class="et">Istruzioni · «Cosa vuoi ottenere?»</div><p style="font-size:20px;line-height:1.45">«Stai lavorando alla VIncA per… Usa la struttura delle linee guida…»</p></div>
+      <div class="box"><div class="et">File</div><p style="font-size:20px;line-height:1.45">Relazione vigente · richiesta di integrazioni · planimetria · formulario del sito</p></div>
+      <div class="box"><div class="et">Chat</div><p style="font-size:20px;line-height:1.45">Risposta punto 1 · risposta punto 2 · lettera di accompagnamento</p></div>
+      <div class="box blu"><div class="et">Visibilità</div><p style="font-size:20px;line-height:1.45">Tutta l'organizzazione oppure solo gli invitati</p></div>
+    </div>
   </div>
-  <p class="piccolo" style="text-align:center;margin-top:30px">Esempio: progetto «VIncA — [nome cliente]»</p>
-  <aside class="note">Ogni chat del progetto parte già con il contesto dedicato. Nella versione aggiornata di Claude, un progetto può avere istruzioni, file, attività programmate e memoria propria. Per uno studio tecnico: un progetto per pratica o cliente, senza mescolare documenti di clienti diversi. Fonte verificata il 20/10/2026: https://support.claude.com/en/articles/14116274-organize-your-tasks-with-projects-in-claude-cowork</aside>
-  <aside class="punti"><ul><li>Un <b>progetto</b> è una cartella per <b>cliente o pratica</b>, con istruzioni e file sempre presenti.</li><li>Ogni chat del progetto <b>parte già con il contesto</b>.</li><li>Esempio: <b>«VIncA, cliente»</b> con relazione, richiesta di integrazioni, planimetria, formulario.</li><li>Regola: <b>non mescolare</b> documenti di clienti diversi.</li></ul></aside>
+  <p class="piccolo" style="text-align:center;margin-top:26px">Esempio: progetto «VIncA — [nome cliente]»</p>
+  <aside class="note">Ogni chat del progetto parte già con il contesto dedicato. Nella versione aggiornata di Claude, un progetto può avere istruzioni, file, attività programmate e memoria propria. Per uno studio tecnico: un progetto per pratica o cliente, senza mescolare documenti di clienti diversi. Fonte verificata il 20/10/2026: https://support.claude.com/en/articles/14116274-organize-your-tasks-with-projects-in-claude-cowork. Screenshot dall'app desktop, 10/11/2026, account di organizzazione: la finestra «Crea un progetto» chiede il nome («Su cosa stai lavorando?»), le istruzioni («Cosa vuoi ottenere?»), offre «Usa una cartella» e la visibilità (tutta l'organizzazione o privato). La visibilità si riprende in S19B. Il progetto di prova è stato creato con il profilo di uno studio inventato.</aside>
+  <aside class="punti"><ul><li>Un <b>progetto</b> è una cartella per <b>cliente o pratica</b>, con istruzioni e file sempre presenti.</li><li>Ogni chat del progetto <b>parte già con il contesto</b>.</li><li>Esempio: <b>«VIncA, cliente»</b> con relazione, richiesta di integrazioni, planimetria, formulario.</li><li>Regola: <b>non mescolare</b> documenti di clienti diversi.</li><li>Alla creazione si sceglie la <b>visibilità</b>: tutto lo studio o solo gli invitati.</li></ul></aside>
 </section>
 
 <section class="slide centro" data-cod="S17A">
   <h2>Nella nuova esperienza, Chat e Cowork sono un unico Claude</h2>
   <p class="piccolo" style="text-align:center;margin:-15px 0 28px">Rilascio graduale da settembre 2026</p>
   <div class="g2" style="align-items:stretch">
-    <div class="box" style="min-height:390px;padding:34px 38px">
+    <div class="box" style="padding:26px 34px">
       <div class="et">Domanda rapida</div>
-      <h3 style="font-size:38px;margin:12px 0 20px">Restate nella conversazione</h3>
+      <h3 style="font-size:34px;margin:10px 0 14px">Restate nella conversazione</h3>
       <ul class="lista" style="font-size:22px"><li>Spiegare un concetto</li><li>Riformulare una mail</li><li>Confrontare due testi</li><li>Preparare una prima bozza</li></ul>
     </div>
-    <div class="box blu" style="min-height:390px;padding:34px 38px">
+    <div class="box blu" style="padding:26px 34px">
       <div class="et">Compito delegato</div>
-      <h3 style="font-size:38px;margin:12px 0 20px">Descrivete il risultato</h3>
+      <h3 style="font-size:34px;margin:10px 0 14px">Descrivete il risultato</h3>
       <ul class="lista" style="font-size:22px"><li>Più passaggi e più file</li><li>Ricerca e uso di applicazioni</li><li>Produzione di documenti finiti</li><li>Lavoro lungo o programmato</li></ul>
     </div>
   </div>
-  <div class="formula-claude"><b>La stessa casella di testo:</b> Claude decide se basta rispondere o se deve organizzare ed eseguire un lavoro.</div>
-  <aside class="note">Dal 16/09/2026 Anthropic sta unificando Chat e Cowork: nella nuova esperienza non si sceglie più la modalità prima di iniziare. Il criterio didattico resta utile: conversazione per una risposta o una bozza; delega agentica per un risultato che richiede più passaggi, file, app o tempo. Alcuni account possono ancora mostrare le due voci durante il rilascio graduale: verificare l'interfaccia il giorno del corso. Fonte: https://claude.com/resources/articles/cowork-is-now-claude</aside>
-  <aside class="punti"><ul><li>Da settembre 2026 <b>Chat e Cowork</b> sono un unico Claude.</li><li><b>Domanda rapida</b>: restate nella conversazione.</li><li><b>Compito delegato</b>: descrivete il <b>risultato</b> e Claude organizza i passaggi.</li><li>La casella di testo è <b>la stessa</b>. Il rilascio è graduale: <b>l'interfaccia può variare</b>.</li></ul></aside>
+  <div style="display:grid;grid-template-columns:660px 1fr;gap:34px;align-items:center;margin-top:28px">
+    <div class="app-shot"><img src="immagini/s17a-casella.png" alt="La casella di testo di Claude con il selettore Chat e Cowork"></div>
+    <div class="formula-claude" style="margin-top:0"><b>La stessa casella di testo.</b> Oggi c'è ancora il selettore <b>Chat · Cowork</b>; nella nuova esperienza scompare ed è Claude a decidere se basta rispondere o se deve organizzare ed eseguire un lavoro.</div>
+  </div>
+  <aside class="note">Screenshot dall'app desktop del 10/11/2026: il selettore Chat/Cowork è ancora visibile nella casella, sia sull'account personale sia su quello di organizzazione. Dal 16/09/2026 Anthropic sta unificando Chat e Cowork: nella nuova esperienza non si sceglie più la modalità prima di iniziare. Il criterio didattico resta utile: conversazione per una risposta o una bozza; delega agentica per un risultato che richiede più passaggi, file, app o tempo. Alcuni account possono ancora mostrare le due voci durante il rilascio graduale: verificare l'interfaccia il giorno del corso. Fonte: https://claude.com/resources/articles/cowork-is-now-claude</aside>
+  <aside class="punti"><ul><li>Da settembre 2026 <b>Chat e Cowork</b> sono un unico Claude.</li><li><b>Domanda rapida</b>: restate nella conversazione.</li><li><b>Compito delegato</b>: descrivete il <b>risultato</b> e Claude organizza i passaggi.</li><li>La casella di testo è <b>la stessa</b>; oggi ha ancora il selettore <b>Chat · Cowork</b>. Il rilascio è graduale: <b>l'interfaccia può variare</b>.</li></ul></aside>
 </section>
 
 <section class="slide centro" data-cod="S17B">
   <h2>Progetto, conversazione e Artifact hanno ruoli diversi</h2>
-  <div class="concetti-claude">
+  <div style="display:grid;grid-template-columns:420px 1fr;gap:34px;align-items:center">
+  <div class="concetti-claude verticale">
     <div class="concetto-claude">
-      <div class="numero">01 · CONTENITORE</div><h3>Progetto</h3>
+      <div class="numero"><b>1</b>CONTENITORE</div><h3>Progetto</h3>
       <p>Raccoglie istruzioni, file, memoria e attività riferiti alla stessa pratica.</p>
       <div class="quando">USARLO · lavoro che continua nel tempo</div>
     </div>
     <div class="concetto-claude">
-      <div class="numero">02 · LAVORO</div><h3>Conversazione</h3>
+      <div class="numero"><b>2</b>LAVORO</div><h3>Conversazione</h3>
       <p>È il singolo incarico: una verifica, una lettera, un confronto o una ricerca.</p>
       <div class="quando">USARLA · un obiettivo preciso</div>
     </div>
     <div class="concetto-claude">
-      <div class="numero">03 · RISULTATO</div><h3>Artifact</h3>
-      <p>È un prodotto autonomo, modificabile e condivisibile: documento, slide, dashboard o piccolo strumento.</p>
+      <div class="numero"><b>3</b>RISULTATO</div><h3>Artifact</h3>
+      <p>Un prodotto autonomo, modificabile e condivisibile: documento, slide, dashboard o piccolo strumento.</p>
       <div class="quando">USARLO · qualcosa da riaprire o consegnare</div>
     </div>
   </div>
-  <div class="formula-claude ambra"><b>Claude Design</b> è il laboratorio visivo degli Artifacts: mockup, prototipi, one-pager e pagine web, modificabili direttamente sulla tela e coerenti con il design system.</div>
-  <aside class="note">Un Project non è un output: è l'ambiente stabile della pratica. Un Artifact è ciò che Claude produce e che può vivere fuori dalla chat. Gli Artifacts comprendono Docs, Slides, Design e, secondo piano e disponibilità, dashboard e animazioni. Usare Design quando il risultato è visivo e deve essere rifinito sulla tela; usare Docs per un testo lungo e Slides per una presentazione. Fonti verificate il 20/10/2026: https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them e https://claude.com/resources/articles/claude-design-stays-on-brand-for-daily-work</aside>
+  <div class="app-shot"><img src="immagini/s17b-artifact.png" alt="Progetto di prova, conversazione e checklist VIncA aperta come documento a fianco della chat">
+    <div class="anno" style="left:1%;top:1%;width:26.5%;height:5%"><span style="left:auto;right:-18px">1</span></div>
+    <div class="anno" style="left:1.5%;top:10%;width:31.5%;height:88%"><span>2</span></div>
+    <div class="anno" style="left:35%;top:7%;width:64%;height:91%"><span>3</span></div>
+  </div>
+  </div>
+  <div class="formula-claude ambra" style="margin-top:20px"><b>Claude Design</b> è il laboratorio visivo degli Artifacts: mockup, prototipi, one-pager e pagine web, modificabili direttamente sulla tela e coerenti con il design system.</div>
+  <aside class="note">Un Project non è un output: è l'ambiente stabile della pratica. Un Artifact è ciò che Claude produce e che può vivere fuori dalla chat. Gli Artifacts comprendono Docs, Slides, Design e, secondo piano e disponibilità, dashboard e animazioni. Usare Design quando il risultato è visivo e deve essere rifinito sulla tela; usare Docs per un testo lungo e Slides per una presentazione. Fonti verificate il 20/10/2026: https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them e https://claude.com/resources/articles/claude-design-stays-on-brand-for-daily-work. Screenshot dall'app desktop, 10/11/2026: nel progetto di prova «VIncA — Esempio capannone» (1, in alto il percorso progetto / chat) la richiesta «Creami un documento di una pagina: la check list dei documenti da chiedere al cliente per redigere una VIncA» (2) produce un documento Claude Docs aperto a fianco (3), con caselle da spuntare e modificabile. Claude segnala da solo che l'elenco è una sua proposta e lascia [DA COMPLETARE] per la data di consegna.</aside>
   <aside class="punti"><ul><li>Tre ruoli: <b>progetto</b> = contenitore, <b>conversazione</b> = singolo incarico, <b>Artifact</b> = risultato.</li><li>Il progetto serve per un lavoro che <b>continua nel tempo</b>.</li><li>Un Artifact si <b>riapre e si condivide</b>: documento, slide, dashboard.</li><li><b>Claude Design</b> quando il risultato è <b>visivo</b> e va rifinito sulla tela.</li></ul></aside>
 </section>
 
@@ -1014,6 +1109,24 @@ Se mancano informazioni necessarie, fammi una domanda prima di rispondere.</pre>
   <aside class="punti"><ul><li><b>Cosa legge il modello</b> quando gli scrivete: non solo il prompt.</li><li>A ogni → una fonte entra nella <b>finestra di contesto</b>: istruzioni, progetto, memoria, connettori, chat.</li><li>Una chat <b>lunghissima riempie</b> la finestra e il modello perde dei pezzi.</li><li>Per una pratica lunga: materiale stabile <b>nel progetto</b>, <b>chat nuova</b> per ogni compito.</li></ul></aside>
 </section>
 
+<section class="slide centro" data-cod="S17K" data-titolo="Quando aprire una chat nuova">
+  <h2>Quando aprire una chat nuova</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box"><div class="et">I segnali</div><ul class="lista" style="font-size:23px"><li>Dimentica una <b>decisione</b> già presa</li><li>Ripete un <b>errore</b> già corretto</li><li>Mescola le <b>versioni</b> del testo</li><li>Le risposte si fanno <b>lente</b></li></ul></div>
+    <div class="box blu"><div class="et">Il riassunto di passaggio</div>
+<pre class="s" style="font-size:22px;line-height:1.65">Prima di chiudere, scrivimi un
+<span class="k">riassunto di passaggio</span>:
+- decisioni prese;
+- dati confermati e da dove vengono;
+- cosa resta aperto;
+- file usati.
+Lo incollo in una chat nuova.</pre></div>
+  </div>
+  <p class="sotto" style="text-align:center;margin-top:32px">I documenti stabili stanno nel <b class="acc">progetto</b>; il riassunto porta solo <b class="acc">lo stato del lavoro</b>.</p>
+  <aside class="note">Slide aggiunta l'11/11/2026. Completa S17J (la finestra di contesto che si riempie): là il perché, qui il come. Il riassunto di passaggio si rilegge prima di incollarlo: se contiene un errore, l'errore passa nella chat nuova. Nelle app con i progetti (S17) i file e le istruzioni restano nel progetto e non vanno ripetuti. Alcune app comprimono da sole le conversazioni molto lunghe: comportamento e nomi variano per app e piano [da verificare il giorno del corso].</aside>
+  <aside class="punti"><ul><li>Le chat lunghissime <b>peggiorano</b>: lo abbiamo visto in S17J.</li><li>I segnali: dimentica <b>decisioni</b>, ripete <b>errori</b> corretti, mescola le <b>versioni</b>.</li><li>Prima di chiudere: <b>«scrivimi un riassunto di passaggio»</b>.</li><li>Decisioni, dati confermati, cosa resta aperto, file usati.</li><li>Lo si <b>rilegge</b> e lo si incolla in una chat nuova.</li></ul></aside>
+</section>
+
 <section class="slide centro" data-cod="S18">
   <h2>La memoria</h2>
   <div class="grande" style="text-align:center;font-size:96px">Comoda,<br>ma va controllata.</div>
@@ -1063,6 +1176,25 @@ Corretto? Quanto prevede l'Emilia-Romagna?</pre>
   <aside class="punti"><ul><li>Caso vero: «<b>devo fare un bosco su 27 ettari</b>», e una domanda sulla densità.</li><li>Della VIA <b>non avevo chiesto nulla</b>.</li><li>Nelle cartelle c'era la <b>normativa già salvata</b>: l'ha letta e ha trovato la soglia.</li><li>Anche un <b>nuovo bosco</b> sopra i <b>20 ettari</b> va a verifica di assoggettabilità a VIA (10 in aree protette).</li><li>Risultato: progetto a <b>19 ettari</b>. È il valore del <b>contesto</b>.</li><li>Ma la soglia l'ho <b>controllata sul testo di legge</b>, e restano aree protette e cumulo.</li></ul></aside>
 </section>
 
+<section class="slide centro" data-cod="S19B" data-titolo="Un Claude per tutto lo studio">
+  <h2>Un Claude per tutto lo studio</h2>
+  <p class="piccolo" style="text-align:center;margin:-16px 0 24px">Piani Team ed Enterprise</p>
+  <div class="scala-autonomia">
+    <div class="livello-autonomia"><div class="livello">01 · PROGETTO CONDIVISO</div><h3>Il contesto</h3>
+      <p>Profilo dello studio, modelli di relazione, normativa regionale: in un progetto condiviso con i colleghi, con permesso di <b>lettura</b> o di <b>modifica</b>.</p>
+      <div class="regola">TUTTI PARTONO DAGLI STESSI FILE</div></div>
+    <div class="livello-autonomia"><div class="livello">02 · SKILL CONDIVISA</div><h3>Il metodo</h3>
+      <p>Una procedura dello studio, per esempio «verifica di completezza VIncA», condivisa con alcuni colleghi o pubblicata a tutta l'organizzazione.</p>
+      <div class="regola">TUTTI LAVORANO ALLO STESSO MODO</div></div>
+    <div class="livello-autonomia"><div class="livello">03 · AMMINISTRATORE</div><h3>Le regole</h3>
+      <p>Chi gestisce l'account decide cosa si condivide: può distribuire una skill a tutti o disattivare la condivisione dei progetti.</p>
+      <div class="regola">UNA PERSONA RESPONSABILE</div></div>
+  </div>
+  <div class="formula-claude"><b>Il collega nuovo</b>, il primo giorno, trova già profilo, modelli e procedure dello studio.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Fonti verificate il 10/11/2026: https://support.claude.com/en/articles/9519177-how-can-i-create-and-manage-projects (nei piani Team ed Enterprise i progetti si condividono con i membri dell'organizzazione, con permesso di visualizzazione o modifica, salvo che l'amministratore abbia disattivato la condivisione), https://support.claude.com/en/articles/13119606-provision-and-manage-skills-for-your-organization (gli owner distribuiscono skill a tutta l'organizzazione; i membri le condividono con colleghi o le pubblicano) e https://support.claude.com/en/articles/12512180-use-skills-in-claude. Attenzione: se la pubblicazione all'organizzazione è attiva, chiunque può pubblicare una skill senza revisione; serve una regola interna su chi pubblica (collegamento a S17G). Collegamenti: S19 (profilo dello studio), S17 (progetti), S17F (skill). Costi dei piani [DA VERIFICARE il giorno del corso].</aside>
+  <aside class="punti"><ul><li>Con i piani <b>Team o Enterprise</b> Claude diventa uno strumento <b>dello studio</b>, non del singolo.</li><li><b>Progetto condiviso</b>: profilo, modelli e normativa uguali per tutti.</li><li><b>Skill condivisa</b>: la stessa procedura per tutti i colleghi.</li><li>Un <b>amministratore</b> decide cosa si condivide e chi pubblica.</li><li>Il collega nuovo trova tutto pronto dal primo giorno.</li></ul></aside>
+</section>
+
 <!-- ================================================================ -->
 <!-- BLOCCO 3 — IL PROMPT                                              -->
 <!-- ================================================================ -->
@@ -1093,7 +1225,8 @@ nord di un nuovo magazzino agricolo.
 <span class="k">Dati:</span>
 - lunghezza 180 m, doppio filare sfalsato, sesto 1 m
   sulla fila, 1,5 m tra le file;
-- specie: <span class="seg">[ELENCO SPECIE ARBUSTIVE E ARBOREE]</span>;
+- specie: biancospino, sanguinello, nocciolo, ligustro,
+  fusaggine, acero campestre, carpino bianco;
 - obiettivo: schermatura visiva e continuità ecologica
   con il fosso esistente.
 
@@ -1101,8 +1234,23 @@ nord di un nuovo magazzino agricolo.
 linguaggio tecnico ma leggibile.
 Non aggiungere specie o dati che non ti ho dato.</pre></div>
   </div>
-  <aside class="note">Mostrare poi i due output affiancati (screenshot S20).</aside>
-  <aside class="punti"><ul><li>Prompt povero: <b>una riga</b>, risultato generico.</li><li>Prompt strutturato: <b>ruolo, compito, dati, formato, vincoli</b>.</li><li>La frase finale conta: <b>«non aggiungere specie o dati che non ti ho dato»</b>.</li><li>Mostro i <b>due risultati affiancati</b>.</li></ul></aside>
+  <aside class="note">Chiedere all'aula, prima di passare alla slide successiva: «cosa vi aspettate dal prompt di sinistra?». Nella prova reale del 10/11/2026 l'elenco delle specie è stato compilato con sette specie (biancospino, sanguinello, nocciolo, ligustro, fusaggine, acero campestre, carpino bianco, con i nomi scientifici). I due risultati sono nella slide successiva, S20A.</aside>
+  <aside class="punti"><ul><li>Prompt povero: <b>una riga</b>, risultato generico.</li><li>Prompt strutturato: <b>ruolo, compito, dati, formato, vincoli</b>.</li><li>La frase finale conta: <b>«non aggiungere specie o dati che non ti ho dato»</b>.</li><li>Cosa vi aspettate? Nella slide successiva i <b>due risultati veri</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S20A" data-titolo="Prompt povero e prompt strutturato · i risultati">
+  <h2>Prompt povero e prompt strutturato · i risultati</h2>
+  <div class="g2" style="flex:1;min-height:0;align-items:stretch">
+    <div class="box"><div class="et">Prompt povero · Claude Sonnet 5.5 (estratto)</div>
+      <p class="testo-es" style="font-size:22.5px;line-height:1.55;font-style:normal">La siepe di mitigazione è un elemento di vegetazione lineare […] progettato per ridurre l'impatto ambientale e paesaggistico di <span class="ko">infrastrutture, impianti produttivi, parchi fotovoltaici, strade</span> o insediamenti […]. Offre anche numerosi benefici ecologici: funge da corridoio ecologico […], contribuisce alla cattura di polveri sottili e CO₂, attenua il rumore […]. Specie autoctone come biancospino, prugnolo, corniolo, sanguinello, ligustro, <span class="ko">alloro o lentisco</span> a seconda dell'area geografica. […] Se ben progettata, la siepe <span class="ko">rappresenta quindi una misura efficace e sostenibile</span>.</p>
+      <div class="trovato" style="font-size:19.5px;margin-top:22px;padding:10px 14px"><b>Problema:</b> va bene per qualsiasi progetto, quindi per nessuno. Nessun dato del nostro caso; non sa dove siamo e cita anche alloro e lentisco.</div></div>
+    <div class="box blu"><div class="et">Prompt strutturato · Claude Sonnet 5.5 (estratto)</div>
+      <p class="testo-es" style="font-size:22.5px;line-height:1.55;font-style:normal">L'intervento prevede la realizzazione di una siepe campestre plurispecifica lungo il confine nord del nuovo magazzino agricolo, per uno <mark>sviluppo lineare di 180 m</mark>. L'impianto è articolato in un <mark>doppio filare sfalsato, con sesto di 1 m sulla fila e 1,5 m tra le file</mark>. […] La scelta floristica comprende <mark>biancospino, sanguinello, nocciolo, ligustro, fusaggine, acero campestre e carpino bianco</mark>. […] Lo sviluppo lineare della siepe, <mark>in relazione con il fosso esistente</mark>, le attribuisce inoltre la funzione di corridoio ecologico. […]</p>
+      <div class="trovato buono" style="font-size:19.5px;margin-top:22px;padding:10px 14px"><b>Rispettato:</b> 174 parole su 150-200, solo le sette specie date, nessun dato aggiunto. Per avvicinarlo allo stile dello studio serve un esempio: è la slide successiva.</div></div>
+  </div>
+  <p class="piccolo" style="text-align:center;margin-top:14px">Prova reale del 10/11/2026 · stesso modello, due conversazioni separate</p>
+  <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate), due conversazioni separate; testo integrale in esempi-output/2026-11-10-prove-sonnet-S12-S20-S27.md. A sinistra 184 parole che vanno bene per qualsiasi siepe: elenca opere che non c'entrano (parchi fotovoltaici, strade), non sapendo la regione cita anche specie mediterranee (alloro, lentisco) e chiude con una frase ornamentale. A destra 174 parole (richiesta: 150-200): riporta lunghezza, sesto, le sette specie e il fosso, e non aggiunge nulla. Il testo è corretto ma ancora «da manuale» («compagine vegetale», «duplice obiettivo»): per lo stile dello studio serve un paragrafo di esempio, la R di TCCRI in S21.</aside>
+  <aside class="punti"><ul><li>Stesso modello, due prompt: a sinistra <b>una riga</b>, a destra il <b>prompt strutturato</b>.</li><li>Il povero: un testo che va bene <b>per qualsiasi progetto</b>; non sa dove siamo e cita <b>alloro e lentisco</b>.</li><li>Lo strutturato: <b>174 parole</b> su 150-200, tutti i dati, <b>solo le sette specie date</b>.</li><li>Nessun dato inventato: merito di <b>«non aggiungere specie o dati»</b>.</li><li>Per lo <b>stile dello studio</b> serve un esempio: è la slide successiva.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S21">
@@ -1143,6 +1291,35 @@ contenere frasi generiche sulla biodiversità.</pre></div>
 Se un'informazione manca, scrivi <span class="seg">[DA COMPLETARE]</span>.
 Se non sei sicuro di un riferimento, scrivi <span class="seg">[DA VERIFICARE]</span>.</pre></div>
   <aside class="punti"><ul><li>Tre frasi da mettere <b>quasi sempre</b>.</li><li><b>Non inventare</b> dati, norme o specie.</li><li><b>[DA COMPLETARE]</b> per ciò che manca, <b>[DA VERIFICARE]</b> per ciò che è incerto.</li><li>Così gli errori diventano <b>visibili</b> invece che nascosti.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S24A" data-titolo="Prima la citazione, poi la risposta">
+  <h2>Prima la citazione, poi la risposta</h2>
+  <div class="io">
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Prompt · bando di 73 pagine allegato</div>
+<pre class="s" style="font-size:20px;line-height:1.7">Domanda: quali spese generali sono ammesse
+per la realizzazione e il ripristino
+dei muretti a secco?
+<span class="k">Prima riporta tra virgolette</span>, una per riga,
+tutte le frasi del documento che rispondono
+alla domanda, con il numero di articolo.
+<span class="k">Poi rispondi usando solo quelle frasi.</span>
+Se il documento non ne parla, scrivilo.</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 22px"><div class="et">Claude Sonnet 5.5 · estratto</div>
+      <div class="verbale" style="font-size:21px">
+        <h4>Frasi del documento (14)</h4>
+        <p>Art. 5.5.1: «spese generali per progettazione e direzione lavori nella misura massima del <b>10%</b> dell'importo complessivo»</p>
+        <p style="margin-top:6px">Art. 7, tabella: «Muretti a secco <b>8%</b>»</p>
+        <h4>Risposta</h4>
+        <p>«Il limite è però <b>incoerente</b> nel documento. […] È prudente fare riferimento all'8% dell'art. 7 (più restrittivo) e <b>chiedere conferma</b> all'amministrazione competente.»</p>
+      </div>
+      <div class="trovato buono" style="font-size:18px;margin-top:14px;padding:10px 14px"><b>Verificato sul bando:</b> le due frasi ci sono, agli articoli indicati. Per controllare bastano due righe, non 73 pagine.</div>
+    </div></div>
+  </div>
+  <div class="avviso" style="margin-top:16px"><b>VERIFICA</b> Con le citazioni sapete subito da dove viene ogni numero, e vedete le contraddizioni.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Prova reale con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate) sullo stesso bando SRD04 2024 di S36; testo integrale in esempi-output/2026-11-10-prove-sonnet-dieci-temi.md. Il prompt non accenna a possibili contraddizioni: il modello le ha trovate da solo perché ha dovuto mettere le frasi una accanto all'altra. Ha riportato 14 frasi (comprese pubblicità, polizze e lavori in economia), poi la risposta. Le due frasi chiave sono state controllate sul testo: art. 5.5.1 «nella misura massima del 10% dell'importo complessivo» e tabella dell'art. 7 «Muretti a secco 8%». È la tecnica più semplice contro le invenzioni sui documenti lunghi e funziona con qualsiasi strumento, non solo con Gemini Notebook (S39). Anticipa S36: lì la stessa incongruenza esce in una scheda più ampia.</aside>
+  <aside class="punti"><ul><li>Una frase in più nel prompt: <b>«prima riporta tra virgolette le frasi del documento, poi rispondi»</b>.</li><li>Prova vera su un bando di 73 pagine: le spese generali dei muretti a secco.</li><li>Riporta le frasi con l'articolo: <b>10%</b> all'art. 5.5.1, <b>8%</b> nella tabella dell'art. 7.</li><li>Nessuno gli aveva chiesto di cercare contraddizioni: <b>la trova da solo</b>.</li><li>Per controllare bastano due righe, non 73 pagine.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S25">
@@ -1191,18 +1368,69 @@ solo quel punto.</pre></div>
   <aside class="punti"><ul><li>Il primo risultato è <b>una bozza</b>.</li><li>Si corregge <b>nella stessa chat</b>: accorciare, asciugare, <b>correggere un punto</b>.</li><li>«Correggi <b>solo quel punto</b>» evita che riscriva tutto.</li></ul></aside>
 </section>
 
-<section class="slide centro" data-cod="S27">
+<section class="slide centro" data-cod="S26A" data-titolo="Se ha frainteso, correggete la domanda">
+  <h2>Se ha frainteso, correggete la domanda</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box"><div class="et">Accumulare correzioni</div>
+      <ul class="lista" style="font-size:22px"><li>«Scrivi la mail per il Comune…»</li><li>«No, era per la Provincia»</li><li>«Ancora no, troppo formale»</li><li>«Ti avevo detto entro il 30»</li></ul>
+      <p style="font-size:20px;margin-top:14px;color:var(--tenue)">Il modello rilegge anche tutte le versioni sbagliate.</p></div>
+    <div class="box blu"><div class="et">Modificare il messaggio</div>
+      <ul class="lista" style="font-size:22px"><li>Passate sul <b>vostro messaggio</b> e scegliete <b>Modifica</b></li><li>Correggete la richiesta e rinviate</li><li>La risposta sbagliata <b>esce dalla conversazione</b></li><li>Le versioni restano consultabili con le frecce <b>‹ 1/2 ›</b></li></ul></div>
+  </div>
+  <p class="sotto" style="text-align:center;margin-top:32px">Ritocchi alla bozza: <b class="acc">nella stessa chat</b>. Domanda fraintesa: <b class="acc">si corregge la domanda</b>.</p>
+  <aside class="note">Slide aggiunta l'11/11/2026. Completa S26: le correzioni di dettaglio (accorciare, asciugare, correggere un punto) si fanno nella stessa chat; quando invece il modello ha frainteso la richiesta, conviene modificare il messaggio originale, così la conversazione resta pulita e le risposte scartate non pesano sulle successive (S17J). In Claude il comando si chiama «Modifica» (verificato da Matteo l'11/11/2026); funzione presente anche in ChatGPT e Gemini. Mostrarlo dal vivo sulla mail di S11.</aside>
+  <aside class="punti"><ul><li>Se il modello <b>ha frainteso</b>, non accumulate «no, intendevo…».</li><li>Ogni correzione resta nella chat: il modello <b>rilegge anche le versioni sbagliate</b>.</li><li>Meglio <b>modificare il messaggio</b> originale e rinviarlo.</li><li>Ritocchi alla bozza: nella stessa chat, come in S26.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S27">
   <h2>Far ragionare prima di rispondere</h2>
-  <div class="box blu"><div class="et">Prompt · confronto tra alternative</div>
-<pre>Devo scegliere tre specie arbustive per una siepe su terreno argilloso, con ristagno
-invernale, in pianura in Lombardia.
-<span class="k">Prima</span> proponi sei candidate, <span class="k">poi</span> per ciascuna indica pro e contro rispetto
-a queste condizioni, <span class="k">poi</span> scegli le tre migliori spiegando il motivo.
-Usa solo specie autoctone della Lombardia e segnala <span class="seg">[DA VERIFICARE]</span> se non sei
-sicuro dell'autoctonia.</pre></div>
-  <div class="avviso" style="margin-top:34px;font-size:23px"><b>VERIFICA</b> L'autoctonia si controlla sulle liste regionali, non sulla parola del modello.</div>
-  <aside class="note">È la tecnica del "confronto tra alternative" (Tree of Thought).</aside>
-  <aside class="punti"><ul><li><b>Far ragionare prima di rispondere</b>: proporre, valutare, scegliere.</li><li>Esempio: <b>sei specie candidate</b>, pro e contro, poi le <b>tre migliori</b>.</li><li>L'<b>autoctonia</b> si controlla sulle <b>liste regionali</b>, non sulla parola del modello.</li></ul></aside>
+  <div class="io">
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Prompt · confronto tra alternative</div>
+<pre class="s" style="font-size:20px;line-height:1.75">Devo scegliere tre specie arbustive per una siepe
+su terreno argilloso, con ristagno invernale,
+in pianura in Lombardia.
+<span class="k">Prima</span> proponi sei candidate,
+<span class="k">poi</span> per ciascuna indica pro e contro rispetto
+a queste condizioni,
+<span class="k">poi</span> scegli le tre migliori spiegando il motivo.
+Usa solo specie autoctone della Lombardia
+e segnala <span class="seg">[DA VERIFICARE]</span> se non sei sicuro
+dell'autoctonia.</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 22px"><div class="et">Claude Sonnet 5.5 · estratto</div>
+      <div class="verbale" style="font-size:19.5px">
+        <h4>Sei candidate, con pro e contro</h4>
+        <p>Sanguinello · pallon di maggio · biancospino · fusaggine · salice cenerino · frangola.<br>«Non ho dubbi sull'autoctonia di nessuna, quindi non uso [DA VERIFICARE].»</p>
+        <h4>Le tre migliori</h4>
+        <ul><li><b>Sanguinello</b>: «la spina dorsale della siepe»</li>
+        <li><b>Pallon di maggio</b>: per le zone più ristagnanti</li>
+        <li><b>Biancospino</b>: «grande rusticità su argilla»</li></ul>
+        <p style="margin-top:6px">Riserva: <b>fusaggine</b>, al posto del biancospino se vicino ci sono frutteti (colpo di fuoco batterico).</p>
+      </div>
+      <div class="trovato" style="font-size:18.5px;margin-top:16px;padding:10px 14px"><b>Controllo sulle schede ERSAF:</b> pallon di maggio, salice cenerino e frangola «anche con ristagni» <span class="ok">✓</span><br>Biancospino: «xerofila, mesofila», non è una specie da ristagno.<br>Fusaggine: terreno «non soggetto a ristagno idrico». Eppure è la riserva.</div>
+    </div></div>
+  </div>
+  <div class="avviso" style="margin-top:16px"><b>VERIFICA</b> Autoctonia ed esigenze si controllano sulle schede regionali, non sulla parola del modello.</div>
+  <aside class="note">È la tecnica del «confronto tra alternative» (Tree of Thought). Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate); testo integrale in esempi-output/2026-11-10-prove-sonnet-S12-S20-S27.md. Ha seguito i tre passaggi e ha aggiunto avvertenze utili: biancospino ospite del colpo di fuoco batterico vicino ai frutteti di pomacee, pH sub-acido per la frangola, impianto su leggera baulatura contro l'asfissia radicale. Le sei specie sono autoctone in Lombardia e sono tutte nelle schede ERSAF: sull'autoctonia ha ragione, e lo ha dichiarato. Controllo sulle schede ERSAF della dashboard delle piante (10/11/2026): pallon di maggio «fresco, anche in presenza di ristagni idrici»; salice cenerino «suoli molto umidi… anche argillosi e costipati»; frangola «anche con ristagni idrici»; biancospino «xerofila, mesofila», terreno «di vario tipo»; fusaggine «di vario tipo ma non soggetto a ristagno idrico». Il sanguinello in ERSAF è «xerofila, mesofila», ma l'abaco dell'Emilia-Romagna gli dà una buona tolleranza all'umidità. Quindi biancospino tra le tre migliori e fusaggine come riserva sono discutibili proprio sul requisito principale, il ristagno; le specie più adatte (salice cenerino, frangola) le aveva trovate ma le ha scartate per ingombro e pH. Domanda all'aula prima di mostrare il riquadro giallo: quale delle sei avreste messo al posto del biancospino? Collegamento con S46: questa verifica con la dashboard richiede un minuto.</aside>
+  <aside class="punti"><ul><li><b>Far ragionare prima di rispondere</b>: proporre, valutare, scegliere.</li><li>Prova vera: <b>sei specie</b>, pro e contro per ciascuna, poi le <b>tre migliori</b> motivate.</li><li>Sono tutte autoctone in Lombardia: <b>su questo ha ragione</b>.</li><li>Ma tra le tre mette il <b>biancospino</b>, che per ERSAF non è da ristagno; la riserva, la <b>fusaggine</b>, vuole terreni senza ristagno.</li><li>Domanda: quale avreste messo voi al posto del biancospino?</li><li>Il ragionamento è ordinato, ma il <b>requisito principale</b> si controlla sulle schede regionali.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S27A" data-titolo="Quanto deve pensare">
+  <h2>Quanto deve pensare? Lo decidete voi</h2>
+  <div class="scala-autonomia">
+    <div class="livello-autonomia"><div class="livello">01 · LOW</div><h3>Poco</h3>
+      <p>Mail, riassunti, riformulazioni, prime bozze. Risposta rapida.</p>
+      <div class="regola">IL LAVORO DI TUTTI I GIORNI</div></div>
+    <div class="livello-autonomia"><div class="livello">02 · MEDIUM · HIGH</div><h3>Il giusto</h3>
+      <p>Analisi di documenti, tabelle, confronti tra testi. Il menu segna con «Default» il livello consigliato per il modello.</p>
+      <div class="regola">PARTITE DA QUI</div></div>
+    <div class="livello-autonomia"><div class="livello">03 · EXTRA HIGH · MAX</div><h3>A fondo</h3>
+      <p>Scelte tra alternative, casi con eccezioni, revisioni critiche. Più lento, consuma prima i limiti del piano.</p>
+      <div class="regola">QUANDO L'ERRORE COSTA</div></div>
+  </div>
+  <div class="formula-claude"><b>In Claude:</b> menu del modello, accanto al pulsante di invio → «Effort». Sonnet 5.5 e Opus 5.5 ragionano sempre: l'impegno decide quanto a fondo.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Fonte verificata il 10/11/2026: https://support.claude.com/en/articles/10574485-using-extended-thinking («Change the model, effort, and thinking settings»): livelli Low, Medium, High, Extra high, Max; il livello consigliato per ogni modello è segnato «Default»; con Fable 5.1 e 5.2, Haiku 5.5, Sonnet 5.5, Opus 5 e 5.5 il ragionamento non si può disattivare e per farlo pensare meno si sceglie un livello più basso; per i modelli senza livelli c'è l'interruttore «Extended». ChatGPT e Gemini hanno opzioni analoghe («pensa più a lungo», modelli Thinking): nomi [DA VERIFICARE il giorno del corso]. Collegamento a S27: la tecnica nel prompt decide cosa confrontare, l'impegno decide quanto a fondo. Nella prova di S27 (biancospino) un impegno più alto non garantisce il risultato: la verifica sulle schede regionali resta.</aside>
+  <aside class="punti"><ul><li>I modelli di oggi <b>ragionano prima di rispondere</b>: voi scegliete <b>quanto</b>.</li><li>In Claude: menu del modello → <b>Effort</b>, da Low a Max.</li><li><b>Poco</b> per mail e riassunti, <b>il giusto</b> per analisi e tabelle, <b>a fondo</b> per scelte e revisioni.</li><li>Più impegno = più lento e più consumo del piano.</li><li>La tecnica di S27 resta: decide <b>cosa</b> confrontare.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S28">
@@ -1313,6 +1541,38 @@ in una riga cosa manca.</pre></div><div class="didasc">Input · relazione VIncA 
   <aside class="punti"><ul><li>Prova vera: una <b>relazione di screening del 2019</b> confrontata con l'<b>Allegato F della DGR 4488/2021</b>.</li><li>Su 26 voci: <b>6 presenti, 10 in parte, 9 mancanti</b>. La relazione è più vecchia del modulo, e lo dice da solo.</li><li>Ha trovato un <b>errore reale</b>: il codice del sito sbagliato nella matrice finale.</li><li>Ma nel riepilogo si è <b>contraddetto sui conteggi</b> (7, poi 9): <b>contate voi</b>.</li><li><b>La relazione è completa?</b> Confronto tra la relazione VIncA e i <b>contenuti richiesti</b> dalle linee guida.</li><li>Esce una tabella <b>presente / in parte / mancante</b>, con capitolo e pagina.</li><li>«<b>Non giudicare la qualità</b>, verifica solo la presenza.»</li><li>Le linee guida giuste le scegliete <b>voi</b>: l'AI confronta, <b>non sceglie la norma</b>.</li></ul></aside>
 </section>
 
+<section class="slide" data-cod="S31A" data-titolo="Fategli fare il funzionario">
+  <h2>Fategli fare il funzionario</h2>
+  <div class="io">
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Prompt · la relazione di S31 allegata</div>
+<pre class="s" style="font-size:20px;line-height:1.7"><span class="k">Sei il funzionario istruttore</span> dell'ente
+competente che deve valutare la relazione
+di screening di incidenza allegata.
+Leggila con occhio critico e scrivi
+<span class="k">le richieste di integrazione</span> che
+invieresti al proponente: numerate,
+ciascuna con il motivo e il punto
+della relazione a cui si riferisce.
+Non riscrivere la relazione e non
+giudicare il progetto.</pre>
+      <p class="fonte-ctx">S31 controllava se i capitoli <b>ci sono</b>. Qui si chiede se <b>reggono</b>.</p></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 22px"><div class="et">Claude Sonnet 5.5 · 14 richieste (estratto)</div>
+      <div class="verbale" style="font-size:20px">
+        <ul><li><b>Motivare la «non significatività»</b>: la matrice dice «non significativo» a ogni voce, l'unico argomento è la distanza, «più di 4 km».</li>
+        <li><b>Scarichi</b>: lavaggio di contenitori e 1.700 m² di piazzali, ma nessun recapito finale. Nel sito vivono pesci d'acqua dolce.</li>
+        <li><b>Distanza</b> non misurata; un secondo sito citato e poi dimenticato.</li>
+        <li><b>Incidenti</b>: incendio, sversamenti, serbatoio di carburante da 9.000 litri.</li>
+        <li><b>Mitigazioni</b>: in fase di screening non bastano a escludere l'incidenza.</li></ul>
+      </div>
+      <div class="trovato buono" style="font-size:18.5px;margin-top:14px;padding:10px 14px"><b>Trovato e verificato:</b> 1.851,40 + 1.700,50 + 528,10 = 4.080 m², non i 4.178 dichiarati.</div>
+      <div class="trovato" style="font-size:18.5px;margin-top:10px;padding:10px 14px"><b>Decidete voi:</b> dispersione delle emissioni e rumore, per uno screening a 4 km, sono richieste proporzionate?</div>
+    </div></div>
+  </div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Prova reale con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate) sulla stessa relazione di screening del 2019 di S31, anonimizzata; testo integrale in esempi-output/2026-11-10-prove-sonnet-dieci-temi.md. Ha scritto 14 richieste in ordine di importanza; in slide ci sono la 1, 3, 4, 6 e 11. Verificati sul testo: superfici 1.851,40 + 1.700,50 + 528,10 = 4.080 m² contro 4.178 m² dichiarati; matrice tutta «non significativo» con la sola distanza «più di 4 km»; serbatoio di carburante da 9.000 litri; area di lavaggio dei contenitori; secondo sito citato al cap. 2 e non più considerato; codice del sito diverso nella tabella del cap. 5 (già trovato in S31); metodologia della guida del Friuli Venezia Giulia e Direttiva 79/409/CEE abrogata. La richiesta sulle mitigazioni richiama un principio corretto (in screening non si tiene conto delle misure di mitigazione: Corte di giustizia UE, causa C-323/17, 2018). Alcune richieste (stima della dispersione delle emissioni e delle deposizioni, rumore e luce) sono forse eccessive per uno screening a oltre 4 km: è il giudizio del tecnico a scegliere quali tenere. Uso consigliato: prima di depositare una relazione, non dopo.</aside>
+  <aside class="punti"><ul><li>Un ruolo diverso: <b>«sei il funzionario che istruisce la pratica»</b>.</li><li>Sulla relazione di S31: <b>14 richieste di integrazione</b>, in ordine di importanza.</li><li>Trova punti veri: esito non motivato, scarichi senza recapito, incidenti, mitigazioni.</li><li>E un errore di calcolo: le superfici fanno <b>4.080 m², non 4.178</b>.</li><li>Alcune richieste sono forse eccessive: <b>scegliete voi</b> quali tenere.</li><li>Da fare <b>prima di depositare</b>, non dopo la PEC della Provincia.</li></ul></aside>
+</section>
+
 <section class="slide" data-cod="S32">
   <h2>T3 · La tabella di ottemperanza</h2>
   <div class="io">
@@ -1369,6 +1629,49 @@ copiare in Excel. <span class="k">Mostra il calcolo.</span></pre></div>
   <aside class="punti"><ul><li><b>Quante piante per la siepe?</b> 180 m, doppio filare, sesto 1 m: <b>360 piante</b>.</li><li>«<b>Mostra il calcolo</b>»: così si verifica.</li><li>Se il calcolo serve spesso, meglio un <b>piccolo strumento</b> da riusare: apro la <b>demo</b>.</li><li>Ci torniamo nel <b>blocco 7</b>.</li></ul></aside>
 </section>
 
+<section class="slide" data-cod="S33A" data-titolo="I numeri si calcolano con il codice">
+  <h2>I numeri si calcolano con il codice</h2>
+  <div class="io">
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Prompt d'esempio · Excel allegato</div>
+<pre class="s" style="font-size:20px;line-height:1.7">Ti allego l'Excel dei rilievi di attecchimento
+2024-2026, una riga per pianta
+(specie, anno, viva o morta).
+<span class="k">Esegui il calcolo con il codice</span>, non a mente:
+- percentuale di fallanze per specie e anno;
+- un grafico per specie;
+- un file Excel con risultati e formule.
+<span class="k">Mostrami il codice</span> che hai usato
+e <span class="k">quante righe hai letto</span>.</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Cosa cambia</div>
+      <ul class="lista" style="font-size:21px"><li>Il conto lo fa <b>un programma</b>, non la stima del modello</li><li>Il <b>numero di righe lette</b> dice se ha letto tutto</li><li>Il codice si <b>rilegge e si rilancia</b> l'anno dopo</li><li>Esce un <b>Excel</b> da aprire e controllare</li></ul></div></div>
+  </div>
+  <div class="avviso" style="margin-top:16px"><b>VERIFICA</b> Restano vostri i dati di partenza e un paio di valori controllati a campione.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Risponde al punto debole di S07 («numeri e calcoli non verificati»): le app che eseguono codice (S06C, colonna «Crea file» di S10) fanno il calcolo con un programma vero, per esempio in Python, invece di stimarlo parola per parola. Chiedere esplicitamente «esegui il calcolo con il codice» e «mostrami il codice». Il prompt è un esempio, non è stato eseguito per la slide; i dati sono immaginari. Nome della funzione nelle impostazioni delle app [DA VERIFICARE il giorno del corso]. Collegamento con S33: il calcolatore della siepe è lo stesso principio, trasformato in uno strumento da riusare.</aside>
+  <aside class="punti"><ul><li>Il modello da solo <b>stima</b> i numeri; con il codice li <b>calcola</b>.</li><li>Chiedetelo: <b>«esegui il calcolo con il codice e mostrami il codice»</b>.</li><li>Fatevi dire <b>quante righe ha letto</b>: così sapete se ha letto tutto.</li><li>Esce un Excel con le formule: si controlla e si riusa l'anno dopo.</li><li>Dati di partenza e qualche valore a campione: li controllate voi.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S33B" data-titolo="Dal PDF alla tabella Excel">
+  <h2>Dal PDF alla tabella Excel</h2>
+  <div class="io" style="flex:none">
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Prompt d'esempio · PDF allegato</div>
+<pre class="s" style="font-size:20px;line-height:1.7">Ti allego il formulario standard del sito
+Natura 2000. Estrai in un Excel la tabella
+delle specie: una riga per specie, con
+le stesse colonne del formulario.
+<span class="k">Dimmi quante righe hai estratto</span>
+per ogni pagina.
+Le celle illeggibili scrivile <span class="seg">[DA VERIFICARE]</span>:
+<span class="k">non ricostruirle</span>.</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Funziona anche per</div>
+      <ul class="lista" style="font-size:22px"><li>Elenchi di <b>specie</b> e di habitat</li><li><b>Computi</b> e preventivi</li><li>Le <b>prescrizioni</b> di un'autorizzazione, una per riga</li><li>Gli <b>allegati</b> dei bandi</li></ul></div></div>
+  </div>
+  <div class="avviso" style="margin-top:16px"><b>VERIFICA</b> Contate le righe, rifate i totali, confrontate due righe a campione con il PDF.</div>
+  <aside class="note">Slide aggiunta l'11/11/2026. Il prompt è un esempio, non è stato eseguito per la slide. I punti deboli tipici: tabelle che continuano su più pagine (righe saltate o duplicate), celle unite, note a piè di tabella confuse con i dati, PDF scansionati (sono immagini: serve un PDF con il testo o una buona scansione, S15). Il numero di righe per pagina è il controllo più rapido. Collegamenti: S33A (i numeri si calcolano con il codice: i totali li fa un programma), S32 (le prescrizioni in tabella di ottemperanza).</aside>
+  <aside class="punti"><ul><li>Le tabelle chiuse in un PDF diventano un <b>Excel</b>.</li><li>Formulari, elenchi di specie, computi, <b>prescrizioni</b>, allegati dei bandi.</li><li>Chiedete <b>quante righe ha estratto per pagina</b>.</li><li>Celle illeggibili: <b>[DA VERIFICARE]</b>, non ricostruite.</li><li>Contate le righe, rifate i totali, due righe a campione.</li></ul></aside>
+</section>
+
 <section class="slide" data-cod="S34">
   <h2>T11 · Dal sopralluogo al verbale</h2>
   <div class="io">
@@ -1408,6 +1711,52 @@ gruppo elettronico.</span>
   <div class="avviso"><b>VERIFICA</b> Nomi e misure. Le parole segnate si controllano riascoltando l'audio.</div>
   <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate) su circa due minuti della trascrizione automatica di un sopralluogo di audit ambientale (azienda di microelettronica, giugno 2026; nessun nome di persona o di azienda nel testo usato). Testo integrale in esempi-output/2026-11-10-prova-sonnet-S34.md. Da far notare: non ha inventato data, luogo, nomi o responsabili e lo ha scritto; ha segnato circa 25 parole dubbie invece di correggerle a caso («gruppo elettronico» è quasi certamente il gruppo elettrogeno, «vaccino di contenimento» il bacino); ha notato che alla domanda su prima e seconda pioggia nella registrazione non c'è risposta. Per un sopralluogo agronomico scrivere «nomi di specie dubbi» al posto di «termini tecnici dubbi». Collegamento con S34A: la qualità del verbale dipende dalla qualità della registrazione; in un'altra parte dello stesso audio la trascrizione automatica ripete in loop una frase inventata («E' un record per lui? No, non ce l'ho cittadina.»), tipico errore di Whisper sui silenzi.</aside>
   <aside class="punti"><ul><li><b>Dal sopralluogo al verbale</b>: due minuti della <b>registrazione vera</b> di un sopralluogo, trascritta in automatico.</li><li>La trascrizione è piena di errori: «<b>botanica nel retrocapo</b>», «<b>vaccino</b> di contenimento».</li><li>Il verbale <b>non inventa</b> data, presenti e responsabili: scrive che <b>mancano</b>.</li><li>Segna circa <b>25 parole dubbie</b> invece di correggerle a caso: «gruppo elettronico» è il <b>gruppo elettrogeno</b>.</li><li>Nota anche una <b>domanda rimasta senza risposta</b>: prima e seconda pioggia.</li><li>Il prompt dà le <b>sezioni</b> del verbale: presenti, stato dei luoghi, rilievi, criticità, azioni.</li><li><b>[DA VERIFICARE]</b> per le parole trascritte male e i <b>nomi di specie</b> dubbi.</li><li>Si verificano sempre <b>nomi e misure</b>.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S34B" data-titolo="Foto e voce dal campo">
+  <h2>Foto e voce dal campo</h2>
+  <div class="io">
+    <div class="colshot"><div class="box blu" style="flex:1"><div class="et">Prompt d'esempio · foto scattata dal telefono</div>
+<pre class="s" style="font-size:20px;line-height:1.7">Foto di una siepe al secondo anno,
+pianura lombarda.
+Quali specie riconosci?
+Per ciascuna dimmi <span class="k">quanto sei sicuro</span>
+e <span class="k">quali caratteri ti servono</span>
+per confermarla (foglia, gemma,
+corteccia, frutto).
+Ci sono piante morte o sofferenti?
+Da cosa lo deduci?</pre></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">In campo</div>
+      <ul class="lista" style="font-size:21px"><li>Una foto e la domanda, <b>scritta o a voce</b>, dall'app sul telefono</li><li>In alcune app la <b>fotocamera in diretta</b>: si inquadra e si parla</li><li>Chiedete sempre il <b>grado di sicurezza</b> e i caratteri per confermare</li><li>Foto riservate: togliete la <b>posizione GPS</b></li></ul></div></div>
+  </div>
+  <div class="avviso" style="margin-top:16px"><b>VERIFICA</b> È una prima ipotesi, non una determinazione: la specie si conferma con la chiave o con l'esperto.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Tutti e tre gli strumenti principali leggono le immagini (S10); le app per telefono permettono anche di dettare la domanda. La fotocamera in diretta con conversazione a voce c'è in Gemini (Gemini Live) e in ChatGPT (modalità voce con video): nomi e piani [DA VERIFICARE il giorno del corso]. Il prompt è un esempio, non è stato eseguito per la slide. La parte importante è «quanto sei sicuro e cosa ti serve per confermare»: obbliga il modello a dichiarare l'incertezza e vi dice cosa guardare. Collegamento a S27 (anche lì il modello era sicuro e una scelta non reggeva) e a S37 (togliere EXIF e GPS). Usi tipici: specie in una siepe da collaudare, sintomi su foglie, fallanze, stato di una scarpata.</aside>
+  <aside class="punti"><ul><li>In sopralluogo: <b>una foto e una domanda</b>, anche a voce.</li><li>In alcune app si inquadra con la <b>fotocamera in diretta</b> e si parla.</li><li>La frase chiave: <b>«quanto sei sicuro e cosa ti serve per confermare?»</b></li><li>È una <b>prima ipotesi</b>: la specie si conferma con la chiave o con l'esperto.</li><li>Foto riservate: togliete la posizione GPS.</li></ul></aside>
+</section>
+
+<section class="slide" data-cod="S34C" data-titolo="Leggere tavole, planimetrie e appunti a mano">
+  <h2>Leggere tavole, planimetrie e appunti a mano</h2>
+  <p class="sotto" style="margin:-12px 0 18px;color:var(--tenue);font-size:21px">«L'area di intervento è cerchiata in rosso. Elenca gli elementi della rete ecologica e i vincoli che la interessano; per ognuno dimmi <b>da quale voce della legenda</b> lo deduci. <b>Non misurare distanze</b>.»</p>
+  <div style="display:grid;grid-template-columns:560px 50px 1fr;flex:1;min-height:0">
+    <div class="colshot"><div class="app-shot"><img src="immagini/s34c-tavola-rec.png" alt="Stralcio della tavola della rete ecologica comunale di un PGT con un'area agricola cerchiata in rosso"></div><div class="didasc">PGT · Rete ecologica comunale (tavola 1:5.000)</div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box" style="flex:1;padding:16px 22px"><div class="et">Claude Sonnet 5.5 · estratto</div>
+      <div class="verbale" style="font-size:22px">
+        <h4>Legge con sicurezza</h4>
+        <p>Verde naturalistico (VN) sul bordo · ambito agricolo E · perimetro del Parco Agricolo Sud</p>
+        <h4>Dichiara il dubbio</h4>
+        <p>«Livello della RER e dei gangli: la maglia è <b>troppo fitta per contare le linee</b>. Serve un controllo sulla tavola originale.»</p>
+        <h4>La distanza dal fontanile (seconda prova)</h4>
+        <p>«L'ordine di grandezza è <b>tra 100 e 200 m</b>. Sono ipotesi, non misure.»</p>
+      </div>
+      <div class="trovato buono" style="font-size:19.5px;margin-top:16px;padding:10px 14px"><b>Bene:</b> separa ciò che legge da ciò che non distingue, e chiede la tavola originale.</div>
+      <div class="trovato" style="font-size:19.5px;margin-top:10px;padding:10px 14px"><b>Misurata sul PDF in scala:</b> circa <b>370 m</b>. Anche l'ordine di grandezza era sbagliato.</div>
+    </div></div>
+  </div>
+  <div class="avviso" style="margin-top:14px"><b>VERIFICA</b> Legende e scritte sì; distanze e confini si misurano in QGIS (S48A), non su un'immagine.</div>
+  <aside class="note">Slide rifatta l'11/11/2026 con due prove reali di Claude Sonnet 5.5 (Claude Code, solo lettura di file, nessuna istruzione personalizzata) su uno stralcio della tavola PdS.02 «Rete Ecologica Comunale multifunzionale» del Piano dei Servizi di un PGT dell'hinterland milanese (variante generale 2023, documento pubblico), con la legenda in due immagini. Testo integrale in esempi-output/2026-11-11-prova-sonnet-S34C-tavola.md. Prova 1, lettura: riconosce con affidabilità alta VN e ambito agricolo, medio-alta il Parco Agricolo Sud, media gli ambiti agricoli strategici interni ai parchi (non distingue con certezza i puntini verdi dai marroni), bassa il livello della RER e dei gangli; elenca anche le voci assenti (corridoi secondari, aree prioritarie, fontanili fuori dal cerchio) e chiede un ingrandimento. Prova 2, distanza: individua i due fontanili e quello più vicino (a nord) ma, senza scala grafica, dà 110-170 m secondo i dpi ipotizzati; misura di controllo sul PDF in scala 1:5.000: circa 370 m (stralcio reso a 1,5 px per punto tipografico). Ha dichiarato che erano ipotesi e consigliato di misurare in CAD o GIS: il comportamento è corretto, il numero no. Cosa legge bene in generale: legende, scritte, appunti a mano leggibili, documenti fotografati. Dove sbaglia: misure in scala, conteggi fitti, colori e retini simili, confini precisi. Per la demo dal vivo: le stesse immagini (stralcio con cerchio e due pezzi di legenda) sono in esempi-input/S34C-tavola/.</aside>
+  <aside class="punti"><ul><li>Claude <b>legge le immagini</b>: tavole, planimetrie, taccuini fotografati.</li><li>Prova vera sulla <b>rete ecologica</b> di un PGT: area agricola cerchiata.</li><li>Legge bene <b>VN, ambito agricolo, Parco Sud</b>; sul livello della RER <b>dichiara il dubbio</b>.</li><li>La chiave: <b>«da quale voce della legenda lo deduci»</b>.</li><li>Distanza dal fontanile: dice <b>100-200 m</b>, misurata in scala sono <b>circa 370 m</b>.</li><li>Distanze e confini: <b>QGIS</b>, non un'immagine.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S34A">
@@ -1467,6 +1816,23 @@ solo proposto.</span></pre></div></div>
   <aside class="punti"><ul><li>Dalla trascrizione al <b>verbale</b>: argomenti, <b>decisioni</b>, attività con <b>responsabile e scadenza</b>, questioni aperte.</li><li>La frase chiave: <b>distingui ciò che è stato deciso da ciò che è stato solo proposto</b>.</li><li>Esempio «meta»: la <b>riunione in cui è nato questo corso</b>, trascritta dal telefono.</li><li>A sinistra la trascrizione vera: «<b>parolamica</b>», «<b>Cloud</b>», frasi spezzate.</li><li>Il verbale di <b>Sonnet 5.5</b>: <b>nessuna decisione formale</b>, perché era un brainstorming. Non le inventa.</li><li>Trova da solo l'incoerenza: <b>tre o quattro ore?</b> E corregge i refusi elencandoli.</li></ul></aside>
 </section>
 
+<section class="slide" data-cod="S35A" data-titolo="Riscrivere per chi non è tecnico">
+  <h2>Riscrivere per chi non è tecnico</h2>
+  <p class="sotto" style="margin:-12px 0 20px;color:var(--tenue)">«Riscrivi per il titolare dell'azienda agricola: non è un tecnico, deve capire cosa succede e cosa deve fare. Massimo cinque righe, niente sigle.»</p>
+  <div class="io">
+    <div class="colshot"><div class="box" style="flex:1"><div class="et">Il paragrafo della relazione</div>
+      <p class="testo-es" style="font-style:normal;font-size:19.5px">L'intervento ricade nella fascia di 500 m dal perimetro della ZSC e pertanto è soggetto a screening di incidenza ai sensi dell'art. 5 del DPR 357/1997. Sulla base degli esiti della fase di screening l'Autorità competente potrà disporre il passaggio alla valutazione appropriata, qualora non sia possibile escludere incidenze significative sugli habitat e sulle specie di interesse comunitario. Si raccomanda di non avviare le operazioni di cantiere nel periodo riproduttivo dell'avifauna (marzo-luglio) e di trasmettere entro 15 giorni la planimetria aggiornata delle aree di deposito temporaneo.</p></div></div>
+    <div class="freccia">→</div>
+    <div class="colshot"><div class="box blu" style="flex:1;padding:16px 22px"><div class="et">Claude Sonnet 5.5</div>
+      <p class="testo-es" style="font-style:normal;font-size:19.5px">Il vostro intervento si trova a meno di 500 metri da un'area protetta a livello europeo per la tutela della natura, quindi serve prima una verifica preliminare per capire se può danneggiare ambienti e specie protette. Se restassero dei dubbi, l'ente competente potrebbe chiedere un esame più approfondito, <span class="ko">con tempi più lunghi</span>. Vi consigliamo quindi di non iniziare i lavori tra marzo e luglio, quando gli uccelli si riproducono. Entro 15 giorni, inoltre, va inviata la planimetria aggiornata con i punti in cui depositerete temporaneamente i materiali.</p>
+      <div class="trovato buono" style="font-size:17px;margin-top:12px;padding:8px 12px"><b>Da solo:</b> «Nel testo originale non è indicato a chi vada inviata la planimetria. Conviene specificarlo.»</div>
+      <div class="trovato" style="font-size:17px;margin-top:8px;padding:8px 12px"><b>Da controllare:</b> «con tempi più lunghi» nel testo non c'è. È plausibile, ma l'ha aggiunto lui.</div>
+    </div></div>
+  </div>
+  <aside class="note">Slide aggiunta l'11/11/2026. Prova reale con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate) su un paragrafo di VIncA scritto per l'esempio, senza dati di clienti. Testo integrale in esempi-output/2026-11-11-prove-sonnet-S08C-S35A.md. Da far notare: le sigle spariscono (ZSC, DPR, avifauna), le scadenze restano; il modello segnala da solo una lacuna del testo originale (a chi va inviata la planimetria), che è un difetto nostro, non suo. Ma aggiunge una conseguenza («con tempi più lunghi») che il paragrafo non dice: plausibile, però va confermata o tolta prima di mandarla al cliente. Usi: il cliente agricolo, il sindaco, l'assemblea pubblica, la sintesi non tecnica. Collegamento a S42 (prima di consegnare) e S31A (fargli fare il lettore).</aside>
+  <aside class="punti"><ul><li>Lo stesso contenuto, per chi <b>non è tecnico</b>: il titolare dell'azienda agricola.</li><li>Prova vera: spariscono le <b>sigle</b>, restano le <b>scadenze</b>.</li><li>Segnala da solo una <b>lacuna</b> del nostro testo: a chi va mandata la planimetria?</li><li>Ma aggiunge <b>«con tempi più lunghi»</b>, che nel testo non c'è.</li><li>Il confronto con l'originale si fa sempre: <b>cosa ha tolto, cosa ha aggiunto</b>.</li></ul></aside>
+</section>
+
 <section class="slide" data-cod="S36">
   <h2>G4 · La scheda del bando</h2>
   <div class="io">
@@ -1503,6 +1869,24 @@ agricole per segnalare il bando.</pre></div></div>
   <div class="avviso"><b>VERIFICA</b> Scadenze e requisiti sul testo del bando e sui decreti successivi: proroghe e rettifiche non sono nel PDF.</div>
   <aside class="note">Prova reale del 10/11/2026 con Claude Sonnet 5.5 (Claude Code, senza strumenti né istruzioni personalizzate) sull'Allegato A «Disposizioni attuative» del bando SRD04 «Investimenti non produttivi agricoli con finalità ambientale» 2024 del CSR Lombardia (73 pagine, testo rettificato dal decreto 12270/2024). Testo integrale e verifica in esempi-output/2026-11-10-prova-sonnet-S36.md; PDF in esempi-input/S36-Bando-SRD04-2024/. Il bando è chiuso: si usa come esempio perché è il tipo di bando che interessa i clienti di uno studio agronomico (siepi, filari, fasce tampone, aree umide, fontanili). Da far notare: ha capito subito che l'edizione è chiusa (conosce la data di oggi) e ha cambiato da solo il taglio della mail («preparatevi alla prossima apertura»); ha trovato un'incongruenza vera nel testo (spese generali dei muretti 10% contro 8%) e un rinvio a un paragrafo sbagliato. Però la scadenza che riporta, 20/12/2024, è quella del PDF: il D.d.s. 19574 del 13/12/2024 l'ha prorogata al 29/01/2025 ore 16:00 e il modello non poteva saperlo. La lezione: la scheda è buona quanto i documenti che le date; la pagina del bando con proroghe e rettifiche va sempre controllata.</aside>
   <aside class="punti"><ul><li><b>La scheda del bando</b>: chi partecipa, cosa finanzia, contributo, <b>scadenze</b>, documenti.</li><li>«<b>Per ogni informazione indica l'articolo</b>»: così si controlla.</li><li>In più una <b>mail ai clienti</b> per segnalare il bando.</li><li>Prova vera sul bando <b>SRD04 2024</b> (siepi, filari, fasce tampone): 73 pagine in una scheda.</li><li>Capisce che è <b>chiuso</b> e cambia da solo il tono della mail.</li><li>Trova un'<b>incongruenza vera</b>: spese generali dei muretti al 10% e all'8%.</li><li>Ma la scadenza è <b>sbagliata</b>: c'era una <b>proroga</b> al 29/01/2025, in un decreto che non gli abbiamo dato.</li><li>Scadenze e requisiti si verificano <b>sul bando e sui decreti successivi</b>.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S36A" data-titolo="Leggere e scrivere in altre lingue">
+  <h2>Leggere e scrivere in altre lingue</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box"><div class="et">Leggere</div>
+      <p style="font-size:21px;line-height:1.45;margin-bottom:14px">Linee guida europee, articoli scientifici sulle specie, schede tecniche in inglese o tedesco.</p>
+<pre class="s" style="font-size:20px;line-height:1.65">Riassumi in italiano questo documento
+in dieci righe. Per ogni affermazione
+<span class="k">indica la pagina</span>.</pre></div>
+    <div class="box blu"><div class="et">Scrivere · con un glossario</div>
+      <table class="tab-dati" style="font-size:18.5px"><tr><td>Valutazione di Incidenza</td><td>Appropriate Assessment</td></tr><tr><td>ZSC</td><td>Special Area of Conservation (SAC)</td></tr><tr><td>ZPS</td><td>Special Protection Area (SPA)</td></tr><tr><td>Formulario standard</td><td>Standard Data Form</td></tr><tr><td>Misure di mitigazione</td><td>Mitigation measures</td></tr></table>
+<pre class="s" style="font-size:20px;line-height:1.65;margin-top:14px">Traduci in inglese <span class="k">usando questo glossario</span>.
+I termini che non trovi, elencali a parte.</pre></div>
+  </div>
+  <div class="avviso"><b>VERIFICA</b> Un testo ufficiale tradotto lo rilegge chi conosce la lingua.</div>
+  <aside class="note">Slide aggiunta l'11/11/2026. Esempio di lettura: la guida metodologica della Commissione europea sull'art. 6, paragrafi 3 e 4, della direttiva Habitat (2021), disponibile in inglese e in italiano: confrontare il riassunto con la versione italiana è un buon esercizio. Il glossario evita che lo stesso termine venga tradotto in tre modi diversi nello stesso documento; nella terminologia Natura 2000 «Appropriate Assessment» è la valutazione appropriata dell'art. 6.3. I prompt sono esempi, non eseguiti per la slide. Usi: clienti e capogruppo esteri, bandi europei, letteratura scientifica.</aside>
+  <aside class="punti"><ul><li><b>Leggere</b>: linee guida europee, articoli scientifici, schede in altre lingue.</li><li>Riassunto in italiano, con <b>la pagina</b> per ogni affermazione.</li><li><b>Scrivere</b>: date un piccolo <b>glossario</b> dei vostri termini.</li><li>I termini che non trova, che li elenchi a parte.</li><li>Un testo ufficiale tradotto lo <b>rilegge chi conosce la lingua</b>.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S37">
@@ -1626,6 +2010,19 @@ dillo esplicitamente.</span></pre></div>
   <aside class="punti"><ul><li><b>Cosa non caricare</b>: dati personali non necessari, <b>documenti riservati</b> su account gratuiti, <b>credenziali</b>.</li><li>Nel dubbio si <b>anonimizza</b>: nomi, particelle, ragioni sociali.</li><li>Controllate le impostazioni sull'<b>uso dei dati per l'addestramento</b>.</li></ul></aside>
 </section>
 
+<section class="slide centro" data-cod="S41A" data-titolo="Account personale o aziendale">
+  <h2>Account personale o aziendale: chi usa le vostre chat</h2>
+  <table class="tab-dati" style="max-width:1300px;margin:0 auto">
+    <tr><th></th><th>Piani personali</th><th>Piani aziendali</th></tr>
+    <tr><td>Claude</td><td>Free, Pro, Max: lo scegliete voi nelle impostazioni sulla privacy. Se acconsentite, le chat restano fino a <b>5 anni</b>; altrimenti 30 giorni</td><td>Team, Enterprise: <b>non usate</b> per l'addestramento</td></tr>
+    <tr><td>ChatGPT</td><td>Free, Plus, Pro: opzione «Migliora il modello per tutti» nei controlli dei dati</td><td>Business, Enterprise: <b>escluse</b> per impostazione predefinita</td></tr>
+    <tr><td>Gemini</td><td>Account Google personale: con l'attività salvata, parte delle chat è letta da <b>revisori</b> e usata per migliorare i modelli</td><td>Google Workspace aziendale: chat e file <b>non usati</b> senza permesso</td></tr>
+  </table>
+  <div class="formula-claude ambra"><b>Lunedì:</b> aprite le impostazioni sulla privacy di ogni account che usate per lavoro. Disattivare vale per le chat future, non per quelle già usate.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026; fonti verificate il 10/11/2026. Claude: https://www.anthropic.com/news/updates-to-our-consumer-terms e https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training (piani Free, Pro, Max: scelta nelle Privacy Settings; con il consenso conservazione 5 anni, senza 30 giorni; i dati già usati restano nei modelli addestrati; Team ed Enterprise sono sotto i Commercial Terms e non sono usati per l'addestramento). ChatGPT: https://help.openai.com/en/articles/7730893-chatgpt-data-controls e https://help.openai.com/en/articles/5722486-how-your-data-is-used (interruttore «Improve the model for everyone» in Settings → Data Controls; Business, Enterprise ed Edu esclusi per impostazione predefinita). Gemini: https://support.google.com/gemini/answer/13594961 (con «Keep activity» attivo una parte delle chat è rivista da revisori umani e conservata fino a 3 anni; le chat temporanee non sono usate per addestrare) e https://support.google.com/a/answer/15706919 (Workspace aziendale: nessuna revisione umana né addestramento senza permesso). Nomi italiani dei menu [DA VERIFICARE il giorno del corso]. Collegamento a S41 e alla clausola di S44: per i documenti dei clienti l'account aziendale è la scelta coerente.</aside>
+  <aside class="punti"><ul><li>Stesso strumento, regole diverse: <b>account personale o aziendale</b>.</li><li>Negli account personali <b>decidete voi</b> se le chat servono ad addestrare i modelli.</li><li>Negli account aziendali (Team, Business, Workspace) <b>non sono usate</b> per impostazione predefinita.</li><li>Lunedì: controllate le <b>impostazioni sulla privacy</b> di ogni account di lavoro.</li><li>Disattivare vale <b>da quel momento in poi</b>.</li></ul></aside>
+</section>
+
 <section class="slide centro" data-cod="S42">
   <h2>Prima di consegnare un testo prodotto con l'AI</h2>
   <ul class="lista check" style="max-width:1100px;margin:0 auto;width:100%">
@@ -1636,6 +2033,37 @@ dillo esplicitamente.</span></pre></div>
     <li><b class="acc">Il testo lo firmerei così com'è?</b></li>
   </ul>
   <aside class="punti"><ul><li><b>Checklist</b> prima di consegnare: norme <b>esistenti e vigenti</b>, <b>numeri</b> che tornano, <b>specie</b> corrette per il territorio.</li><li>Ci sono <b>informazioni aggiunte</b> che non avevo fornito?</li><li>La domanda finale: <b>lo firmerei così com'è?</b></li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S42A" data-titolo="Il banco di prova dello studio">
+  <h2>Il banco di prova dello studio</h2>
+  <div class="g2" style="align-items:stretch;max-width:1400px;margin:0 auto;width:100%">
+    <div class="box blu"><div class="et">Cinque compiti fissi · presi da questo corso</div>
+      <ul class="lista" style="font-size:22px"><li>Mail al cliente con il contesto (S13)</li><li>Completezza di una relazione VIncA (S31)</li><li>Prescrizioni da un atto (S32)</li><li>Specie per una siepe con vincoli (S27)</li><li>Scheda di un bando (S36)</li></ul></div>
+    <div class="box"><div class="et">Cosa annotare, ogni volta</div>
+      <ul class="lista check" style="font-size:22px"><li>Ha inventato qualcosa?</li><li>Quanti errori ho trovato io?</li><li>Quanto tempo ho risparmiato?</li><li><b class="acc">Lo firmerei?</b></li></ul>
+      <p class="fonte-ctx" style="margin-top:14px">Da rifare a ogni nuovo modello o strumento, e comunque <b>ogni sei mesi</b>.</p></div>
+  </div>
+  <div class="formula-claude"><b>Cambia in fretta:</b> a ottobre per S12 avevamo immaginato una mail generica di tre righe. A novembre il modello ha risposto con undici segnaposto e quattro domande.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Un banco di prova personale vale più delle classifiche: misura lo strumento sui compiti dello studio. Il corso stesso ne è un esempio: tutte le prove sono in esempi-output, con prompt, risposta e verifica. Fatto vero per la frase in basso: la scaletta del 03/10/2026 riportava per S12 un esempio illustrativo («Gentile Cliente, le scrivo per chiederle cortesemente di inviarci i documenti necessari…»); la prova reale del 10/11/2026 ha dato una mail con undici segnaposto e quattro domande finali. Collegamenti: S06 (stessa domanda, sette modelli), S06B (affidabilità: provarlo su un vostro compito reale), S42 (checklist prima di consegnare).</aside>
+  <aside class="punti"><ul><li>Le classifiche dei modelli non dicono come vanno <b>sui vostri lavori</b>.</li><li>Tenete <b>cinque compiti fissi</b> dello studio, per esempio quelli di oggi.</li><li>Ogni volta annotate: <b>invenzioni, errori, tempo, lo firmerei?</b></li><li>Rifatelo a ogni nuovo strumento e <b>ogni sei mesi</b>.</li><li>Cambia in fretta: la mail di S12 un mese fa l'avremmo immaginata diversa.</li></ul></aside>
+</section>
+
+<section class="slide centro" data-cod="S42B" data-titolo="Dall'AI al modello Word dello studio">
+  <h2>Dall'AI al modello Word dello studio</h2>
+  <div class="g3" style="gap:28px;align-items:stretch">
+    <div class="box"><div class="et">Nel prompt</div>
+<pre class="s" style="font-size:20px;line-height:1.65">Scrivi in prosa continua:
+niente elenchi puntati,
+niente grassetti,
+niente titoli.
+Lo impagino io.</pre></div>
+    <div class="box"><div class="et">In Word</div><p style="font-size:21px;line-height:1.5">Incolla → <b>Mantieni solo testo</b>. Il testo prende gli stili del vostro modello, non quelli della chat.</p></div>
+    <div class="box blu"><div class="et">Oppure il file</div><p style="font-size:21px;line-height:1.5">Allegate il <b>modello Word dello studio</b> e chiedete un file .docx che usi i suoi stili.</p></div>
+  </div>
+  <p class="sotto" style="text-align:center;margin-top:36px">Cosa tradisce il testo dell'AI: <b class="acc">elenchi da tre</b>, grassetti ovunque, un titolo per paragrafo, chiuse a effetto.</p>
+  <aside class="note">Slide aggiunta l'11/11/2026. È l'attrito più comune nello studio: il testo è buono, ma incollato in Word si porta dietro elenchi, grassetti e titoli della chat e si riconosce come scritto da un'AI. Tre rimedi, dal più semplice: chiederlo nel prompt (o una volta per tutte nelle istruzioni personalizzate, S16, o nel profilo dello studio, S19); incollare come solo testo; farsi produrre il .docx a partire dal modello dello studio (serve un'app che crea file, colonna «Crea file» di S10). Il file prodotto si apre e si controlla: intestazioni, numerazione dei paragrafi, didascalie. Collegamento a S42 (prima di consegnare).</aside>
+  <aside class="punti"><ul><li>Il testo è buono, ma <b>incollato in Word</b> si riconosce subito.</li><li>Nel prompt: <b>prosa continua</b>, niente elenchi, grassetti e titoli.</li><li>In Word: <b>Incolla → Mantieni solo testo</b>.</li><li>Oppure allegate il <b>modello dello studio</b> e chiedete il .docx.</li><li>I segni tipici: <b>elenchi da tre</b>, grassetti ovunque, chiuse a effetto.</li></ul></aside>
 </section>
 
 <section class="slide" data-cod="S43">
@@ -1761,6 +2189,23 @@ delle scadenze trovate.</pre></div>
   <aside class="punti"><ul><li>Il passo successivo: <b>agenti</b> che eseguono compiti sui <b>file del computer</b>.</li><li>Esempio: converti, rinomina, <b>elenca le scadenze</b>.</li><li>Rischi: solo <b>cartelle dedicate</b>, <b>backup</b>, <b>istruzioni nascoste</b> nei documenti, <b>costi</b>.</li></ul></aside>
 </section>
 
+<section class="slide centro" data-cod="S48A" data-titolo="L'AI insieme a QGIS">
+  <h2>L'AI insieme a QGIS</h2>
+  <div class="g2" style="align-items:stretch">
+    <div class="box"><div class="et">01 · Vi scrive lo strumento</div>
+      <p style="font-size:22px;line-height:1.5">Espressioni del calcolatore di campi, script PyQGIS, modelli di Processing. Li incollate in QGIS e li lanciate <b>voi</b>.</p></div>
+    <div class="box blu"><div class="et">02 · Lavora dentro QGIS</div>
+      <p style="font-size:22px;line-height:1.5">Con un collegamento MCP (S17D), per esempio il plugin <b>QGIS MCP</b>, Claude legge i layer, lancia gli algoritmi e produce la mappa.</p></div>
+  </div>
+  <div class="box" style="margin-top:20px"><div class="et">Prompt d'esempio · il bosco di S19A</div>
+<pre class="s" style="font-size:20px">Nel progetto aperto, sul layer «nuovo_bosco»: calcola la superficie in ettari escludendo
+radure e strade interne, crea un buffer di 1 km e dimmi quali altri imboschimenti
+ricadono dentro, con la superficie di ciascuno. <span class="k">Prima dimmi quale sistema di riferimento usi.</span></pre></div>
+  <div class="avviso" style="margin-top:16px"><b>VERIFICA</b> Lavorate su una copia del progetto e guardate il risultato sulla mappa: un sistema di riferimento sbagliato sbaglia tutte le aree.</div>
+  <aside class="note">Slide aggiunta il 10/11/2026. Due livelli, come in S17E: l'AI che scrive codice da lanciare a mano (più controllabile) e l'AI collegata a QGIS tramite MCP (più veloce, agisce sul progetto). Sul PC di Matteo è installato il plugin QGIS MCP: si può mostrare dal vivo se QGIS e il plugin sono pronti [DA VERIFICARE prima del corso]. Il prompt riprende le avvertenze del caso S19A: superficie misurata in GIS escludendo radure e viabilità, cumulo con altri imboschimenti entro 1 km. Non è stato eseguito per la slide. Rischi: come per gli agenti di S48, lavorare su copie dei dati; controllare sempre il sistema di riferimento (in Lombardia i dati regionali sono in coordinate metriche, non in gradi).</aside>
+  <aside class="punti"><ul><li>Per chi lavora in VIncA: l'AI <b>lavora anche con QGIS</b>.</li><li>Primo livello: vi <b>scrive</b> espressioni e script, e li lanciate voi.</li><li>Secondo livello: <b>collegata a QGIS</b> legge i layer, calcola e fa la mappa.</li><li>Esempio: superficie del bosco di S19A e altri imboschimenti entro 1 km.</li><li>Sempre su una <b>copia</b>, e controllate il <b>sistema di riferimento</b>.</li></ul></aside>
+</section>
+
 <!-- ================================================================ -->
 <!-- PARTE B — DIMOSTRAZIONE PRATICA                                   -->
 <!-- ================================================================ -->
@@ -1841,7 +2286,7 @@ con le latifoglie senza foglie.</pre></div>
   <!-- disegno costruito dallo script -->
   <svg class="tempo" viewBox="0 0 1380 420" style="width:100%;flex:1;min-height:0"></svg>
   <p class="piccolo suggerimento" style="text-align:center;margin-top:10px">Il tempo risparmiato non sparisce: si sposta · clic su un deposito per spostarci 10 minuti</p>
-  <aside class="note">Interattiva, flussi tra depositi: <b>→</b> 1) «Probabilmente no»: l'ora risparmiata scorre tutta in «più lavoro»; 2) «La scelta è lavorare meglio»: l'ora si divide tra verifica, formazione e tempo libero. Poi clic su un deposito per spostarci 10 minuti (li toglie al deposito più pieno); <b>R</b> ricomincia. Riprendere l'alzata di mano di S44A: chi ha l'impressione di lavorare di più da quando usa l'AI? Il lavoro del tecnico resta perché resta la responsabilità (S09) e la L. 132/2025, art. 13 c. 1, ammette l'AI solo come supporto, con prevalenza del lavoro intellettuale (S43). «Probabilmente no» è un giudizio, non un dato: presentarlo così. Spunto dal talk «Ma non dovevamo lavorare meno? [Talk AIWEEK 2026]».</aside>
+  <aside class="note">Interattiva, flussi tra depositi: <b>→</b> 1) «Probabilmente no»: l'ora risparmiata scorre tutta in «più lavoro»; 2) «La scelta è lavorare meglio»: l'ora si divide tra verifica, formazione e tempo libero. Poi clic su un deposito per spostarci 10 minuti (li toglie al deposito più pieno); <b>R</b> ricomincia. Il lavoro del tecnico resta perché resta la responsabilità (S09) e la L. 132/2025, art. 13 c. 1, ammette l'AI solo come supporto, con prevalenza del lavoro intellettuale (S43). «Probabilmente no» è un giudizio, non un dato: presentarlo così. Spunto dal talk «Ma non dovevamo lavorare meno? [Talk AIWEEK 2026]».</aside>
   <aside class="punti"><ul><li><b>L'AI ci ruberà il lavoro?</b> Probabilmente no: per ora lavoriamo <b>di più</b>.</li><li>→ l'ora risparmiata finisce tutta in <b>più lavoro</b>.</li><li>→ la scelta è lavorare <b>meglio</b>: verifica, formazione, tempo libero.</li><li>Il lavoro resta perché resta la <b>responsabilità</b> del tecnico. «Probabilmente no» è un <b>giudizio</b>, non un dato.</li></ul></aside>
 </section>
 
